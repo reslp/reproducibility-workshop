@@ -38,12 +38,17 @@ Getting started
 * Installation instructions for different software.
 * Get in contact with the instructors.
 
+.. toctree::
+   :caption: Theory
+   :name: theory
+   :maxdepth: 1
+   :hidden:
 
 .. toctree::
-   :caption: First steps
-   :name: introduction
+   :caption: Practials
+   :name: practical
    :maxdepth: 1
    :hidden:
 
    day-1/data-organization-and-git
-
+   day-2/docker-intro

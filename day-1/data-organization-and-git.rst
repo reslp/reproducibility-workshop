@@ -57,6 +57,16 @@ With `git <https://git-scm.com>`_ you can easily track your work and see how it 
     $ git init
     Initialized empty Git repository ...
 
+It is generally also a good idea to set up git with your name and email address so that contributions to a repository can be attributed transparently. This can be done with the following commands. They will set the global settings of git, it is only necessary to do this once regardless of how many reporitories you initialize.
+
+.. code-block:: bash
+
+    $ git config --global user.name "FIRST_NAME LAST_NAME"
+    $ git config --global user.email "MY_NAME@example.com"
+
+.. hint::
+
+    If you would like to perform this action only for your current repository, you just have to leave out the :bash:`--global` flag.
 
 Check the status of your repository
 -----------------------------------
@@ -144,14 +154,34 @@ Let us quickly recapitualte what we have learned so far about working with git. 
 It is sometimes considered confusing that git uses this two-part workflow with staging and commiting. Why is it necessary to stage files first and how does git know that a file should be part of a commit? The answer to this question is that you can also combine changes of multiple files into a single commit. This makes sense, since you may be working on different things simultaneously or changes for one aspect of your project requires modifying multiple files. In this case you would probably want to group all changes together and only create a single commit.
 
 
+Keeping track of your commits
+=============================
 
+Git offers several commands which let you quickly check the history of your repository. Let us look at our repository now:
 
+.. code-block:: bash
 
+    $ git log --oneline
+    13202ab (HEAD -> master) Add protocol document
+    50d2cf8 First commit
 
+    $ git log
+    commit 13202abad4911ba1158161b0ab8120a3be2e1387 (HEAD -> master)
+    Author: Philipp Resl <xxx@yyy.com>
+    Date:   Thu Jun 9 13:39:43 2022 +0200
+
+         Add protocol document
+
+    commit 50d2cf80c9461eef8f67c9273eec8fd3e687162b
+    Author: Philipp Resl <xxx@yyy.com>
+    Date:   Tue Jun 7 13:23:04 2022 +0200
+
+         First commit
 
  
+The difference between the two commands presented above is simply the amount of information you get controlled by the :bash:`--oneline` flag. The standard :bash:`git log` command show additional information such as who contributed to the repository and the exact date and time of the commits. The last commit is always on top of the list. It is also called HEAD. This is also indicated by :bash:`(HEAD -> master)` which also tells you the branch you are on. In this case: master. We did not talk about branches yet. This will come a little bit later.
 
-
+To make them identifiable commits get unique IDs that consists of combinations of numbers and letters. These are also called hashes. We can use commit hashes to switch between different versions of the repository. For example let us try to switch back to the First commit with the hash :bash:`50d2cf8` (long version: :bash:`50d2cf80c9461eef8f67c9273eec8fd3e687162b`). Mind you, that your hashes will be different. You need to use the ones from your :bash:`git log` output. 
 
 
 

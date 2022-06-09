@@ -1,3 +1,7 @@
+.. role:: bash(code)
+   :language: bash
+
+
 =======================================================
 Exercise 3 - Data organization and proper documentation
 =======================================================
@@ -8,6 +12,7 @@ In this exercise we will have a look into how you can put structure into your re
 First let us create a new project with a basic directory structure that can help us to organize our data better:
 
 .. codeblock:: bash
+
 	$ mkdir my_project
 	$ cd my_project
 	$ mkdir bin data doc results tmp
@@ -47,6 +52,7 @@ Initialize a new repository
 With :bash:`git <https://git-scm.com>`_ you can easily track your work and see how it evolves into a large research project. A nice thing about git is that it uses very little memory and you almost don't 'see' it during your workflow. Git stays out of your way when you work on your project, but it is there when you need it. The first step when you start working with git is to create a repository or repo. On your machine a repo is just a folder that git is monitoring. It is straightforward to set up from within you projects directory using :bash:`git init`.
 
 .. codeblock:: bash
+
 	$ cd my_project 
 	$ git init
 	Initialized empty Git repository ...
@@ -59,6 +65,7 @@ Check the status of your repository
 You should see a message that git init successfully create a git repository. Congratulations, Now your project is monitored by git. It is now possible to check the status of your repository with :bash:`git status`. This command is very handy to be able to see what git sees. Let us run it:
 
 .. codeblock:: bash
+
 	$ git status
 	On branch master
 
@@ -71,6 +78,7 @@ You should see a message that git init successfully create a git repository. Con
 Remeber this command. It is key to understand what git keeps track of and what not. You will use this command regularely. You can see that currently the repository is empty, also there are no tracked files. Let us change that and create a file in the doc directory. After this we run :bash:`git status` again.
 
 .. codeblock:: bash
+
 	$ touch protocol.md
 	$ git status
 	On branch master
@@ -93,6 +101,7 @@ Staging files
 Now that git "sees" the file, we need to let it know that we would like to also track it. In git this is called Staging. The git command for that is called :bash:`git add`. See how it works:
 
 .. codeblock:: bash
+
 	$ git add protocol.md
 	$ git status
 	On branch master
@@ -114,6 +123,7 @@ Commit changes
 Committing changes (remember that all changes to be committed first need to be staged), is what makes git remember. A commit is a snapshot of the complete repository at a given time. Creating a commit requires the :bash:`git commit` command. Seee below:
 
 .. codeblock:: bash
+
 	$ git commit -m "Adding the protocol.md file to the repository"
 	[master (root-commit) 50d2cf8] First commit
 	 1 file changed, 1 insertion(+)

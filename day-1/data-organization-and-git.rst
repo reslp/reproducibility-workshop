@@ -13,9 +13,9 @@ First let us create a new project with a basic directory structure that can help
 
 .. codeblock:: bash
 
-	$ mkdir my_project
-	$ cd my_project
-	$ mkdir bin data doc results tmp
+    $ mkdir my_project
+    $ cd my_project
+    $ mkdir bin data doc results tmp
 
 
 At the beginning of a project, all directories will be empty, however they will fill quickly as you continue to work on the project.
@@ -27,13 +27,13 @@ The suggested directory structure is intuitive (it follows basic naming conventi
 
 .. codeblock:: bash
 
-	A quick recapitulation of the proposed structure:
+    A quick recapitulation of the proposed structure:
 	
-	bin		contains scripts and execuables for performing different analyses
-	data		contains all raw-data
-	results		contains analyses results. Ideally within subdirectories.
-	tmp		Location of temporary files. The "playground" of your project
-	doc		Contains all the documentation for your project. 
+    bin			contains scripts and execuables for performing different analyses
+    data		contains all raw-data
+    results		contains analyses results. Ideally within subdirectories.
+    tmp			Location of temporary files. The "playground" of your project
+    doc			Contains all the documentation for your project. 
 
 
 Keeping track of your project using git
@@ -49,13 +49,13 @@ commit
 Initialize a new repository
 ---------------------------
 
-With :bash:`git <https://git-scm.com>`_ you can easily track your work and see how it evolves into a large research project. A nice thing about git is that it uses very little memory and you almost don't 'see' it during your workflow. Git stays out of your way when you work on your project, but it is there when you need it. The first step when you start working with git is to create a repository or repo. On your machine a repo is just a folder that git is monitoring. It is straightforward to set up from within you projects directory using :bash:`git init`.
+With `git <https://git-scm.com>`_ you can easily track your work and see how it evolves into a large research project. A nice thing about git is that it uses very little memory and you almost don't 'see' it during your workflow. Git stays out of your way when you work on your project, but it is there when you need it. The first step when you start working with git is to create a repository or repo. On your machine a repo is just a folder that git is monitoring. It is straightforward to set up from within you projects directory using :bash:`git init`.
 
 .. codeblock:: bash
 
-	$ cd my_project 
-	$ git init
-	Initialized empty Git repository ...
+    $ cd my_project 
+    $ git init
+    Initialized empty Git repository ...
 
 
 Check the status of your repository
@@ -66,12 +66,12 @@ You should see a message that git init successfully create a git repository. Con
 
 .. codeblock:: bash
 
-	$ git status
-	On branch master
+    $ git status
+    On branch master
 
-	No commits yet
+    No commits yet
 
-	nothing to commit (create/copy files and use "git add" to track)
+    nothing to commit (create/copy files and use "git add" to track)
 
 
 
@@ -79,18 +79,18 @@ Remeber this command. It is key to understand what git keeps track of and what n
 
 .. codeblock:: bash
 
-	$ touch protocol.md
-	$ git status
-	On branch master
+    $ touch protocol.md
+    $ git status
+    On branch master
 	
-	No commits yet
+    No commits yet
 
-	Untracked files:
-  	(use "git add <file>..." to include in what will be committed)
+    Untracked files:
+    (use "git add <file>..." to include in what will be committed)
 
-		protocol.md
+       protocol.md
 
-	nothing added to commit but untracked files present (use "git add" to track)
+    nothing added to commit but untracked files present (use "git add" to track)
 
 
 You can see from the output of git status that git now has become aware of the :bash:`protocol.md` file. However git does not keep track of changes in the file yet, it is listed under "Untracked files".
@@ -102,16 +102,16 @@ Now that git "sees" the file, we need to let it know that we would like to also 
 
 .. codeblock:: bash
 
-	$ git add protocol.md
-	$ git status
-	On branch master
-
-	No commits yet
-
-	Changes to be committed:
-	  (use "git rm --cached <file>..." to unstage)
-
-		new file:   protocol.md
+    $ git add protocol.md
+    $ git status
+    On branch master
+    
+    No commits yet
+    
+    Changes to be committed:
+      (use "git rm --cached <file>..." to unstage)
+    
+    	new file:   protocol.md
 
 
 :bash:`git add` will add the file to the staging environment. We are now ready to make a snapshot of the repository by making our first commit.
@@ -124,10 +124,10 @@ Committing changes (remember that all changes to be committed first need to be s
 
 .. codeblock:: bash
 
-	$ git commit -m "Adding the protocol.md file to the repository"
-	[master (root-commit) 50d2cf8] First commit
-	 1 file changed, 1 insertion(+)
-	 create mode 100644 protocol.md
+    $ git commit -m "Adding the protocol.md file to the repository"
+    [master (root-commit) 50d2cf8] First commit
+     1 file changed, 1 insertion(+)
+     create mode 100644 protocol.md
 
 
 As you can see we are using the flag :bash:`-m`, which is short for message. This flag takes a string as argument which will become the commit message. The commit message describes what is contained in the commit. Make sure this is an informative message, because it will stay in your git log. Meaningful commit messages enable you to quickly idenftify what you did whitout having to look at the actual files.
@@ -135,13 +135,14 @@ As you can see we are using the flag :bash:`-m`, which is short for message. Thi
 Stage and commit. Why two steps?
 --------------------------------
 
-Let us quickly recapitualte what we have learn so far about working with git. A typical git workflow would look like this:
+Let us quickly recapitualte what we have learned so far about working with git. A typical git workflow would look like this:
 
-	1. Make stanges to your file.
+	1. Make changes to your file.
 	2. Add the file to your staging area with :bash:`git add`.
 	3. Commit your staged file using :bash:`git commit` and use an informative commit message.
 
 It is sometimes considered confusing that git uses this two-part workflow with staging and commiting. Why is it necessary to stage files first and how does git know that a file should be part of a commit? The answer to this question is that you can also combine changes of multiple files into a single commit. This makes sense, since you may be working on different things simultaneously or changes for one aspect of your project requires modifying multiple files. In this case you would probably want to group all changes together and only create a single commit.
+
 
 
 

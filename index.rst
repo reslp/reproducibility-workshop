@@ -51,10 +51,11 @@ Getting started
    :hidden:
 
    day-1/exercise-1-shell-intro.rst
-   day-1/exercise-2-advances-shell.rst
+   day-1/exercise-2-advanced-shell.rst
    day-1/exercise-3-data-organization.rst
    day-1/exercise-4-git.rst
 
+.. toctree::
    :caption: Day 2
    :name: day2
    :maxdepth: 1

@@ -9,6 +9,13 @@ Exercise 3 - Data organization and proper documentation
 In this exercise we will have a look into how you can put structure into your research projects files and folder on your computer and how you can keep track of changes to them.
 
 
+We will:
+
+- Setup a directory structure
+- Initialize a git repository
+- Use git to track files in the repository
+- Work with Markdown documents
+
 First let us create a new project with a basic directory structure that can help us to organize our data better:
 
 .. code-block:: bash
@@ -126,7 +133,6 @@ Now that git "sees" the file, we need to let it know that we would like to also 
 
 :bash:`git add` will add the file to the staging environment. We are now ready to make a snapshot of the repository by making our first commit.
 
-
 Commit changes
 --------------
 
@@ -141,6 +147,11 @@ Committing changes (remember that all changes to be committed first need to be s
 
 
 As you can see we are using the flag :bash:`-m`, which is short for message. This flag takes a string as argument which will become the commit message. The commit message describes what is contained in the commit. Make sure this is an informative message, because it will stay in your git log. Meaningful commit messages enable you to quickly idenftify what you did whitout having to look at the actual files.
+
+Exercise
+~~~~~~~~
+
+Create a short protocol in Mardown format of what we did so far to your :bash:`protocol.md` file and commit the changes to your repository.
 
 Stage and commit. Why two steps?
 --------------------------------
@@ -184,7 +195,97 @@ The difference between the two commands presented above is simply the amount of 
 To make them identifiable commits get unique IDs that consists of combinations of numbers and letters. These are also called hashes. We can use commit hashes to switch between different versions of the repository. For example let us try to switch back to the First commit with the hash :bash:`50d2cf8` (long version: :bash:`50d2cf80c9461eef8f67c9273eec8fd3e687162b`). Mind you, that your hashes will be different. You need to use the ones from your :bash:`git log` output. 
 
 
+Reverting to an older version of your repository
+================================================
+
+Since git keeps track of all your commited changes by using unique hashes, it is also possible to revert the repository to a specific commit. This is done with :bash:`git checkout`. 
+
+.. code-block:: bash
+   
+   $ git checkout 50d2cf8
+   You are in 'detached HEAD' state. You can look around, make experimental
+   changes and commit them, and you can discard any commits you make in this
+   state without impacting any branches by performing another checkout.
+   
+   If you want to create a new branch to retain commits you create, you may
+   do so (now or later) by using -b with the checkout command again. Example:
+
+      git checkout -b <new-branch-name>
+
+   HEAD is now at 50d2cf8 First commit 
+
+
+This will revert (checkout) your repository to how it was when you made your first commit.
+
+Exercise
+~~~~~~~~
+
+Revert your reporitory to the second commit we made earlier. Hint you may use :bash:`git reflog` to get the hash.
 
 
 
+Ignoring files
+==============
+
+In general git is aware of all files in your repository. However, it is common that there are files which you do not want to be tracked e.g. large input files or software executables which your are not allowed to distribute. 
+
+You can tell git to ignore files by using what is called a :bash:`.gitignore` file. In this file you can add all folders and files which git should ignore, each entry on its own line. You can also use regular expressions to specify multiple files. Here are some examples from a :bash:`.gitignore` file:
+
+.. code-block:: bash
+
+   $ cat .gitignore
+   data/raw_reads.fq.gz
+   data/*.fq
+   software/
+   log/
+   !log/.gitkeep
+
+These covers several practical examples of how you can exclude (and keep) files. It should be pretty self explanatory what they do. Lines starting with ! have a special meaning though. It means that this file will not be included. Remember earlier when we said that it is not possible to commit empty directories to a git repository? This is a away around this problem.
+Git treats your .gitignore file as a regular file, so make sure to also commit the changes to it.
+
+
+Exercise
+~~~~
+
+Create two files in your repository and add one of these files to your :bash:`.gitignore` file. Hint: You can use :bash:`git status` to keep track of the files and find you what git "sees". 
+
+Branches
+========
+
+Sometimes you may want to make larger changes to your repository with the risk that they are incompatible with your main workflow. Of course you don't want to overwrite anything that already works. It may also be that you collaborate with somebody on a project and you don't want to mess up their work in the shared repository. In souch cases git offers a concept called branches. A branch is exactly what the name implies. It creates a named branch of your repository starting from a specific commit (usualy HEAD). A branch may contain many commits and you may have many branches. At a later stage, branches can also be merged to combine all commits. The standard branch is called master or main. :bash:`git status` will show you the current branch you are in. These examples should make it more clear:
+
+.. code-block:: bash
+
+   $ git branch testbranch
+   $ git checkout testbranch
+   $ git status
+     On branch testbranch
+     nothing to commit, working tree clean
+
+First we have to create a branch and give it a name: :bash:`git branch testbranch`. Next we need to switch to that branch: :bash:`git checkout testbranch`. With :bash:`git status` we can now see that we are working in this new branch. Everyting we commit will be committed to this new branch.
+
+
+
+Merging branches
+================
+
+At some point you may want to combine work made in different branches. This is possible with :bash:`git merge`. Typically you will want to merge your new branch with the main (or master) branch. Git will identify the last commit the branches we want to merge have in common and it will create a new merge commit. Before merging you need to make sure thate the current HEAD is in the branch that should be the merge target. This means you will need to check out the branch you want to merge with first. This is typicall is the main (or master) branch. Given we are already in the main branch we can merge a branch with master like this:
+
+.. code-block:: bash
+
+   $ git merge testbranch
+     Merge made by the 'recursive' strategy.
+      bla | 1 +
+      1 file changed, 1 insertion(+)
+
+.. warning::
+
+   Merging can be tricky and cause conflicts if commits made in different branches change the same file. In such a case you need to manually inspect the conflicting files to resolve the problem.
+
+
+
+
+.. admonition:: Exercise
+
+   Create a new branch, and make two commits to this branch and merge it with the master branch.
 

@@ -2,45 +2,10 @@
    :language: bash
 
 
-=======================================================
-Exercise 3 - Data organization and proper documentation
-=======================================================
+=====================================
+Exercise 4 - Version control with Git
+=====================================
 
-In this exercise we will have a look into how you can put structure into your research projects files and folder on your computer and how you can keep track of changes to them.
-
-
-We will:
-
-- Setup a directory structure
-- Initialize a git repository
-- Use git to track files in the repository
-- Work with Markdown documents
-
-First let us create a new project with a basic directory structure that can help us to organize our data better:
-
-.. code-block:: bash
-
-    $ mkdir my_project
-    $ cd my_project
-    $ mkdir bin data doc results tmp
-
-
-At the beginning of a project, all directories will be empty, however they will fill quickly as you continue to work on the project.
-
-Information in your project's directories 
-=========================================
-
-The suggested directory structure is intuitive (it follows basic naming convention on \*nix systems) as well as general enough to fit many different use cases. It should be relatively clear what should be put where. Of course it is up to you to decide where to place stuff, but keep in mind that your choice is reasonable and intuitive. For example if you, for some reason place a subset of Illumina read FASTQ files into :bash:`tmp/illumina/subsets` you may spend more time searching for the data then if you would have placed it into :bash:`data/`. Also, if you collaborate with somebody and send them your project, it may also be difficult for them to figure out where the subsetted Illumina read files are.
-
-.. code-block:: bash
-
-    A quick recapitulation of the proposed structure:
-	
-    bin			contains scripts and execuables for performing different analyses
-    data		contains all raw-data
-    results		contains analyses results. Ideally within subdirectories.
-    tmp			Location of temporary files. The "playground" of your project
-    doc			Contains all the documentation for your project. 
 
 
 Keeping track of your project using git
@@ -65,6 +30,8 @@ With `git <https://git-scm.com>`_ you can easily track your work and see how it 
     Initialized empty Git repository ...
 
 It is generally also a good idea to set up git with your name and email address so that contributions to a repository can be attributed transparently. This can be done with the following commands. They will set the global settings of git, it is only necessary to do this once regardless of how many reporitories you initialize.
+
+More information `here <https://git-scm.com/docs/git-init>`_.
 
 .. code-block:: bash
 
@@ -91,8 +58,9 @@ You should see a message that git init successfully create a git repository. Con
     nothing to commit (create/copy files and use "git add" to track)
 
 
+Remember this command. It is key to understand what git keeps track of and what not. You will use this command regularely. You can see that currently the repository is empty, also there are no tracked files. Let us change that and create a file in the doc directory. After this we run :bash:`git status` again.
 
-Remeber this command. It is key to understand what git keeps track of and what not. You will use this command regularely. You can see that currently the repository is empty, also there are no tracked files. Let us change that and create a file in the doc directory. After this we run :bash:`git status` again.
+More information `here <https://git-scm.com/docs/git-status>`_.
 
 .. code-block:: bash
 
@@ -133,6 +101,9 @@ Now that git "sees" the file, we need to let it know that we would like to also 
 
 :bash:`git add` will add the file to the staging environment. We are now ready to make a snapshot of the repository by making our first commit.
 
+More information `here <https://git-scm.com/docs/git-add>`_.
+
+
 Commit changes
 --------------
 
@@ -148,10 +119,11 @@ Committing changes (remember that all changes to be committed first need to be s
 
 As you can see we are using the flag :bash:`-m`, which is short for message. This flag takes a string as argument which will become the commit message. The commit message describes what is contained in the commit. Make sure this is an informative message, because it will stay in your git log. Meaningful commit messages enable you to quickly idenftify what you did whitout having to look at the actual files.
 
-Exercise
-~~~~~~~~
+More information `here <https://git-scm.com/docs/git-commit>`_.
 
-Create a short protocol in Mardown format of what we did so far to your :bash:`protocol.md` file and commit the changes to your repository.
+.. admonition:: Exercise
+
+    Create a short protocol in Mardown format of what we did so far to your :bash:`protocol.md` file and commit the changes to your repository.
 
 Stage and commit. Why two steps?
 --------------------------------
@@ -194,6 +166,7 @@ The difference between the two commands presented above is simply the amount of 
 
 To make them identifiable commits get unique IDs that consists of combinations of numbers and letters. These are also called hashes. We can use commit hashes to switch between different versions of the repository. For example let us try to switch back to the First commit with the hash :bash:`50d2cf8` (long version: :bash:`50d2cf80c9461eef8f67c9273eec8fd3e687162b`). Mind you, that your hashes will be different. You need to use the ones from your :bash:`git log` output. 
 
+More information `here <https://git-scm.com/docs/git-log>`.
 
 Reverting to an older version of your repository
 ================================================
@@ -217,12 +190,11 @@ Since git keeps track of all your commited changes by using unique hashes, it is
 
 This will revert (checkout) your repository to how it was when you made your first commit.
 
-Exercise
-~~~~~~~~
+.. admonition:: Exercise
 
-Revert your reporitory to the second commit we made earlier. Hint you may use :bash:`git reflog` to get the hash.
+    Revert your reporitory to the second commit we made earlier. Hint you may use :bash:`git reflog` to get the hash.
 
-
+More information `here <https://git-scm.com/docs/git-checkout>`_.
 
 Ignoring files
 ==============
@@ -244,10 +216,9 @@ These covers several practical examples of how you can exclude (and keep) files.
 Git treats your .gitignore file as a regular file, so make sure to also commit the changes to it.
 
 
-Exercise
-~~~~
+.. admonition:: Exercise
 
-Create two files in your repository and add one of these files to your :bash:`.gitignore` file. Hint: You can use :bash:`git status` to keep track of the files and find you what git "sees". 
+   Create two files in your repository and add one of these files to your :bash:`.gitignore` file. Hint: You can use :bash:`git status` to keep track of the files and find you what git "sees". 
 
 Branches
 ========
@@ -264,6 +235,7 @@ Sometimes you may want to make larger changes to your repository with the risk t
 
 First we have to create a branch and give it a name: :bash:`git branch testbranch`. Next we need to switch to that branch: :bash:`git checkout testbranch`. With :bash:`git status` we can now see that we are working in this new branch. Everyting we commit will be committed to this new branch.
 
+More information `here <https://git-scm.com/docs/git-branch>`_.
 
 
 Merging branches
@@ -278,14 +250,73 @@ At some point you may want to combine work made in different branches. This is p
       bla | 1 +
       1 file changed, 1 insertion(+)
 
+More information `here <https://git-scm.com/docs/git-merge>`.
+
 .. warning::
 
    Merging can be tricky and cause conflicts if commits made in different branches change the same file. In such a case you need to manually inspect the conflicting files to resolve the problem.
-
-
-
 
 .. admonition:: Exercise
 
    Create a new branch, and make two commits to this branch and merge it with the master branch.
 
+Working with online Git repositories
+====================================
+
+There are several services that provide online services that provide hosting of git repositories. The three large services are `Github <https://github.com/>`_ `Gitlab <https://about.gitlab.com/>`_ and `BitBucket <https://bitbucket.org/>`_. Many different bioinformatic software packages are hosted and developed using one of these platforms. It is one of the great strengths of git to be able to access repositories that are located on different computers. It greatly facilitates collabrative work, transparency and reproducibility. 
+
+Each of the three platforms have their own special features complementing the core functionality of git. There is a lot you can do on these platforms going far beyond this introduction here. We will therefore only provide a very general introduction to how to interact with online repositories. Here is a simple example:
+
+.. code-block:: bash
+
+   $ git clone https://github.com/reslp/reproducibility-workshop.git
+     Cloning into 'reproducibility-workshop'...
+     remote: Enumerating objects: 54, done.
+     remote: Counting objects: 100% (54/54), done.
+     remote: Compressing objects: 100% (32/32), done.
+     remote: Total 54 (delta 25), reused 45 (delta 19), pack-reused 0
+     Unpacking objects: 100% (54/54), done.
+
+:bash:`git clone` is the command to create a local copy of the repository of this course hosted on Github. It will download the complete repository, together with a complete history of all commits on all branches.
+
+More information `here <https://git-scm.com/docs/git-clone>`_.
+
+
+Transfering local changes to an online repository
+=================================================
+
+If you have made local changes to a repository, at some point you will want to include these changes in the online version of it. This is called pushing and the corresponding command is :bash:`git push`.
+
+.. code-block:: bash
+
+  $ git push origin main
+
+This command will push all committed changes made in the main branch to the online repository (which is called origin).
+
+More information `here <https://git-scm.com/docs/git-push>`_.
+
+Getting changes from an online repository
+=========================================
+
+It can happen that changes have been pushed to an online repository, but your local copy is older and you do not have the latest changes. In such a case you can download all changes from a remote repository directly into your local copy:
+
+.. code-block:: bash
+
+   $ git pull
+   
+This command will compare the remote and local repositories and will download all changes from the remot version of the repository
+
+More information `here <https://git-scm.com/docs/git-pull>`_.
+
+There is a lot more...
+=======================
+
+This practical can only be considered a basic introduction to git. Git can do a lot more. The commands provided here will get you started and as you familiarize and apply them in your own projects you will quickly discover additional functionality. Here are additional resources that we found helpful when learning git.
+
+    - `Git reference manual <https://git-scm.com/docs>`_
+    - `Git Pro Book <https://git-scm.com/book/en/v2>`_
+    - `Oh Shit, Git?! <https://ohshitgit.com/>`_
+    - `W3 Schools Git Tutorial <https://www.w3schools.com/git/>`_
+    - `Learn Git interactively <https://learngitbranching.js.org/>`_ 
+    - `Linus Torvalds talking about Git <https://www.youtube.com/watch?v=4XpnKHJAok8>`_
+    - `A Quick Introduction to Version Control with Git and GitHub <https://journals.plos.org/ploscompbiol/article?id=10.1371/journal.pcbi.1004668>`_

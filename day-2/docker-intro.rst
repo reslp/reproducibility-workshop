@@ -116,13 +116,14 @@ To get an idea what we can do with docker you can run the docker command without
 
 This may look overwhelming at first but it illustrates that Docker is capable of many different things and there are many different ways how to do them. Also, during your daily docker use, you may actually only need a subset of what is listed above. Because Docker can do so many different things the :bash:`docker` command is organized in sub-commands which correspond to different aspects of Docker. Docker sub-commands can be further customized with traditional command-line flags.
 
-:: tip "Getting help"
+.. hint:: "Getting help"
+
 	If you would like to know about the different options you can use the docker command like so to display additional help: docker COMMAND --help. For example `docker run --help` will only display options associated with the docker run command.
 
 Lets run our first container from a pre-built image
 ---------------------------------------------------
 
-Probably the first container every new Docker user runs is the `(hello-world) <https://en.wikipedia.org/wiki/%22Hello,_World!%22_program>` container. We will also follow this tradition to execute the hello-world docker container:
+Probably the first container every new Docker user runs is the `hello-world <https://en.wikipedia.org/wiki/%22Hello,_World!%22_program>`_ container. We will also follow this tradition to execute the hello-world docker container:
 
 .. code-block:: bash
 
@@ -158,7 +159,7 @@ A lot is going on when this command is executed apart from printing the traditio
 
 .. tip::  "DockerHub"
 
-	Docker Hub is a large online repository of custom Docker images made by other users. We will have a closer look on how it works in the next session. 
+    Docker Hub is a large online repository of custom Docker images made by other users. We will have a closer look on how it works in the next session. 
 
 As already mentioned :bash:`docker run` automatically pulls an image if it is not already available on the host. It is however also possible to just pull it without immediately creating a container. This can be done with :bash:`docker pull`. We will now pull an plain ubuntu image. Note also that we are pulling a specific version (which is indicated by the colon after the image name). 
 
@@ -167,11 +168,13 @@ As already mentioned :bash:`docker run` automatically pulls an image if it is no
     (host) $ docker pull ubuntu:18.04
 
 
-!!! info "Be explicit with image versions"
-	Usually it is good practice to always specify the version of an image when creating a container. This ensures reproducability and the same behavior during every run. In the case of hello-world we ran the latest version. The latest version of the image is pulled if no version number is specified explicitly. This could break your workflow if the image is updated because if a newer version is available it will automatically download it. This new image then replaces the old one.
+.. hint:: "Be explicit with image versions"
+
+    Usually it is good practice to always specify the version of an image when creating a container. This ensures reproducability and the same behavior during every run. In the case of hello-world we ran the latest version. The latest version of the image is pulled if no version number is specified explicitly. This could break your workflow if the image is updated because if a newer version is available it will automatically download it. This new image then replaces the old one.
 
 
-### Executing commands within a container
+Executing commands within a container
+-------------------------------------
 
 Lets try something a bit more advanced: In the last section we saw how the hello-world container displayed some text on our terminal screen before it exits back to our command prompt. This very simple container only runs for a few seconds and the only thing it does is to display the message above. However, often it is desired to change the execution of a container as it runs or run specific commands inside the container. In fact this is probably one of the most common use cases for many scientists. Let's see how we can execute (almost) any command inside a docker container:
 

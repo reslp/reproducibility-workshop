@@ -50,5 +50,6 @@ Getting started
    :maxdepth: 1
    :hidden:
 
-   day-1/data-organization-and-git.rst
+   day-1/exercise-3-data-organization.rst
+   day-1/exercise-4-git.rst
    day-2/docker-intro.rst

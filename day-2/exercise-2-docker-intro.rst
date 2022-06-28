@@ -1,9 +1,9 @@
 .. role:: bash(code)
    :language: bash
 
-=====================================================
-Docker - Running and interacting with prebuild images
-=====================================================
+================================
+Exercise 2 - Working with Docker
+================================
 
 A successful Docker installation runs in the background out of sight of the user. At its core is the so-called Docker deamon (or dockerd) which manages different docker objects such as containers, images or volumes.
 The way to interact with the Docker daemon and tell it what to do is through a command line interface (CLI) program which is called :bash:`docker`. We refer to this here as the :bash:`docker` command. 
@@ -457,7 +457,6 @@ We will now create a :bash:`testfile` in the current directory. Then we will sta
     testfile
     (host) $
 
-=======
 Summary
 =======
 

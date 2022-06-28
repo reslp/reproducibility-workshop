@@ -45,11 +45,22 @@ Getting started
    :hidden:
 
 .. toctree::
-   :caption: Practials
-   :name: practical
+   :caption: Day 1
+   :name: day1
    :maxdepth: 1
    :hidden:
 
+   day-1/exercise-1-shell-intro.rst
+   day-1/exercise-2-advances-shell.rst
    day-1/exercise-3-data-organization.rst
    day-1/exercise-4-git.rst
-   day-2/docker-intro.rst
+
+   :caption: Day 2
+   :name: day2
+   :maxdepth: 1
+   :hidden:
+
+   day-2/exercise-1-conda.rst
+   day-2/exercise-2-docker-intro.rst
+   day-2/exercise-3-advanced-docker.rst
+   day-2/exercise-4-docker-pitfalls.rst

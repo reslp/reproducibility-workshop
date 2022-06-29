@@ -6,6 +6,15 @@
 Exercise 4 - Version control with Git
 =====================================
 
+Git is a version control system originally introduced to support the development of the Linux operating system. Originally released in 2005 git is now used in countless projects to facilitate version control and collaboration. Git can be used in many different scenarios and it is also a handy tool to keep track of changes in research projects. With git it is straightforward to monitor changes in files and thus ensure reproducibility of bioinformatic experiments.
+
+In this exercise we will:
+~~~~~~~~~~~~~~~~~~~~~~~~~
+
+- Create our first git repository
+- Learn how to keep track of file changes
+- Learn what branches are and how they work
+- Interact with online repositories
 
 
 Keeping track of your project using git

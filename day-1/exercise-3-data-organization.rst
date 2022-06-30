@@ -103,13 +103,29 @@ Here is a first example showing many features of Markdown:
 
 It should be self explanatory what this means. The :bash:`#` characters are used to create headings of different levels and there are other special character to identify code blocks (`), bold (**) and italic (*) text are to create tables.
 
-Hopefully you agree that although we are using special characters here in otherwise regular text, it is still easy to read and comprehend. Apart from this Markdown truely shines when it is rendered. This means that headers become real headers, bold text become bold etc. There is a lot of dedicated software to render Markdown locally on your computer, and many Websites (eg. Github) are able to do so as well. This is the cool thing about markup languages such as Markdown. In fact, the course material you are currently reading is also written in a markup language called `reStructedText <https://de.wikipedia.org/wiki/ReStructuredText>`_.
+Hopefully you agree that although we are using special characters here in otherwise regular text, it is still easy to read and comprehend. Apart from this Markdown truely shines when it is rendered. This means that headers become real headers, bold text become bold etc. There is a lot of dedicated software to render Markdown locally on your computer, and many Websites (eg. Github) are able to do so as well. 
 
 .. admonition:: Exercise
 
    It is much easier to understand Markdown when you see it live in action. In this exercise you should play around with Markdown directly in the browser.
    Go to `https://markdownlivepreview.com/ <https://markdownlivepreview.com/>`_ and see how it works. You can also copy and paste from your own local document.
 
+Markdown languages
+~~~~~~~~~~~~~~~~~~
+
+Many different markdown languages exist for different purposes and with different features. In fact, the course material you are currently reading is also written in a markup language called `reStructedText <https://de.wikipedia.org/wiki/ReStructuredText>`_. A cool thing about markdown languages is that they can be converted in one another relatively easily. With ``pandoc`` you can convert between different markdown languages and also produce PDF files and MS Word documents. Is can be very handy when you want to share documents with collaborators or bring them into a format where they are better suited to be printed.
+
+Let's see how it works:
+
+.. code-block:: bash
+
+   $ pandoc test.md --from markdown --to rst -o test.rst
+
+The above command converts a file from Markdown to reStructuredText.
+
+.. admonition:: Exercise
+
+   Play around with pandoc and convert your .md file into a few different formats. You may also look at the pandoc website `https://pandoc.org/ <https://pandoc.org/>`_ for more information and possible conversions.
 
 Additional resources
 ====================

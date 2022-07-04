@@ -1,0 +1,8 @@
+name: myenvironment
+channels:
+  - conda-forge
+  - defaults
+  - bioconda
+dependencies:
+  - mamba=0.24.0
+

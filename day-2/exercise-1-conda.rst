@@ -5,14 +5,14 @@
 Exercise 1 - Virtual environments
 =================================
 
-In recent years virtual environments have become more and more common in bioinformatics and scientific computing. Researchers work with many different software packages and may depend on specific versions for their code to run. This problem is intensified when working on remote servers or high performance computing clusters because usually on these systems regular users will have no possibility to install their own software system wide (eg. with :bash:`sudo apt-get` or similar). In both these scenarios virtual environment software can help. Virtual environments are typically run and/or installed locally in the context of a single user and do not interfer with software installed globally on the respective machine.
+In recent years virtual environments have become more and more common in bioinformatics and scientific computing. Researchers work with many different software packages and may depend on specific versions of other software for their code to run. This problem is intensified when working on remote servers or high performance computing clusters because usually on these systems regular users will have no possibility to install their own software system wide (eg. with :bash:`sudo apt-get` or similar). Here virtual environment software can help. Virtual environments are typically run and/or installed locally in the context of a single user and do not interfer with software installed globally on the respective machine.
 
 .. hint::
 
-    There are different variants of virtual environments each with its own strengths, weaknesses and use cases. Some promiment examples include `python venv <https://docs.python.org/3/library/venv.html>`_ for all things in the python ecosystem, `environment modules <https://modules.readthedocs.io/en/latest/index.html>`_ which are often used on HPC clusters to load different software.
+    There are different variants of virtual environments each with its own strengths, weaknesses and use cases. Some prominent examples include `python venv <https://docs.python.org/3/library/venv.html>`_ for all things in the python ecosystem, `environment modules <https://modules.readthedocs.io/en/latest/index.html>`_ which are often used on HPC clusters to load different software. Here we will focos in the ``conda`` virtual-environment and package manager.
 
 
-A now very common way to work with virtual environments is `conda <https://www.anaconda.com/>`_. Conda provides convenient handling of virtual environments and it serves as an installer for many open-sources tools used in bioinformatics, statistics, machine-learning etc. In the conda ecosystem software which should be installed are called packages. Packages are somewhat loosely group by topic which are called channels. Common channels containing bioinformatic packages are :bash:`bioconda` and :bash:`conda-forge`. Conda offers version controlled installation and works without administrator privileges on most operating systems.
+A now very common way to work with virtual environments is `conda <https://www.anaconda.com/>`_. Conda provides convenient handling of virtual environments and it serves as an installer for many open-sources tools used in bioinformatics, statistics, machine-learning etc. In the conda ecosystem software is provided as so-called packages. Conda packages are somewhat loosely grouped by topic in software repositories called channels. Common channels containing bioinformatic packages are :bash:`bioconda` and :bash:`conda-forge`. Conda offers version controlled installation and works without administrator privileges on most operating systems.
 
 .. warning::
 
@@ -160,6 +160,9 @@ After creating the environment we can now activate it:
    $ conda activate myenvironment
    (myenvironment) $
 
+Installing packages
+-------------------
+
 When you run the :bash:`conda activate` command, you will see that your command prompt changes. This tells you that you are now working in the virtual environment :bash:`myenvironment`. In this environment we can now start to install other conda packages.
 
 .. code-block:: bash
@@ -171,18 +174,38 @@ This is the basic syntax of how to install conda packages. Notice the ``=0.24.0`
 
 The package we installed is called ``mamba`` and we installed it through the `conda forge <https://conda-forge.org/>`_ channel (``-c conda-forge``) which contains over 18.000 utility packages. `mamba <https://github.com/mamba-org/mamba>`_ is a replacement for the ``conda`` command executable. While it does not have every feature ``conda`` has we still highly recommend using ``mamba`` when installing packages because it is a lot faster than regular ``conda`` when resolving dependencies.
 
+Removing packages
+-----------------
 
+Conda packages are removed like so:
+
+.. code-block:: bash
+
+   (myenvironment) $ conda uninstall mamba
+
+
+Additional commands for managing packages
+-----------------------------------------
+
+Several additional commands exist to help you manage conda packages such as ``conda update``, ``conda search`` and more. There is not enough time to cover all of them here but you can look at the `online documentation <https://docs.conda.io/projects/conda/en/latest/commands/search.html>`_ . 
+
+
+.. admonition:: Exercise
+
+   Now you have a bit of time to play around with conda and its different commands. If you already have some experience with conda, we encourage you to try commands you did not use before.
+   Some examples of what you could do is: Install additional packages, upgrade or downgrade packages, search for packages, list all installed packages, etc.
+ 
 Saving environments
 -------------------
 
-For the sake of reproducibility you will often want to have the exact same conda environment on multiple computers. To achieve this, conda has a feature to export your complete environment as a YAML file.
+Conda environments can become very big quickly and it is hard to keep track which packages you actually installed in your environment. For the sake of reproducibility you will often want to use the exact same conda environment on multiple computers. This is hard to achieve manually (unless you keep track of every package you installed). Luckily, conda has a feature to export your complete environment as a YAML file.
 
 
 .. hint:: 
 
    What are YAML files?
 
-   `YAML <https://en.wikipedia.org/wiki/YAML>`_ (YAML Ain't Markup Language) is a simple format and language typically used in config files to store settings and other information. This information can be read and interpreted by other software. By saving settings and parameters into YAML files, it becomes easy to reproduce analyses without having to remember each paramter. There are libraries to interact with YAML files for each major programming language and many bioinformatics software uses YAML files as an input. YAML files have the syntax ``name: value``. Typical extensions are ``.yaml`` or ``.yml``. Additional grouping of values can be made by assigning named block and indenting all name-value pairs belonging to this block. Look at this section of a YAML file:
+   `YAML <https://en.wikipedia.org/wiki/YAML>`_ (YAML Ain't Markup Language) is a simple format and language typically used in config files to store settings and other information. This information can be read and interpreted by other software. By saving settings and parameters into YAML files, it becomes easy to reproduce analyses without having to remember each parameter. There are libraries to interact with YAML files for each major programming language and many bioinformatics software use YAML files as an input or additional config files. YAML files have the syntax ``name: value``. Typical file extensions are ``.yaml`` or ``.yml``. Additional grouping of values can be made by assigning named blocks and indenting all name-value pairs belonging to this block. Look at this section of a YAML file:
 
    .. code-block:: bash
    
@@ -191,13 +214,15 @@ For the sake of reproducibility you will often want to have the exact same conda
          threads: 20
          params: "-a -x sr"
 
-   As you can see the three last lines are indented and the whole indented block has the name samtools. Hopefully this quick introduction helps to understand YAML files, We will come accross them often so it is good to know their structure. There are other, more complex laguages such as JSON or also XML (if you are ready for frustration) which are less human readable but have libraries to interact with them in different languages. If you are interested in this topic here are some links with further information:
+   As you can see the three last lines are indented and the whole indented block has the name samtools which means these values belong together. 
 
-   `What is YAML? <https://blog.stackpath.com/yaml/>`_
-   `More extensive YAML tutorial <https://www.cloudbees.com/blog/yaml-tutorial-everything-you-need-get-started>`_
-   `YAML vs. JSON <https://www.geeksforgeeks.org/what-is-the-difference-between-yaml-and-json/>`_
-   `JSON or YAML? Which is better <https://linuxhint.com/yaml-vs-json-which-is-better/>`_
-   `Working with YAML files in Python <https://python.land/data-processing/python-yaml>`_
+   We will come accross YAML files often so it is good to fimiliarize yourself with how they are structured. There are other, more complex laguages such as JSON or also XML (if you are ready for frustration) which are less human readable but have libraries to interact with them in different languages. If you are interested in this topic here are some links with further information:
+
+   - `What is YAML? <https://blog.stackpath.com/yaml/>`_
+   - `More extensive YAML tutorial <https://www.cloudbees.com/blog/yaml-tutorial-everything-you-need-get-started>`_
+   - `YAML vs. JSON <https://www.geeksforgeeks.org/what-is-the-difference-between-yaml-and-json/>`_
+   - `JSON or YAML? Which is better <https://linuxhint.com/yaml-vs-json-which-is-better/>`_
+   - `Working with YAML files in Python <https://python.land/data-processing/python-yaml>`_
 
 Now we will save the environment with mamba installed to a YAML file:
 
@@ -216,15 +241,15 @@ Now we will save the environment with mamba installed to a YAML file:
      - bzip2=1.0.8=h7f98852_4
      - c-ares=1.18.1=h7f98852_0 
 
-As you can see ``conda env export`` creates a YAML file. The first few lines already indicate how it is structured, we have different indented blocks which belong together (such as name, channels and dependencies). You can also see that each installed packages is specified with a version number and a build number using the format ``packagename=version=build``. This means conda is very specific when exporting environments. In terms of reproducibility this should be a good thing right? Well in fact this can cause many problems. We will have a look at this and other issues you may encounter with conda in the next section.
+As you can see ``conda env export`` creates a YAML file. The first few lines already indicate how it is structured, we have different indented blocks which belong together (such as name, channels and dependencies). You can also see that each installed packages is specified with a version number and a build number using the format ``packagename=version=build``. This means conda is very specific when exporting environments. In terms of reproducibility this should be a good thing right? Well in fact this can cause many problems. In the rest of this exercise we will look at some issues you may encounter with conda.
 
 Problems with conda
 ===================
 
-Conda is a very nice tool to create virtual environments and install software packages. However there are a few, not immediately obvious challenges when working with conda that can impact reproducibility negatively. Let us continue with the example of creating an environment from a saved yaml file.
+Conda is a very useful too to create and manage virtual environments and software packages. However there are a few not immediately obvious challenges when working with conda that can impact reproducibility negatively. Let us continue with the example of creating an environment from a saved yaml file.
 
 Challenges when exporting environments
-~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+--------------------------------------
 
 The standard way of creating an environment from a compatible YAML file with conda is this:
 
@@ -234,7 +259,9 @@ The standard way of creating an environment from a compatible YAML file with con
 
 Conda will parse the YAML file, create a new environment by the name given in the first line of the file and install all packages listed under dependencies. It will install the exact same version and build and this is where the problem starts. Not every version and build exists for every operating system and computer architecture. It will depend if you are working on Linux or Mac and there are differences between 32bit and 64bit CPUs as well as ARM and x86 CPU architectures. Since there are many dependencies that need to be considered (look at the complete environment files with ``less``), there is a lot of room for problems. 
 
-A possible solution to this problem is to export environments like this:
+There is no single 100% solution to this problem, but there are a few things you can do to help making conda environments independent from your computer environment. 
+
+A first possibility is to export environments like this:
 
 .. code-block:: bash
    
@@ -264,17 +291,17 @@ As you can see this will create an environment file that still has the version n
      - mamba
    prefix: /home/user/.miniconda3/envs/myenvironment 
 
-In this case only the packages that have been installed explicitly (with ``conda install``) will be listed here. But unfortunately without version numbers and also a package channel is missing.
+In this case only the packages that have been installed explicitly (with ``conda install``) will be listed here. Unfortunately without version numbers and also a package channel (``conda-forge``) is missing.
 
 .. admonition:: Exercise
   
-   You will now try to install your conda environment on a differently setup computer. If you have conda installed locally on your computer you can try it there. If not, we have provided an alternative environment for you to perform this exercise. To get to this environment run: ``debian-alternate-miniconda`` in the same directory where your YAML environment file is. This is a stripped down version of Debian Linux with Miniconda 4.7.12 installed. You may use ``vim`` or ``nano`` to edit the file there. Use ``exit`` to close this environment. Your task is to try to get the environment to install properly and mama working inside the environment.
+   Your task is to try to get the exported environment to install properly and mamba working inside the environment as if you where on a different computer. If you have conda installed locally on your computer you can try it there. If not, we provide an alternative way for you to perform this exercise. Run: ``debian-alternate-miniconda`` in the same directory where your YAML environment file is. This will bring you into a stripped down version of Debian Linux with Miniconda 4.7.12 installed. You may use ``vim`` or ``nano`` to edit the file there. Use ``exit`` to close this environment when you are done. 
 
 
 Incompatible packages from small channels
-~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+-----------------------------------------
 
-Beside the large conda channels (such as bioconda, conda-forge, r) it is possible to install also from alternative channels. However also this can come with several challenges and unexpected behaviour. For example some channels can provide incompatible dependecy versions even when thy should be compatible. This can sometimes happen unexpectedly and also rarely with large channels, but far less often. Here is an example where we try to install `ete3 <http://etetoolkit.org/>`_ and its associated tools. Ete3 is an API for working with phylogenetic data in python. It is powerful and provides many interesting functions to work with alignments and phylogenetic trees. Let us see how this goes by following installation instructions which you can find if you search for `ete3 conda install <https://www.google.com/search?channel=fs&client=ubuntu&q=install+ete3+conda>`_ . 
+Beside the large conda channels (such as ``bioconda``, ``conda-forge``, ``r``) it is also possible to use and install from alternative channels. However this can come with several challenges and unexpected behaviour. It can for example result in incompatible dependecies and you can quickly damage up your environment beyond repair. This can sometimes happen unexpectedly and also rarely with large channels, but far less often. Here is an example where we try to install `ete3 <http://etetoolkit.org/>`_ and its associated command line tools. Ete3 is an API for working with phylogenetic data in python. It is powerful and provides many interesting functions to work with alignments and phylogenetic trees and a full featured command line interface. Let us see how this goes by following installation instructions which you can find if you search for `ete3 conda install <https://www.google.com/search?channel=fs&client=ubuntu&q=install+ete3+conda>`_ . 
 
 .. code-block:: bash
 
@@ -316,7 +343,7 @@ This is strange! Shouldn't conda help us solve these issues? Apparently it does 
 
 .. admonition:: Exercise
 
-   As you can see, this does not work so easily. Your task is now to try to install ete3 and ete_toolchain into the same environment. The underlying issue is discussed `here <https://github.com/etetoolkit/ete/issues/500>`_ .
+   Your task is now to try to install ete3 and ete_toolchain into the same environment. The underlying issue is discussed `here <https://github.com/etetoolkit/ete/issues/500>`_ .
 
 Once you have solved this, we can look at all packages installed through the etetoolkit channel:
 
@@ -342,7 +369,7 @@ Once you have solved this, we can look at all packages installed through the ete
    t_coffee                  11.00                h99d273f_0    etetoolkit
    trimal                    1.4                  h87cb4c3_0    etetoolkit
 
-You may recognize several of these programs. They are standard software in phylogenetics which ete3 uses, however the used version here are pretty outdated. The ete channel does not provide more recent versions and updating these packages through a different channel. For example we can try to update iqtree (a Maximum-Likelihood phylogenetic tree building software) to it's latest version available on bioconda:
+You may recognize several of these programs. Most of them are standard phylogenetic software which ete3 interacts with, however the used version here are pretty outdated. The ``ete`` channel does not provide more recent versions. However we may need a more recent version for some other task we would like to perform. For example we can try to update ``iqtree`` (a Maximum-Likelihood phylogenetic tree building software) to it's latest version available on bioconda:
 
 .. code-block:: bash
 
@@ -386,12 +413,16 @@ You may recognize several of these programs. They are standard software in phylo
    iqtree=2.2.0.3 -> libgcc-ng[version='>=10.3.0'] -> _libgcc_mutex[version='*|0.1',build=main]
    
 
-Welcome to `dependency hell <https://en.wikipedia.org/wiki/Dependency_hell>`_ ! We are having the same problem conda set out to solve. 
-
+Welcome to `dependency hell <https://en.wikipedia.org/wiki/Dependency_hell>`_ ! Looks like we are now having the same problem conda set out to solve. 
+ 
 R and conda
-~~~~~~~~~~~
+-----------
 
-Many of you probably also work with R. In case your are not familiar with R, R is a `statistical programming language <https://en.wikipedia.org/wiki/R_(programming_language)>`_ that has become heavily used in natural sciences. It has countless user-developed extensions for different kinds of analysis and visualizing data. If you rely on R heavily, it may be tempting to install R in conda. This may be necessary to keep different R versions and according version of R packages. However if you plan to do so, there are several things to keep in mind. In R it is not the standard to install specific version (although you definitely should) when installing packages. Although it is possible, given you have devtools installed: 
+Many of you probably also work with R. In case your are not familiar with R, R is a `statistical programming language <https://en.wikipedia.org/wiki/R_(programming_language)>`_ that has become heavily used in natural sciences. It has countless user-developed extensions for different kinds of analyses and for visualizing data. If you rely on `R` heavily as we do, it may be tempting to install R in conda to keep track of your R packages and have reproducible R environments. This may be especially necessary to keep different R versions and according versions of R packages for example if you would like to reanalyze the data of an older publication.
+
+If you plan to do so, there are several things to keep in mind. The first thing (and this is a very small digression into working with R) is that in R it is not the standard to install specific versions (although you definitely should) of packages. Simply search the internet a bit and you will quickly realize that very rarely r package versions are given.
+
+It is possible to install a specific version of a package, given you have devtools installed: 
 
 .. code-block:: bash
 
@@ -419,20 +450,130 @@ Many of you probably also work with R. In case your are not familiar with R, R i
   > install_version("ggplot2", version = "3.3.6", repos = "http://cran.us.r-project.org")
 
 
-The ggplot package in R is probably one of the most commonly used packages for data visualization. Due to its popularity it is also available on as a conda package. In fact there are multiple available ggplot packages:
+The ggplot package in R is probably one of the most commonly used packages for data visualization. Due to its popularity it is also available as conda package. In fact there are multiple available ggplot packages available for conda:
 
 - `ggplot on conda-forge <https://anaconda.org/conda-forge/r-ggplot2>`_
 - `an old version of ggplot <https://anaconda.org/conda-forge/ggplot>`_ (also on conda-forge)
 - `ggplot on bioconda <https://anaconda.org/bioconda/r-ggplot2>`_ 
 
-and probably others on small channels. This is not ideal. 
+and probably others on small channels. This is not ideal and does not help with making analyses reproducible. One additional complication is that conda channels are ordered and it will search them based on the order you specified. We have already seen this with the example of mamba above.
+
+You can list channels like so:
+
+.. code-block:: bash
+
+   $ conda config --list channels
+   channels:
+    - bioconda
+    - conda-forge
+    - defaults
+
+If you would install ggplot with this channel order and without specifying a version number and channel (eg. ``conda install r-ggplot2``) you would end up with the ggplot package from ``bioconda`` which is quite outdated compared to the version in ``conda-forge``. This is simply because the ``bioconda`` channel is listed before ``conda-forge``. The channel order is also relevant in environment files. If you want to know more about how to manage channels you can go `here <https://docs.conda.io/projects/conda/en/latest/user-guide/tasks/manage-channels.html>`_ .
+
+Here is an example of strange behaviour that can prevent achieving reproducibility. In this example we will create a new environment and install a specific version of R and ``ggplot`` using conda. Next we will open the R console and install ggplot again from inside R. Let us see what happens.
+
+.. hint::
+  
+   Output of most commands below is omitted to save space.
 
 
+.. code-block:: bash
+
+   $ conda create -n r-test
+   $ conda activate r-test
+   (r-test) $ conda install -c conda-forge r-base=4.0.5
+   (r-test) $ conda install -c conda-forge r-ggplot=3.3.0
+   (r-test) $ conda list | grep ggplot2
+   r-ggplot2                 3.3.0             r40h6115d3f_1    conda-forge
+
+Ok, we have successfully installed R and ggplot2 using conda. We have used the same channel as well so there should be no dependency issues. Now let's start R and install ggplot again. Why would we even do this you may ask? One reason why we would do this could be that ggplot gets an update and we would like to use the new features. In R we are not really used to keep track of version numbers. Typically we will simply install packages with ``install.packages("packagename")`` and be done with it. In combination with conda this can lead to problems. Let us see how:
+
+.. code-block:: bash
+
+  (r-test) $ R
+  > library(ggplot)
+  > sessionInfo()
+  R version 4.0.5 (2021-03-31)
+  Platform: x86_64-conda-linux-gnu (64-bit)
+  Running under: Ubuntu 18.04.5 LTS
+  
+  Matrix products: default
+  BLAS/LAPACK: /home/reslp/.miniconda3/envs/r-test/lib/libopenblasp-r0.3.20.so
+  
+  locale:
+   [1] LC_CTYPE=en_US.UTF-8       LC_NUMERIC=C              
+   [3] LC_TIME=de_AT.UTF-8        LC_COLLATE=en_US.UTF-8    
+   [5] LC_MONETARY=de_AT.UTF-8    LC_MESSAGES=en_US.UTF-8   
+   [7] LC_PAPER=de_AT.UTF-8       LC_NAME=C                 
+   [9] LC_ADDRESS=C               LC_TELEPHONE=C            
+  [11] LC_MEASUREMENT=de_AT.UTF-8 LC_IDENTIFICATION=C       
+  
+  attached base packages:
+  [1] stats     graphics  grDevices utils     datasets  methods   base     
+  
+  other attached packages:
+  [1] ggplot2_3.3.0
+  
+  loaded via a namespace (and not attached):
+   [1] fansi_1.0.3      withr_2.5.0      utf8_1.2.2       crayon_1.5.1    
+   [5] grid_4.0.5       R6_2.5.1         lifecycle_1.0.1  gtable_0.3.0    
+   [9] magrittr_2.0.3   scales_1.2.0     pillar_1.7.0     rlang_1.0.3     
+  [13] cli_3.3.0        vctrs_0.4.1      ellipsis_0.3.2   glue_1.6.2      
+  [17] munsell_0.5.0    compiler_4.0.5   pkgconfig_2.0.3  colorspace_2.0-3
+  [21] tibble_3.1.7
+  > detach("package:ggplot2")  
+  > install.packages("ggplot2", repos = "http://cran.us.r-project.org")   
+  > quit()
+  $ R
+  > library(ggplot2)
+  > sessionInfo()
+  R version 4.0.5 (2021-03-31)
+  Platform: x86_64-conda-linux-gnu (64-bit)
+  Running under: Ubuntu 18.04.5 LTS
+  
+  Matrix products: default
+  BLAS/LAPACK: /home/reslp/.miniconda3/envs/r-test/lib/libopenblasp-r0.3.20.so
+  
+  locale:
+   [1] LC_CTYPE=en_US.UTF-8       LC_NUMERIC=C              
+   [3] LC_TIME=de_AT.UTF-8        LC_COLLATE=en_US.UTF-8    
+   [5] LC_MONETARY=de_AT.UTF-8    LC_MESSAGES=en_US.UTF-8   
+   [7] LC_PAPER=de_AT.UTF-8       LC_NAME=C                 
+   [9] LC_ADDRESS=C               LC_TELEPHONE=C            
+  [11] LC_MEASUREMENT=de_AT.UTF-8 LC_IDENTIFICATION=C       
+  
+  attached base packages:
+  [1] stats     graphics  grDevices utils     datasets  methods   base     
+  
+  other attached packages:
+  [1] ggplot2_3.3.6
+  
+  loaded via a namespace (and not attached):
+   [1] fansi_1.0.3      withr_2.5.0      utf8_1.2.2       crayon_1.5.1    
+   [5] grid_4.0.5       R6_2.5.1         lifecycle_1.0.1  gtable_0.3.0    
+   [9] magrittr_2.0.3   scales_1.2.0     pillar_1.7.0     rlang_1.0.3     
+  [13] cli_3.3.0        vctrs_0.4.1      ellipsis_0.3.2   glue_1.6.2      
+  [17] munsell_0.5.0    compiler_4.0.5   pkgconfig_2.0.3  colorspace_2.0-3
+  [21] tibble_3.1.7
+
+Isn't this strange? It seems like we now have a newer version of ggplot installed directly through R. Let's check which version conda shows as being installed:
+
+.. code-block:: bash
+
+   (r-test) $ conda list | grep ggplot2
+   r-ggplot2                 3.3.0             r40h6115d3f_1    conda-forge
+
+Looks like it still shows the version we installed through conda. There is something wrong here! While this particular example may not be very problematic in a real life scenario, you can see how easy it is to mess up your environment and R set up and loose reproducibility. Especially when you only share your conda environment file without the information of how you installed R packages. 
+
+.. admonition:: Exercise
+
+   Your task now is to solve the issue so that the ggplot version shown in conda and R match again.
 
 
-Tips to increase reproducibility with conda
-===========================================
+Summary: Tips to increase reproducibility with conda
+====================================================
 
+We have seen how conda manages environments and how we can install and remove packages from different environments. We have also given a few examples of how working with conda can cause problems.
 From what we have seen in the exercises above, several hurdles can come in the way to achieve full reproducibility when working with conda. There are however several things you can do to increase reproducibility:
 
 - Make sure to have the same conda version installed on each system.
@@ -442,15 +583,16 @@ From what we have seen in the exercises above, several hurdles can come in the w
 - Try to avoid installing from small (and often not well maintained channels).
 - Create many small environments instead of installing everything into a single environment.
 
-When working with R in conda:
+When working with R in conda
+----------------------------
 
 - Alawys install R first before installing packages.
 - Avoid installing R packages from different channels
-- Don't mix R packages installed through conda and directly in R (eg. with ``install.packages()``.
-- If possible avoid the r channel and make sure to use the corret one.
+- Don't mix R packages installed through conda and directly in R (eg. with ``install.packages()``).
+- If possible avoid the r channel and make sure to use a more up to date channel.
 - Be prepared to run into problems.
 
-
+A nice way to increase reproducibility and create very solid environments is to use containerization. We will look into this topic in the next exercise.
 
 
 

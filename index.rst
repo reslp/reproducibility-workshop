@@ -65,3 +65,12 @@ Getting started
    day-2/exercise-2-docker-intro.rst
    day-2/exercise-3-advanced-docker.rst
    day-2/exercise-4-docker-pitfalls.rst
+
+.. toctree::
+   :caption: Day 3
+   :name: day3
+   :maxdepth: 1
+   :hidden:
+
+   day-3/exercise-1-workflows.rst
+   day-3/exercise-2-phylogenomics.rst

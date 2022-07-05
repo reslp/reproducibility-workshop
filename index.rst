@@ -74,3 +74,5 @@ Getting started
 
    day-3/exercise-1-workflows.rst
    day-3/exercise-2-phylogenomics.rst
+
+

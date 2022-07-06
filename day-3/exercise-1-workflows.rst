@@ -5,22 +5,26 @@ Workflow management systems help to structure complex workflows. When a workflow
 
 In this exercise we will introduce different ways how to automate workflows to increase productivity and reproducibility.
 
-We will be using a simplified dummy dataset to illustrate the principle of what we want to do. The task is simple: We want to combine the content of several files into a single file and convert all text in the combined file to lower case. The resulting file should be called ``lower.txt``. The data for this exercise is in ``additional-data/simple-workflow-example/input``. You can copy the ``simple-workflow-example`` directory or work directly there.
+We will be using a simplified dummy dataset to illustrate the principle of what we want to do. The task is simple: We want to combine the content of several files into a single file and convert all text in the combined file to lower case. The resulting file should be called ``lower.txt``. The data for this exercise is in ``additional-data/simple-workflow-example/input``.
+
+.. admonition:: Exercise
+
+   Copy the ``simple-workflow-example`` to your home directory and familiarize yourself with the input data. If possible try to come up with a solution to the proposed task from above by using bash before reading on.
 
 Using commandline scripting
 ----------------------------
 
-The task we have to do is simple and can easily be achieved by using a bash oneliner:
+As you probably figured out yourself, the task we have to do is simple and can easily be achieved by using a bash oneliner:
 
 .. code-block:: bash
 
    $ cat input/*.txt | tr [:upper:] [:lower:] > lower.txt
 
-However we will now try to divide this command into individual steps and then make an automated workflow out of it. 
+However we will now try to divide this command into individual steps for the sake of this exercise and then make an automated workflow out of it. 
 
-The command does several things:
+The command iabove does several things:
 
-1. It gets a list of ``.txt`` files by using the ``*`` expansion.
+1. First, it gets a list of all ``.txt`` files in the ``input`` directory by using the ``*`` expansion.
 2. It shows the content of all the files gather by 1 using ``cat``.
 3. It pipes the output of 2 into ``tr`` which converts the streamed content to lower case.
 4. Finally the result is piped into a file called ``lower.txt``
@@ -87,23 +91,31 @@ How would our simple test workflow look written in make? Let us have a look at t
 .. code-block:: bash
    
    $ cat Makefile
-   input_files=$$(ls input/*.txt)
-   
-   combined.txt: 
-           for file in $(input_files); do \
+   all: lower.txt
+
+   combined.txt: input/*.txt 
+           for file in $^; do \
                    cat $$file >> combined.txt; \
            done
    
    lower.txt: combined.txt
            cat combined.txt | tr [:upper:] [:lower:] > lower.txt
-   
-   all: lower.txt
 
    clean:
            rm -rf combined.txt lower.txt 
 
+In this makefile there are four rules: ``combined.txt``, ``lower.txt``, ``all`` and ``clean``. The first two rules have file targets making it clear what they should do: Generate the files ``combined.txt`` and ``lower.txt``. Let's look at the ``combined.txt`` rule in more detail:
 
+.. code-block:: bash
+   :linenos:
+   
+   combined.txt: input/*.txt 
+        for file in $^; do \
+                cat $$file >> combined.txt; \
+        done
+   
 
+In the first line, the target and input is specified, seperated by a colon (:). We use ``input/*.txt`` to expand to all ``*.txt`` files in the ``input`` directory. The recipe in the rule is a simple bash ``for`` loop. What is new here is the variable ``$^`` which is make specific (look `here <https://www.gnu.org/software/make/manual/html_node/Automatic-Variables.html>`_ for additional details). It holds a list of all input files which the for loop should iterate over. Also multi-line statements as given here (the recipe consits of lines 2-4) have to be separated by a backslash ``\``. This is a peculiarity of make, which requires recipies to only contain one line of code. With the backslash make knows that the command continues in the next line. The third line contains the actual ``cat`` command. In bash we would write ``cat $file`` instead of ``cat $$file``. Since make also has variables which start with ``$`` we need to let make know that this is a bash variable which is why we need the extra ``$``.
 
 .. tip::
 
@@ -112,6 +124,40 @@ How would our simple test workflow look written in make? Let us have a look at t
    - `Escaping $ in Makefiles <https://til.hashrocket.com/posts/k3kjqxtppx-escape-dollar-sign-on-makefiles>`_
    - `GNU Make Escaping: A Walk on the Wild Side <https://www.cmcrossroads.com/article/gnu-make-escaping-walk-wild-side>`_
    - `Stackoverflow answer to escaping in make <https://stackoverflow.com/a/7860705>`_
+
+Now that we know the basic structure of make rules, the rule to create ``lower.txt`` should be self explanatory.
+
+Special make rules
+~~~~~~~~~~~~~~~~~~
+
+The rules ``all`` and ``clean`` are new and they don't exist in the shellscript version of our pipeline. It is often quite useful to have these special rules in your makefile. If you have already build some software with make you will know that ``clean`` removes (intermediate) results and ``all`` is the rule to recreate all output. It is not necessary to have these special rules, but there are many cases where they become useful.
+
+Execute a make workflow
+~~~~~~~~~~~~~~~~~~~~~~~
+
+Executing a make workflow is simple. You have to navigate to the directory where your makefile is located and execute ``make``.
+
+.. code-block:: bash
+
+   $ make
+   for file in input/A.txt input/B.txt input/C.txt input/D.txt; do \
+   	cat $file >> combined.txt; \
+   done
+   cat combined.txt | tr [:upper:] [:lower:] > lower.txt
+   $
+
+This is it. Given that the makefile is correct and it finds all the files, this is all you have to do to execute the workflow and you should find the final output file ``lower.txt`` in the same directory.
+
+Behind the scenes, ``make`` searches for a Makefile in the present directory and executes the first rule it finds in the file. Since the first rule is the *all* rule, which requires the ``lower.txt`` file, make will continue to search for a rule called ``lower.txt``. It sees that the lower.txt rule requires the ``combined.txt`` file which is created in the according rule. The order of rule executon thus is: combined.txt -> lower.txt -> all.
+
+.. admonition:: Exercise
+
+   Play around with this workflow. Run make again and see what happens. Try to break the workflow by changing the Makefile. Which error messages do you get? Can you change the workflow so that it only usestwo files instead of four?
+
+Many more possibilities
+~~~~~~~~~~~~~~~~~~~~~~~
+
+
 
 
 

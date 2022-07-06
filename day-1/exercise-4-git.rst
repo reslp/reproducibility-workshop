@@ -329,3 +329,4 @@ This practical can only be considered a basic introduction to git. Git can do a 
     - `Learn Git interactively <https://learngitbranching.js.org/>`_ 
     - `Linus Torvalds talking about Git <https://www.youtube.com/watch?v=4XpnKHJAok8>`_
     - `A Quick Introduction to Version Control with Git and GitHub <https://journals.plos.org/ploscompbiol/article?id=10.1371/journal.pcbi.1004668>`_
+    - `What comes after Git? <https://matt-rickard.com/what-comes-after-git/>`_

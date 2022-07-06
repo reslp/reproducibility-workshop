@@ -1,7 +1,7 @@
-Workflow mamagement systems
+Workflow management systems
 ===========================
 
-Workflow management systems help to structure complex workflows. When a workflow has many steps with different input and outfile in different formats, using some kind of workflow management system can greatly help to increase readability and reusability and thus also reproducibility of your analyses. Once you will be familiar with workflow management, you will never turn back.
+Workflow management systems help to structure complex workflows. When a workflow has many steps with many different input and output files in different formats, using some kind of workflow management system can greatly help to increase readability and reusability and thus also reproducibility of your analyses. Once you will be familiar with workflow management, you will never turn back.
 
 In this exercise we will introduce different ways how to automate workflows to increase productivity and reproducibility.
 
@@ -55,4 +55,64 @@ Another problem is that if you run a script again (on purpose or by accident) th
 GNU Make
 --------
 
-`GNU Make <https://www.gnu.org/software/make/>`_, make or sometimes gmake was first introduced in 1976 to build the source code of Unix and it has a long and successful track record in computer science. Typically make is used to compile software from source. If you have installed software on linux you may be familiar with commands like ``make``, ``make install`` or ``make clean``. Although make is usually used to build software, it can be used to automate almost any task.
+`GNU Make <https://www.gnu.org/software/make/>`_, make or sometimes gmake was first introduced in 1976 to build the source code of Unix and it has a long and successful track record in computer science. Typically make is used to compile software from source. Previous to make Unix was compiled using custom shell scripts. If you have installed software on Linux or Unix you may be familiar with commands like ``make``, ``make install`` or ``make clean``. As already mentioned make is usually used to build software, however it can be used to automate almost any task and even large bioinformatics projects (such as `LongStitch <https://github.com/bcgsc/longstitch>`_) use make as a workflow manager.
+
+How does make work?
+~~~~~~~~~~~~~~~~~~~
+
+Make uses the concept of rules. You can think of rules as individual tasks that are executed in a given order determined by other rules. If we take our example from above, we have already identified the steps that need to happen for the whole workflow to complete successfully. Each rule has a target and one (or more) dependencies. Other words for that would be: output (target) and input (dependencies). The rule then contains all instructions (the recipe) to build the output from the input. This is a common concept also in other workflow managers.
+
+Let's have a look at the general structure of a rule in make:
+
+.. code-block:: bash
+
+   targets: prerequisites
+        recipe
+        …
+ 
+Here is how this could look for our task of converting a file to lower case:
+
+.. code-block:: bash
+
+   lower.txt: combined.txt
+        cat combined.txt | tr [:upper:] [:lower:] > lower.txt
+
+The *target* (output) of this rule is the file ``lower.txt`` and the *dependency* (input) is ``combined.txt``. The *recipe* for this rule is the second line. Typically all rules are combined into one or more socalled Makefiles which typically are named ``Makefile`` or ``makefile``.
+
+Our simple test workflow in make
+~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+
+How would our simple test workflow look written in make? Let us have a look at the complete ``makefile`` and then discuss it.
+
+.. code-block:: bash
+   
+   $ cat Makefile
+   input_files=$$(ls input/*.txt)
+   
+   combined.txt: 
+           for file in $(input_files); do \
+                   cat $$file >> combined.txt; \
+           done
+   
+   lower.txt: combined.txt
+           cat combined.txt | tr [:upper:] [:lower:] > lower.txt
+   
+   all: lower.txt
+
+   clean:
+           rm -rf combined.txt lower.txt 
+
+
+
+
+.. tip::
+
+   If you are familiar with ``bash`` scripting, the escaping rules and formatting of multi line commands may look weird. Keep in mind that although it looks similar ``make`` is not ``bash`` and the syntax is different. Here are a few links where escaping rules are explained in more detail:
+
+   - `Escaping $ in Makefiles <https://til.hashrocket.com/posts/k3kjqxtppx-escape-dollar-sign-on-makefiles>`_
+   - `GNU Make Escaping: A Walk on the Wild Side <https://www.cmcrossroads.com/article/gnu-make-escaping-walk-wild-side>`_
+   - `Stackoverflow answer to escaping in make <https://stackoverflow.com/a/7860705>`_
+
+
+
+

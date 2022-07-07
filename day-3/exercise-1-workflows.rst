@@ -107,7 +107,7 @@ How would our simple test workflow look written in make? Let us have a look at t
 In this makefile there are four rules: ``combined.txt``, ``lower.txt``, ``all`` and ``clean``. The first two rules have file targets making it clear what they should do: Generate the files ``combined.txt`` and ``lower.txt``. Let's look at the ``combined.txt`` rule in more detail:
 
 .. code-block:: bash
-:linenos:
+   :linenos:
 
    combined.txt: input/*.txt 
         for file in $^; do \
@@ -222,9 +222,6 @@ We will soon look at workflow management systems tailored more specifically for 
 .. hint::
 
    The concepts of *rules* and *wildcards* which we introduced now with make are also very important in other workflow managers. It is important that you familiarize with them well.
-
-Nextflow
---------
 
 
 Snakemake
@@ -359,7 +356,6 @@ Similar to Nextflow and make we can make this workflow more general and extend i
 First, let us have a look at how our workflow looks when we extend it to use wildcards. The input directories are again called ``input1`` and ``input2``.
 
 .. code-block:: bash
-
    :linenos:
 
    mynumbers = [1, 2]
@@ -478,6 +474,7 @@ Parallelization with snakemake
 Snakemake is great at performing different tasks in parallel. Parallelization can be specified independently for ich rule with the ``threads`` directive. For example this would tell snakemake to run the ``lower`` rule using two threads:
 
 .. code-block:: bash
+   :emphasize-lines: 4
 
    rule lower:
            input: rules.combine.output
@@ -488,6 +485,72 @@ Snakemake is great at performing different tasks in parallel. Parallelization ca
                    cat {input} | tr [:upper:] [:lower:] > {output}
                    """
 
-This does not automaticall mean that the rule runs faster. It just means that snakemake will allocate two threads when it executes the rule. Additionally the number of threads can be specified by snakemake's ``-c`` flag. By default each rule uses one thread. If you call ``snakemake -c 1`` the execution of rules will be strictly serial (similar to calling ``make`` without additional flags). This global setting also overrides settings of individual rules. If you would like to use parallelization with snakemake you have to specify at least two threads: ``snakemake -c 2``. With the ``lower`` rule using to threads and the rest of the rules using only a single thread, this means that snakemake would run the two ``combine`` rules simulaneously (because the use only a single thread) and run each ``lower`` rule one after the other (because it uses two threads). Snakemake is smart to fill up the available threads as much as possible. Using threads and parallelization because especially important with complex workflows.
+This does not automatically mean that the rule runs faster. It just means that snakemake tries to allocate two threads when it executes the rule. Additionally the number of threads needs to be specified by snakemake's ``-c`` flag. By default each rule uses only one thread. If you call ``snakemake -c 1`` the execution of rules will be strictly serial (similar to calling ``make`` without additional flags). This global setting also overrides settings of individual rules. If you would like to use parallelization with snakemake you have to specify at least two threads: ``snakemake -c 2``. With the ``lower`` rule using to threads and the rest of the rules using only a single thread, this means that snakemake would run the two ``combine`` rules simulaneously (because the use only a single thread) and run each ``lower`` rule one after the other (because it uses two threads). Snakemake is smart to fill up the available threads as much as possible. Using threads and parallelization because especially important with complex workflows.
 
  
+Nextflow
+--------
+
+Another, slightly different Workflow manager is `Nextflow <https://nextflow.io/>`_. It follows a slightly different paradigm than make and Snakemake and it uses a different terminology. Rules are called *processes* and different processes communicate through so-called *channels*. A *channel* is similar to a pipe in Linux, but there is more to it. If you are interested, you can look `here <https://www.nextflow.io/docs/latest/channel.html>`_ to learn more. This means that input and output of different *processes* do not necessarily have to be files. Rather, values can be passed between processes without writen intermediate results to files. This can be very nice to reduce the number of files but it can also make it more complicated if you are not familiar with piping. To make this nextflow example easier to compare with the same implementation in make and snakemake, we will create outputfiles for all intermediate steps. Nextflow is based on Java mainly using the `Apache Groovy <https://en.wikipedia.org/wiki/Apache_Groovy>`_ super-set. We are no experts with Nextflow, however we wanted to show you how it looks in case it is a system that you would like to pursue further. Here is how our workflow looks like:
+
+
+.. code-block:: bash
+   :linenos:
+
+   params.indir = "$baseDir/input/"
+   
+   process combine {
+       input: path indir
+       output: file "combined.txt"
+       shell:
+           """
+               for file in \$(ls $indir/*.txt); do
+                   cat \$file >> combined.txt
+               done
+           """
+   }
+   
+   process lower {
+       input: file "combined.txt"
+       output: file "lower.txt"
+       shell:
+          """
+             cat combined.txt | tr [:upper:] [:lower:] > lower.txt
+          """
+   }
+   
+   workflow {
+       combine(params.indir) | lower | view
+   }
+ 
+As you can see the syntax is a bit different to what we have seen so far. Let's disect it a bit. Individual processes are declared with the keyword ``process`` followed by a name. The whole code for each process is wrapped in curly brackets ``{}``. Each process requires one ore more input and can produce one or more outputs. Also mandatory is a part that contains the code which should be executed (in this case it is called ``shell:``). Inputs and outputs get their values by connecting to *channels*. Channels can contain different kinds of data and Nextflow distinguishes between them. In this case we are using the ``path`` type for the input of the ``combine`` process and ``file`` for the ``lower`` process.
+
+The bash code inside the ``shell`` parts of the processes is almost the same to what we have seen. The only difference is that we need to escape values of bash variables with ``\$variable`` because Nextflow also uses the ``$`` sign to access its own variables.
+
+Differently to other managers we also have a directive called ``workflow``. You can think of this as the `all` rule in make or Snakemake. However the difference to these rules is that in Nextflow equivalent we have to specify how the workflow should be executed. As you can see we can use pipes ``|`` to connect different processes. This is used to connect the output of one channel with the input of the next one. 
+
+.. admonition:: Exercise
+
+   Think about how this different from how Snakemake and make work. What is the fundamental difference? Let's discuss.
+
+Let us disect the line: ``combine(params.indir) | lower | view``. The first part of our workflow is to combine all the files into one. We have to let the process now where the input is, so we pass the input to the processes (similar to a function call in almost any programming language). The files are processed and the output is piped into the next process ``lower`` which converts it to lower case and saves it to ``lower.txt``. Lastly pipe the output into the ``view`` command which prints the path of the output file on screen. We do this because Nextflow runs the whole workflow inside a special temporary directory. This behavior can be changed, however we wanted to show you the defaults first.
+
+Execute Nextflow
+~~~~~~~~~~~~~~~~
+
+Let us execute the workflow now:
+
+.. code-block:: bash
+
+   $ nextflow lower.nf
+   N E X T F L O W  ~  version 22.04.4
+   Launching `lower.nf` [hungry_borg] DSL2 - revision: 369f0fca2c
+   WARN: Process with name 'combine' overrides a built-in operator with the same name
+   executor >  local (2)
+   [01/017747] process > combine [100%] 1 of 1 ✔
+   [08/692b7f] process > lower   [100%] 1 of 1 ✔
+   /data/work/08/692b7fdd0beaa7730b6e6d6f4a3d9e/lower.txt
+
+
+
+

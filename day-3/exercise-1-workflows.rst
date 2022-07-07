@@ -1,5 +1,5 @@
-Workflow management systems
-===========================
+Exercise 1 - Workflow management systems
+========================================
 
 Workflow management systems help to structure complex workflows. When a workflow has many steps with many different input and output files in different formats, using some kind of workflow management system can greatly help to increase readability and reusability and thus also reproducibility of your analyses. Once you will be familiar with workflow management, you will never turn back.
 

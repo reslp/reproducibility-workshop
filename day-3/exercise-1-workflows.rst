@@ -107,8 +107,8 @@ How would our simple test workflow look written in make? Let us have a look at t
 In this makefile there are four rules: ``combined.txt``, ``lower.txt``, ``all`` and ``clean``. The first two rules have file targets making it clear what they should do: Generate the files ``combined.txt`` and ``lower.txt``. Let's look at the ``combined.txt`` rule in more detail:
 
 .. code-block:: bash
-   :linenos:
-   
+:linenos:
+
    combined.txt: input/*.txt 
         for file in $^; do \
                 cat $$file >> combined.txt; \
@@ -146,19 +146,85 @@ Executing a make workflow is simple. You have to navigate to the directory where
    cat combined.txt | tr [:upper:] [:lower:] > lower.txt
    $
 
+Here are some other examples:
+
+.. code-block:: bash
+
+   $ make combined.txt # this will only create the combined file
+   for file in input/A.txt input/B.txt input/C.txt input/D.txt; do \
+   	cat $file >> combined.txt; \
+   done
+   $ make clean # this will remove all files:
+   rm -rf combined.txt lower.txt
+   $ make all # equivalent to make (in this case)
+
 This is it. Given that the makefile is correct and it finds all the files, this is all you have to do to execute the workflow and you should find the final output file ``lower.txt`` in the same directory.
 
 Behind the scenes, ``make`` searches for a Makefile in the present directory and executes the first rule it finds in the file. Since the first rule is the *all* rule, which requires the ``lower.txt`` file, make will continue to search for a rule called ``lower.txt``. It sees that the lower.txt rule requires the ``combined.txt`` file which is created in the according rule. The order of rule executon thus is: combined.txt -> lower.txt -> all.
 
 .. admonition:: Exercise
 
-   Play around with this workflow. Run make again and see what happens. Try to break the workflow by changing the Makefile. Which error messages do you get? Can you change the workflow so that it only usestwo files instead of four?
+   Play around with this workflow. Run make again and see what happens. Try to break the workflow by changing the Makefile. Which error messages do you get? Can you change the workflow so that it only usestwo files instead of four? Can you add another rule (eg. to create another file in upper case)?
+
+
+Parallelization with make
+~~~~~~~~~~~~~~~~~~~~~~~~~
+
+Our workflow has one major flaw. Currently our workflow works only with a single input. How can we extend this to multiple inputs and run rules in parallel? This is something we typically want to do in large scale analyses to use computational resources optimally and reduce runtimes as much as possible. Consider the following Makefile which is extended for multiple inputs:
+
+.. code-block:: bash
+   :linenos:
+
+   all: lower1.txt lower2.txt
+      
+   combined%.txt: input%/*.txt
+           for file in $^; do \
+                   cat $$file >> $@; \
+           done
+   
+   lower%.txt: combined%.txt
+           cat $^ | tr [:upper:] [:lower:] > $@
+   
+   clean:
+           rm -rf combined*.txt lower*.txt
+
+
+As you can see we are now using a second input directory. The logic here is that we are using the same naming scheme for input directories so make can find them. In this case: ``input1`` and ``input2``. Make now uses a concept called *wildcards* to match the names of input and output files. In make we can specify a placeholder for whichever values a wildcard can have in file paths with ``%``. You can read the `wildcards chapter <https://www.gnu.org/software/make/manual/make.html#Wildcards>`_ in make's documentation for more details on wildcards and how to use them. There are different types of wildcards which serve different purposes (eg. ``*`` is also a wildcard). 
+
+.. admonition:: Exercise
+
+   Think about how many wildcards we have and which values they can take. Let's discuss this.
+
+There are a few additional changes to the Makefile compared to the version written for only a single input. For example we needed to use the special variable ``$@`` in line 9 above which refers to the target (output) of the rule as well as the ``$^`` which we have already seen earlier. This is simply because we don't know the value of a wildcard before the rule gets executed. Make will automatically fill in the correct values as we execute the workflow. Additionally, the clean rule has to now delete additional files.
+
+We can now execute the workflow in parallel:
+
+.. code-block:: bash
+
+   $ make all -j 2
+
+
+.. admonition:: Exercise
+
+   Your task now is to apply this logic and extend your workflow to use parallelization. Make sure that you have at least three input directories and then run the workflow in parallel.
 
 Many more possibilities
 ~~~~~~~~~~~~~~~~~~~~~~~
 
+The example above only barely scratches the surface of what you can do with make. There are many extensions, for example also a variant called `biomake <https://github.com/evoldoers/biomake>`_ which is compatible with most of GNU make's features but extends GNU make by adding support for HPC cluster job submission systems and multiple wildcards by target. Make has a great documentation and has a very long and successful track record in many large scale projects. For reproducibility make can be a very handy tool. It will make your workflows more transparent and much better structured with almost unlimited reusability. If this has spawned your interest in make here are some links with more information:
 
+- `GNU Make documentation <https://www.gnu.org/software/make/manual/make.html>`_
+- `Make tutorial <http://www.bioinformaticszen.com/post/makefiles/>`_
+- `Learning Make <https://davetang.org/muse/2015/05/31/learning-about-makefiles/>`_ (with an example on how to incorporate R)
 
+We will soon look at workflow management systems tailored more specifically for bioinformatics however everything we will show you can also be done with make (although sometimes with a bit more effort).
+
+.. hint::
+
+   The concepts of *rules* and *wildcards* which we introduced now with make are also very important in other workflow managers. It is important that you familiarize with them well.
+
+Nextflow
+--------
 
 
 

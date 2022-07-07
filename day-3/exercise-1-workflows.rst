@@ -227,4 +227,267 @@ Nextflow
 --------
 
 
+Snakemake
+---------
 
+`Snakemake <https://snakemake.readthedocs.io/en/stable/>`_ is another commonly used workflow management system with lots of features. Many bioinformatics pipelines use snakemake such as our own `phylociraptor <https://github.com/reslp/phylociraptor>`_. Snakemake also heavily uses the concept of rules and wildcards and has many features allowing to operate on HPC clusters, or other cloud computing infrastructures such as AWS, Google cloud and a lot more. Snakemake is developed rapidly and it can happen that snakemake pipelines written in older versions of snakemake stop working in newer versions. It is therefore important to be version specific when using it.
+
+The test workflow in snakemake
+~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+
+Snakemake is written in python and also it's syntax is basically a python dialect. In snakemake you can also use pure python in many cases. This makes it easier to get started if you are already familier with python. Let us look at our example workflow. You will surely recognize the similarity with python.
+
+.. code-block:: bash
+   :linenos:
+   
+   rule combine:
+           input: "input/A.txt", "input/B.txt", "input/C.txt"
+           output: "combined.txt"
+           shell:
+                   """
+                   cat {input} >> {output}
+                   """
+   
+   rule lower:
+           input: rules.combine.output
+           output: "lower.txt"
+           shell:
+                   """
+                   cat {input} | tr [:upper:] [:lower:] > {output}
+                   """
+   rule all:
+           input: "lower.txt"
+
+
+In snakemake rules are specified by the keyword ``rule`` followed by the rule name. Snakemake follows the indentantion style of python. Your not allowed to mix different styles (spaces and tabs) to indent line. Rules in snakemake have different directives such as ``input:``, ``output:`` and ``shell:``.  ``input:`` and ``output:`` require one or more files which will be used by the rule as input and output. The ``shell`` directive is where the code we would like to execute is located. We can also access our input and output inside the ``shell`` part of the rule with curly brackets ``{}``. In snakemake rules can be connected by referring to other rules' output directly through the rules object: ``rules.combine.output``. This is a nice feature because the connection between the rules will stay intact even if you change the name of the output file in the combine rule.
+
+Similar to GNU make we can have an ``all`` rule. As you can see, the ``all`` does not have an output. It only requires the ``lower.txt`` file as ``input``.
+
+There are many additional directives in snakemake to modify how rules work. For example you can specify a conda yml file with ``conda:``. Snakemake will then create a conda environment for you and run the code in the shell part inside this environment. Similarly with ``container:`` cou can specify a singularity container which is then used as runtime environment for you code. With ``params:`` you can specify additional parameters eg. read from a YAML file. 
+
+Executing snakemake workflows
+~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+
+Similar to GNU make, snakemake expects a file containing all the rules to be present where you run your workflow. This file is called ``Snakefile``. If the ``Snakefile`` exists, you can run the workflow like so:
+
+.. code-block:: bash
+
+   $ snakemake --cores 1 all
+   Building DAG of jobs...
+   Using shell: /bin/bash
+   Provided cores: 1 (use --cores to define parallelism)
+   Rules claiming more threads will be scaled down.
+   Job stats:
+   job        count    min threads    max threads
+   -------  -------  -------------  -------------
+   all            1              1              1
+   combine        1              1              1
+   lower          1              1              1
+   total          3              1              1
+   
+   Select jobs to execute...
+   
+   [Thu Jul  7 13:13:09 2022]
+   rule combine:
+       input: input/A.txt, input/B.txt, input/C.txt
+       output: combined.txt
+       jobid: 2
+       reason: Missing output files: combined.txt
+       resources: tmpdir=/tmp
+   
+   [Thu Jul  7 13:13:09 2022]
+   Finished job 2.
+   1 of 3 steps (33%) done
+   Select jobs to execute...
+   
+   [Thu Jul  7 13:13:09 2022]
+   rule lower:
+       input: combined.txt
+       output: lower.txt
+       jobid: 1
+       reason: Missing output files: lower.txt; Input files updated by another job: combined.txt
+       resources: tmpdir=/tmp
+   
+   [Thu Jul  7 13:13:09 2022]
+   Finished job 1.
+   2 of 3 steps (67%) done
+   Select jobs to execute...
+   
+   [Thu Jul  7 13:13:09 2022]
+   localrule all:
+       input: lower.txt
+       jobid: 0
+       reason: Input files updated by another job: lower.txt
+       resources: tmpdir=/tmp
+   
+   [Thu Jul  7 13:13:09 2022]
+   Finished job 0.
+   3 of 3 steps (100%) done
+   Complete log: .snakemake/log/2022-07-07T131309.374584.snakemake.log 
+   $
+
+
+Snakemake by default already prints a lot of information regarding the workflow on screen. However there many additional parameters which you can use to change the behavior of snakemake. It can become overwhelming quickly If you look at ``snakemake --help``. Here are some additional paramters we think are important to get started with snakemake: 
+
+- ``-p`` prints also the code inside the shell directives on screen.
+- ``-n, --dry-run`` performs a *dry run*. This lists all the rules to be executed without actually running them
+- ``--until myrule`` run workflow until rule myrule.
+- ``-c, --cores`` maximum number of cores to be used in parallel.
+- ``-f, --force`` force a rerun of the selected target rule.
+- ``-F, --forceall`` force rerun of workflow.
+- ``--use-conda, --use-singularity, --use-envmodules`` if you want to use containers, conda or environment modules.
+
+The snakemake rule graph
+~~~~~~~~~~~~~~~~~~~~~~~~
+
+A rulegraph shows the relationships between different rules and how they are connected. This rulgraph for our test workflow is quite simple and linear. Rulegraphs of complext pipelines can look very differnt as rules can themselfes depend and be the dependency of multiple other rules.
+
+.. image:: rulegraph.png
+
+From this graph we can tell that our workflow works as we indended. This can be a nice way to find dependency problems in more complex situations and it is a great way to show what the workflow does. 
+
+.. admonition:: Exercise
+
+   Create a snakefile and run the workflow. Figure out how to create a rule-graph of the workflow.
+
+
+Generalizing the workflow
+~~~~~~~~~~~~~~~~~~~~~~~
+
+Similar to Nextflow and make we can make this workflow more general and extend it to allow multiple input. We will be using the concept of wildcards, which we introduced in the section on make. Wildcards are placeholders and can take any value. Similar to make snakemake operates on files, so typically wildcards take a part of a file or directory name or path as values.
+
+First, let us have a look at how our workflow looks when we extend it to use wildcards. The input directories are again called ``input1`` and ``input2``.
+
+.. code-block:: bash
+
+   :linenos:
+
+   mynumbers = [1, 2]
+   
+   rule combine:
+           input: "input{number}/"
+           output: "combined{number}.txt"
+           shell:
+                   """
+                   cat {input}/*.txt >> {output}
+                   """
+   
+   rule lower:
+           input: rules.combine.output
+           output: "lower{number}.txt"
+           shell:
+                   """
+                   cat {input} | tr [:upper:] [:lower:] > {output}
+                   """
+   rule all:
+           input: expand("lower{number}.txt", number=mynumbers)
+
+What has changed? The first line now contains a python list with all the values our wildcard can have. In this case ``1`` and ``2``. The inputs and output of the rules has changed as well: We need to somehow let snakemake now where the values of the wildcard need to be filled in. In this case the wildcard value is a part of the input directory name or the name of the output files. The name of the wildcard is ``{number}``. This uses the same *placeholder* syntax with ``{}`` as we have seen earlier.
+
+.. hint::
+
+   Wildcards can take any name. Instead of *number* we could for example also call it *x* or *myawesomewildcard*. However the name needs to be the same in all rules (except for the all rule which uses ``expand``; see below) so that snakemake is able to propagate the value of the wildcard to different rules. It is generally a good idea to have an informative name as this will make it easier to debug problems.
+
+Now, how does snakemake know which files it should generate and which rules it needs to run? This information comes from the ``all`` rule. The input has changed to ``input: expand("lower{number}.txt", number=mynumbers)``. ``expand`` will create a list of files in which it substitutes the wildcard ``{number}`` with all the values from the list given in the first line of the file called ``mynumbers``. This is equivalent as if we would specify the input as ``input: "lower1.txt", "lower2.txt"``.
+
+Let's make a dry run of the workflow: 
+
+.. code-block:: bash
+
+   $ snakemake all -n
+   Building DAG of jobs...
+   Job stats:
+   job        count    min threads    max threads
+   -------  -------  -------------  -------------
+   all            1              1              1
+   combine        2              1              1
+   lower          2              1              1
+   total          5              1              1
+   
+   
+   [Thu Jul  7 14:44:25 2022]
+   rule combine:
+       input: input2
+       output: combined2.txt
+       jobid: 4
+       reason: Missing output files: combined2.txt
+       wildcards: number=2
+       resources: tmpdir=/tmp
+   
+   
+   [Thu Jul  7 14:44:25 2022]
+   rule combine:
+       input: input1
+       output: combined1.txt
+       jobid: 2
+       reason: Missing output files: combined1.txt
+       wildcards: number=1
+       resources: tmpdir=/tmp
+   
+   
+   [Thu Jul  7 14:44:25 2022]
+   rule lower:
+       input: combined1.txt
+       output: lower1.txt
+       jobid: 1
+       reason: Missing output files: lower1.txt; Input files updated by another job: combined1.txt
+       wildcards: number=1
+       resources: tmpdir=/tmp
+   
+   
+   [Thu Jul  7 14:44:25 2022]
+   rule lower:
+       input: combined2.txt
+       output: lower2.txt
+       jobid: 3
+       reason: Missing output files: lower2.txt; Input files updated by another job: combined2.txt
+       wildcards: number=2
+       resources: tmpdir=/tmp
+   
+   
+   [Thu Jul  7 14:44:25 2022]
+   localrule all:
+       input: lower1.txt, lower2.txt
+       jobid: 0
+       reason: Input files updated by another job: lower1.txt, lower2.txt
+       resources: tmpdir=/tmp
+   
+   Job stats:
+   job        count    min threads    max threads
+   -------  -------  -------------  -------------
+   all            1              1              1
+   combine        2              1              1
+   lower          2              1              1
+   total          5              1              1
+   
+   
+   This was a dry-run (flag -n). The order of jobs does not reflect the order of execution
+
+
+As you can see each rule will now be executed twice execpt the all rule.
+
+ 
+.. admonition:: Exercise
+
+   Add additional values for the wildcard and make another dry run of the workflow. What happens?
+
+
+Parallelization with snakemake
+~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+
+Snakemake is great at performing different tasks in parallel. Parallelization can be specified independently for ich rule with the ``threads`` directive. For example this would tell snakemake to run the ``lower`` rule using two threads:
+
+.. code-block:: bash
+
+   rule lower:
+           input: rules.combine.output
+           output: "lower{number}.txt"
+           threads: 2
+           shell:
+                   """
+                   cat {input} | tr [:upper:] [:lower:] > {output}
+                   """
+
+This does not automaticall mean that the rule runs faster. It just means that snakemake will allocate two threads when it executes the rule. Additionally the number of threads can be specified by snakemake's ``-c`` flag. By default each rule uses one thread. If you call ``snakemake -c 1`` the execution of rules will be strictly serial (similar to calling ``make`` without additional flags). This global setting also overrides settings of individual rules. If you would like to use parallelization with snakemake you have to specify at least two threads: ``snakemake -c 2``. With the ``lower`` rule using to threads and the rest of the rules using only a single thread, this means that snakemake would run the two ``combine`` rules simulaneously (because the use only a single thread) and run each ``lower`` rule one after the other (because it uses two threads). Snakemake is smart to fill up the available threads as much as possible. Using threads and parallelization because especially important with complex workflows.
+
+ 

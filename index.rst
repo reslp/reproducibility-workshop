@@ -4,9 +4,9 @@
 Reproducibility of Bioinformatic Analyses
 =========================================
 
-Here you will find the materials for the `Physalia course <https://www.physalia-courses.org/courses-workshops/bioinformatics-reproducibility/>`_ "Reproducibility in Bioinformatics". 
+Here you will find the materials for the `Physalia course <https://www.physalia-courses.org/courses-workshops/bioinformatics-reproducibility/>`_ **Reproducibility in Bioinformatics**. 
 
-The course will be held via Zoom on **July 11-13 2022**.
+The course will be held online via Zoom on **July 11-13 2022**.
 
 ---------------
 Course overview
@@ -34,13 +34,9 @@ Learning outcomes
 Getting started
 ----------------------
 
-* Get on overview of the course `here <introduction/about.html>`_ . 
+* Get on overview of the course `here <introduction/about.html>`_. 
 * Installation instructions for different software
 * Get in contact with the instructors.
-
-
-
-
 
 .. toctree::
    :caption: Course overview

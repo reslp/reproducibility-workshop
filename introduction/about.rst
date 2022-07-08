@@ -1,5 +1,5 @@
-Reproducibility in Bioinformatics
-=================================
+About
+=====
 
 In Bioinformatics the computer is our lab. We perform experiments, by trying different software, playing around with parameters to tweak analyses and we write code to combine different analyses parts into large workflows. We also develop new tools which then need to be extensively to identify and remove problematic behaviour and bugs. With having to do all that, it is easy to forget that analyses could have to be repeated at a later time. It can happen easily that after some time has passed, but at the latest when results need to be brought in text form before they can be published, it is unclear which software was used, how the data was treated or what exact parameter settings of differen programs where. This has lead to a tremendous decline in reproducibility of bioinformatic focused studies.
 
@@ -27,8 +27,8 @@ Syllabus
 Instructors
 -----------
 
-Christoph Hahn `GitHub <https://github.com/chrishah/>`_ `Twitter <https://twitter.com/C__Hahn>`_
+Christoph Hahn -- `GitHub <https://github.com/chrishah/>`_ `Twitter <https://twitter.com/C__Hahn>`_
 
-Philipp Resl `GitHub <https://github.com/reslp>`_ `Twitter <<https://twitter.com/philippresl`_
+Philipp Resl -- `GitHub <https://github.com/reslp>`_ `Twitter <https://twitter.com/philippresl>`_
 
 

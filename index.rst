@@ -34,15 +34,21 @@ Learning outcomes
 Getting started
 ----------------------
 
-* Get on overview of the course here `do <introduction/about.html>`_ . 
-* Installation instructions for different software.
+* Get on overview of the course `here <introduction/about.html>`_ . 
+* Installation instructions for different software
 * Get in contact with the instructors.
 
+
+
+
+
 .. toctree::
-   :caption: Theory
-   :name: theory
+   :caption: Course overview
+   :name: overview
    :maxdepth: 1
    :hidden:
+
+   introduction/about.rst
 
 .. toctree::
    :caption: Day 1

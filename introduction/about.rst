@@ -27,8 +27,8 @@ Syllabus
 Instructors
 -----------
 
-Christoph Hahn -- `GitHub <https://github.com/chrishah/>`_ `Twitter <https://twitter.com/C__Hahn>`_
+Christoph Hahn (University of Graz, Austria) -- `GitHub <https://github.com/chrishah/>`_ `Twitter <https://twitter.com/C__Hahn>`_
 
-Philipp Resl -- `GitHub <https://github.com/reslp>`_ `Twitter <https://twitter.com/philippresl>`_
+Philipp Resl (University of Graz, Austria) -- `GitHub <https://github.com/reslp>`_ `Twitter <https://twitter.com/philippresl>`_
 
 

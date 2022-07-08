@@ -1,8 +1,8 @@
 .. physalia-reproducibility documentation master file, created by
 
-=========================================
-Reproducibility of Bioinformatic Analyses
-=========================================
+=================================
+Reproducibility in Bioinformatics
+=================================
 
 Here you will find the materials for the `Physalia course <https://www.physalia-courses.org/courses-workshops/bioinformatics-reproducibility/>`_ **Reproducibility in Bioinformatics**. 
 

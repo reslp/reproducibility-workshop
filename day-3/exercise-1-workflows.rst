@@ -531,7 +531,7 @@ Differently to other managers we also have a directive called ``workflow``. You 
 
 .. admonition:: Exercise
 
-   Think about how this different from how Snakemake and make work. What is the fundamental difference? Let's discuss.
+   Think about how this differs from how Snakemake and make work. What is the fundamental difference? Let's discuss.
 
 Let us disect the line: ``combine(params.indir) | lower | view``. The first part of our workflow is to combine all the files into one. We have to let the process now where the input is, so we pass the input to the processes (similar to a function call in almost any programming language). The files are processed and the output is piped into the next process ``lower`` which converts it to lower case and saves it to ``lower.txt``. Lastly pipe the output into the ``view`` command which prints the path of the output file on screen. We do this because Nextflow runs the whole workflow inside a special temporary directory. This behavior can be changed, however we wanted to show you the defaults first.
 
@@ -550,6 +550,134 @@ Let us execute the workflow now:
    [01/017747] process > combine [100%] 1 of 1 ✔
    [08/692b7f] process > lower   [100%] 1 of 1 ✔
    /data/work/08/692b7fdd0beaa7730b6e6d6f4a3d9e/lower.txt
+
+
+Nextflow prints some information about what it did on screen. You you see the two processes and that the have finished sucessfully as indicated by the ``✔``. The last line gives the path to the output file.
+
+.. admonition::
+
+   Create a ``.nf`` file and run the workflow with Nextflow.
+
+Some additional features
+~~~~~~~~~~~~~~~~~~~~~~~~
+
+It is clear that our example workflow only barely scratches the surface of what Nextflow can do. One nice thing about it is that you can download premade nextflow workflows from a community supported database called `nf-core <https://nf-co.re/>`_. Nextflow can interact with different cloud infrastructures like AWS, Google Cloud or Kubernetes Clusters. If you are interested in Nextflow and want to learn more, here are a few links that can get you started:
+
+- `Learning Nextflow in 2022 <https://www.nextflow.io/blog/2022/learn-nextflow-in-2022.html>`_
+- `Nextflow documentation <https://www.nextflow.io/docs/latest/index.html>`_
+- `List of nf-core pipelines <https://nf-co.re/pipelines>`_ 
+
+
+A superficial speed comparison
+------------------------------
+
+Now that we have written the same simple workflow we can compare how fast they execute to see if we can find a difference between them. We have prepared a small script which helps us do that. The script is in ``additional-data/time-workflows.sh``. You will have to copy it over to the directory where you have created the different workflows. Here is how it looks:
+
+.. code-block:: bash
+   :linenos   :linenos::
+
+   $ cat time-workflows.sh
+   #!/usr/bin/env bash
+   
+   conda activate sm7.8.5
+   # function modified from https://stackoverflow.com/a/54920339
+   avg_time() {	
+       #
+       # usage: avg_time n command ...
+       #
+       n=$1; shift
+       (($# > 0)) || return                   # bail if no command given
+       for ((i = 0; i < n; i++)); do
+           { time -p "$@" &>/dev/null; } 2>&1 # ignore the output of the command
+                                              # but collect time's output in stdout
+   # the sed is used in case the decimal seperator is , instead of . due to locale
+       done | tee | sed 's/,/\./' | awk '           
+           /real/ { real = real + $2; }
+           /user/ { user = user + $2; }
+           /sys/  { sys  = sys  + $2; }
+           END    {
+                    printf("real %f sec\n", real);
+                    printf("user %f sec\n", user);
+                    printf("sys %f sec\n",  sys)
+                  }'
+   }
+   
+   ntimes=100
+   echo "$ntimes GNU Make runs take:"
+   avg_time $ntimes make all -B
+   echo
+   echo "$ntimes Snakemake runs take:"
+   avg_time $ntimes snakemake --forceall all
+   echo
+   echo "$ntimes Nextflow runs take:"
+   avg_time $ntimes nextflow lower.nf
+
+
+The script will use the ``time`` command to measure how long a command runs. To get a better comparison (one individual run may finish very quickly) we will run each workflow 100 times.
+
+.. admonition:: Exercise
+
+   Your task now is to run this script to get an estimate of how long each workflow manager takes. Make sure that the conda activate command in the script points to the correct conda environment. Whyt do you find?
+
+
+Workflow managers wrap-up
+-------------------------
+
+As you saw there are different options to create bioinformatic workflows. Familiarizing yourself with any one of the presented options will, in the long run, greatly improve the reproducibility, transparency and portability of your work. It will also change the way you think about your analyses. It becomes easier to devide longer workflows into individual tasks. Your workflows can then bis stitched together easily. Making extensions to the workflow is also going to be much more straightforward. Here is a list of pros and cons of all three Workflow managers introduced in this exercise. Mind you this is our subjective take on this, so we are happy if you disagree with our assessment.
+
+GNU Make
+~~~~~~~~
+
+**pros**
+
+- Syntax is close to bash
+- Very little overhead
+- Standard tool on Linux
+- very extensively tested
+- extensive documentation
+
+**cons**
+
+- lower readability of code compared to other workflow managers
+- not specifically made with bioinformatics in mind
+- interaction with HPC cluster only through ``biomake`` add-on
+
+Snakemake
+~~~~~~~~~
+
+**pros**
+
+- Lot's of learning resources
+- great interop with python
+- easy to understand how rules are linked
+- very actively developed to accomodate emerging technologies
+- easy to learn
+- many available workflows
+
+**cons**
+
+- Different versions not 100% compatible
+- larger overhead
+- Python makes it slower
+- hard to master
+
+Nextflow
+~~~~~~~~
+ 
+**pros**
+
+- rock solid integration with different cloud computing plattforms
+- speed
+- not dependent on files to connect workflow parts
+- many available 
+
+**cons**
+
+- More complex syntax
+- A lot of the available online resources are not up to date with currently used syntax (DSL1 vs. DSL2)
+- hard to master
+- less learning resources available
+
 
 
 

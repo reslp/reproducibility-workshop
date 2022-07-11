@@ -35,8 +35,8 @@ Getting started
 ----------------------
 
 * Get on overview of the course `here <introduction/about.html>`_. 
-* Installation instructions for different software
-* Get in contact with the instructors.
+
+
 
 .. toctree::
    :caption: Course overview

@@ -98,7 +98,7 @@ Let’s switch it on ..
 
 .. code:: bash
 
-   (user@host)-$ swith-on_ubuntu_22-04
+   (user@host)-$ switch-on_ubuntu_22-04
 
 .. and initiate ``apt``.
 

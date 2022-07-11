@@ -5,10 +5,10 @@
 Exercise 3 - Data organization
 ==============================
 
-Organizing data properly is the first step to reproducible bioinformatic analysis. Here we will have a look into how you can put structure into your research projects files and folder on your computer. We have used the proposed structure in many different projects and have come to the conclusion that this system works pretty well. Additionally we will introduce two common file types (Markdown and YAML) which you can use as digital lab books and to specify parameters for your analyses to make the more reproducible and transparent.
+Organizing data properly is the first step to reproducible bioinformatic analysis. It will help you and your collaborators and it is porbably one of the largest time savers when developing and maintaining computational workflows. Here we will have a look into how you can put structure into your research projects files and folder on your computer. We have used the proposed structure in different projects and have come to the conclusion that this system works pretty well. Additionally we will introduce a common format called Markdown which you can use as digital lab books and to specify parameters for your analyses to make the more reproducible and transparent.
 
-In this exercise we will:
-~~~~~~~~~~~~~~~~~~~~~~~~~
+Onjectivs
+==========
 
 - Setup a directory structure
 - Learn how to use Markdown
@@ -17,7 +17,7 @@ In this exercise we will:
 Information in your project's directories 
 =========================================
 
-The suggested directory structure is intuitive (it follows basic naming convention on \*nix systems) as well as general enough to fit many different use cases. It should be relatively clear what should be put where. Of course it is up to you to decide where to place stuff, but keep in mind that your choice is reasonable and intuitive. For example if you, for some reason place a subset of Illumina read FASTQ files into :bash:`tmp/illumina/subsets` you may spend more time searching for the data then if you would have placed it into :bash:`data/`. Also, if you collaborate with somebody and send them your project, it may also be difficult for them to figure out where the subsetted Illumina read files are.
+The suggested directory structure is intuitive (it follows basic naming convention on \*nix systems) as well as general enough to fit many different use cases. It should be relatively clear what should be put where. Of course it is up to you to decide where to place stuff, but keep in mind that your choices are reasonable and intuitive. For example if you, for some reason place a subset of Illumina read FASTQ files into :bash:`tmp/illumina/subsets` you may spend more time searching for the data then if you would have placed it into :bash:`data/`. Also, if you collaborate with somebody and send them your project, it may also be difficult for them to figure out where the subsetted Illumina read files are.
 
 .. code-block:: bash
 
@@ -31,7 +31,7 @@ The suggested directory structure is intuitive (it follows basic naming conventi
 
 .. admonition:: Exercise
 
-   Your first task is to create a new project directory in your home directory with the subdirectories as listed above.
+   Your first task is to create a new project directory in your home directory with the subdirectories as listed above. Is there someting you are missing.
 
 Keeping track of your work
 ==========================
@@ -39,7 +39,7 @@ Keeping track of your work
 The digital lab book
 ~~~~~~~~~~~~~~~~~~~~
 
-Apart from a clear and transparent directory structure, it is very important to keep track of what you are doing. If you have experience of working in a wet-lab, you are probably familiar with the concept of having a lab book. In a lab book you would keep track of what you did in the lab eg. which protocols you followed and how you altered them, how samples were treated etc. We like to think of our computer environments as labs as well. This means that we need to make sure our "samples" are properly labeled (stored in well-organized project folders) and we keep a lab book containing instructions of what exactly we did. Similar to the wet-lab such notes will help to repeat analyses and they are an important step to increase reproducibility.
+Apart from a clear and transparent directory structure, it is very important to keep track of what you are doing. If you have experience of working in a wet-lab, you are probably familiar with the concept of having a lab book. In a lab book you keep track of what exactly you did in the lab eg. which protocols you followed and how you altered them, how samples were treated etc. Usually lab-books have to stay in the lab even after you leave. We like you to think of computer environments as labs as well. This means that we need to make sure our "samples" are properly labeled (stored in well-organized project folders) and we keep a lab book containing instructions of what exactly we did. Similar to the wet-lab such notes will help to repeat analyses and they are an important step to increase reproducibility.
 
 Requirements
 ~~~~~~~~~~~~
@@ -57,7 +57,7 @@ Ideally a digital lab book should be:
 Introducing Markdown
 ~~~~~~~~~~~~~~~~~~~~
 
-`Markdown <https://en.wikipedia.org/wiki/Markdown>`_ fulfills these criteria. Markdown is a simple markup language to create formatted text. It does not require any spcific editor (although `many <https://github.com/mundimark/awesome-markdown-editors>`_ exist). It is easy to learn and read and is a great tool to bring structure into your notes.
+`Markdown <https://en.wikipedia.org/wiki/Markdown>`_ fulfills these criteria. Markdown is a simple markup language to create formatted text. It does not require any spcific editor (although `many <https://github.com/mundimark/awesome-markdown-editors>`_ exist). It is easy to write and read and is a great tool to bring structure into your notes.
 
 Markdown is written in plain text in any text-editor and it uses special characters to distiguish between headings, lists, blocks of programming code etc. This makes it easy to share and collaborate on markdown documents. Even without any prior knowledge of the markdown language they are easy to read. Originally it was created as an easy to read and write format that can be easily converted to HTML (a more complex and less easy to read markup language that is used to create website). Now Markdown is used in many additional settings and it perfect for creating documentation and notes.
 
@@ -103,13 +103,12 @@ Here is a first example showing many features of Markdown:
 
 It should be self explanatory what this means. The :bash:`#` characters are used to create headings of different levels and there are other special character to identify code blocks (`), bold (**) and italic (*) text are to create tables.
 
-Hopefully you agree that although we are using special characters here in otherwise regular text, it is still easy to read and comprehend. Apart from this Markdown truely shines when it is rendered. This means that headers become real headers, bold text become bold etc. There is a lot of dedicated software to render Markdown locally on your computer, and many Websites (eg. Github) are able to do so as well. 
-
 .. admonition:: Exercise
 
    It is much easier to understand Markdown when you see it live in action. In this exercise you should play around with Markdown directly in the browser.
    Go to `https://markdownlivepreview.com/ <https://markdownlivepreview.com/>`_ and see how it works. You can also copy and paste from your own local document.
 
+Hopefully you agree that although we are using special characters here in otherwise regular text, it is still easy to read and comprehend. Apart from this Markdown truely shines when it is rendered. This means that headers become real headers, bold text become bold etc. There is a lot of dedicated software to render Markdown locally on your computer, and many Websites (eg. Github) are able to do so as well. 
 Markdown languages
 ~~~~~~~~~~~~~~~~~~
 

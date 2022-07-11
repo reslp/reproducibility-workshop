@@ -361,7 +361,7 @@ More information `here <https://git-scm.com/docs/git-pull>`_.
 
 .. admonition:: bash
 
-   Find a git repository on Github, maybe some software you have been using. Clone the code and investigate the repository using what you have learning in this exercise. When was the last commit? Do you find the commit messages helpful? How many tags to you find? Are there any branches?
+   Find a git repository on Github, maybe some software you have been using. Clone the code and investigate the repository using what you have learned in this exercise. When was the last commit? Do you find the commit messages helpful? How many tags to you find? Are there any branches?
 
 There is a lot more...
 =======================

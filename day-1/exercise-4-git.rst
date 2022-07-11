@@ -6,10 +6,10 @@
 Exercise 4 - Version control with Git
 =====================================
 
-Git is a version control system originally introduced to support the development of the Linux operating system. Originally released in 2005 git is now used in countless projects to facilitate version control and collaboration. Git can be used in many different scenarios and it is also a handy tool to keep track of changes in research projects. With git it is straightforward to monitor changes in files and thus ensure reproducibility of bioinformatic experiments.
+Git is a version control system originally introduced to support the development of the Linux operating system. Originally released in 2005 git is now used in countless projects to facilitate version control and collaboration. Git can be used in many different scenarios and it is also a handy tool to keep track of changes in research projects. With git it is straightforward to monitor changes in files and thus ensure reproducibility of bioinformatic experiments. In this exercise we will introduce ``git`` and show how a basic git workflow looks like. 
 
-In this exercise we will:
-~~~~~~~~~~~~~~~~~~~~~~~~~
+Objectives
+==========
 
 - Create our first git repository
 - Learn how to keep track of file changes
@@ -38,7 +38,7 @@ With `git <https://git-scm.com>`_ you can easily track your work and see how it 
     $ git init
     Initialized empty Git repository ...
 
-It is generally also a good idea to set up git with your name and email address so that contributions to a repository can be attributed transparently. This can be done with the following commands. They will set the global settings of git, it is only necessary to do this once regardless of how many reporitories you initialize.
+It is generally also a good idea to set up git with your name and email address so that contributions to a repository can be attributed transparently. This can be done with the following commands which will set the global settings of git. It is only necessary to do this once regardless of how many reporitories you initialize.
 
 More information `here <https://git-scm.com/docs/git-init>`_.
 
@@ -55,7 +55,7 @@ Check the status of your repository
 -----------------------------------
 
 
-You should see a message that git init successfully create a git repository. Congratulations, Now your project is monitored by git. It is now possible to check the status of your repository with :bash:`git status`. This command is very handy to be able to see what git sees. Let us run it:
+You should see a message that ``git init`` successfully created a git repository. Congratulations, now your project is monitored by git. One of the things you will be doing regularely is to check the status of your repository with :bash:`git status`. This command is very handy and it allows you to see what git sees. Let's try it out:
 
 .. code-block:: bash
 
@@ -67,7 +67,7 @@ You should see a message that git init successfully create a git repository. Con
     nothing to commit (create/copy files and use "git add" to track)
 
 
-Remember this command. It is key to understand what git keeps track of and what not. You will use this command regularely. You can see that currently the repository is empty, also there are no tracked files. Let us change that and create a file in the doc directory. After this we run :bash:`git status` again.
+Remember this command. It is key to understand what git keeps track of and what not. Form the output you can see that currently the repository is empty, and also that there are no tracked files. Let us change that and create a new file. After this we run :bash:`git status` again.
 
 More information `here <https://git-scm.com/docs/git-status>`_.
 
@@ -92,7 +92,7 @@ You can see from the output of git status that git now has become aware of the :
 Staging files
 -------------
 
-Now that git "sees" the file, we need to let it know that we would like to also track it. In git this is called Staging. The git command for that is called :bash:`git add`. See how it works:
+Now that git "sees" the file, we need to let it know that we would like to also track it. In git this is called **staging**. The git command for that is called :bash:`git add`. See how it works:
 
 .. code-block:: bash
 
@@ -113,6 +113,11 @@ Now that git "sees" the file, we need to let it know that we would like to also 
 More information `here <https://git-scm.com/docs/git-add>`_.
 
 
+.. admonition::
+
+   How can you see what exactly has changed in my file before I commit changes? Git has a special command for that. Your task is to find this command and try it.
+
+
 Commit changes
 --------------
 
@@ -126,9 +131,11 @@ Committing changes (remember that all changes to be committed first need to be s
      create mode 100644 protocol.md
 
 
-As you can see we are using the flag :bash:`-m`, which is short for message. This flag takes a string as argument which will become the commit message. The commit message describes what is contained in the commit. Make sure this is an informative message, because it will stay in your git log. Meaningful commit messages enable you to quickly idenftify what you did whitout having to look at the actual files.
+As you can see we are using the flag :bash:`-m`, which is short for message. This flag takes a string as argument which will become the commit message. The commit message describes what is contained in the commit. Make sure this is an informative message, because it will stay in your git log. Meaningful commit messages enable you to quickly idenftify what you did whitout having to look at the actual files. Look at the `xkcd <https://xkcd.com/1296/>`_ comic below. It describes what can happen easily with projects in git.
 
 More information `here <https://git-scm.com/docs/git-commit>`_.
+
+.. image:: https://imgs.xkcd.com/comics/git_commit.png
 
 .. admonition:: Exercise
 
@@ -137,7 +144,7 @@ More information `here <https://git-scm.com/docs/git-commit>`_.
 Stage and commit. Why two steps?
 --------------------------------
 
-Let us quickly recapitualte what we have learned so far about working with git. A typical git workflow would look like this:
+Let us quickly recapitualte what we have learned so far about working with git. We have seen how a typical git workflow would look like:
 
 	1. Make changes to your file.
 	2. Add the file to your staging area with :bash:`git add`.
@@ -203,12 +210,16 @@ This will revert (checkout) your repository to how it was when you made your fir
 
     Revert your reporitory to the second commit we made earlier. Hint you may use :bash:`git reflog` to get the hash.
 
+.. hint:: 
+
+   Using ``git checkout`` is crucial if you would like to use the exact same version of a repository which is hosted on some online platform such as GitHub or Gitlab.
+
 More information `here <https://git-scm.com/docs/git-checkout>`_.
 
 Ignoring files
 ==============
 
-In general git is aware of all files in your repository. However, it is common that there are files which you do not want to be tracked e.g. large input files or software executables which your are not allowed to distribute. 
+In general git is aware of all files in your repository. However, it is common that there are files which you do not want to be tracked. For example this includes large input files or software executables which your are not allowed to distribute. 
 
 You can tell git to ignore files by using what is called a :bash:`.gitignore` file. In this file you can add all folders and files which git should ignore, each entry on its own line. You can also use regular expressions to specify multiple files. Here are some examples from a :bash:`.gitignore` file:
 
@@ -221,8 +232,11 @@ You can tell git to ignore files by using what is called a :bash:`.gitignore` fi
    log/
    !log/.gitkeep
 
-These covers several practical examples of how you can exclude (and keep) files. It should be pretty self explanatory what they do. Lines starting with ! have a special meaning though. It means that this file will not be included. Remember earlier when we said that it is not possible to commit empty directories to a git repository? This is a away around this problem.
-Git treats your .gitignore file as a regular file, so make sure to also commit the changes to it.
+The above ``.gitignore`` file covers several practical examples of how you can exclude (and keep) files in excluded directories. It should be pretty self explanatory what they do. Lines starting with ``!`` have a special meaning though. It means that this file will **not** be excluded. Remember earlier when we said that it is not possible to commit empty directories to a git repository? This is a away around this problem.
+
+.. hint::
+
+   Git treats your ``.gitignore`` file as a regular file, so make sure to also commit the changes to it.
 
 
 .. admonition:: Exercise
@@ -250,7 +264,7 @@ More information `here <https://git-scm.com/docs/git-branch>`_.
 Merging branches
 ================
 
-At some point you may want to combine work made in different branches. This is possible with :bash:`git merge`. Typically you will want to merge your new branch with the main (or master) branch. Git will identify the last commit the branches we want to merge have in common and it will create a new merge commit. Before merging you need to make sure thate the current HEAD is in the branch that should be the merge target. This means you will need to check out the branch you want to merge with first. This is typicall is the main (or master) branch. Given we are already in the main branch we can merge a branch with master like this:
+At some point you may want to combine work made in different branches. This is possible with :bash:`git merge`. Typically you will want to merge your new branch with the main (or master) branch. Git will identify the last commit the two branches have in common and it will create a new merge commit. Before merging you need to make sure thate the current HEAD is in the branch that should be the merge target. This means you will need to check out the branch you want to merge with first. This is typically is the main (or master) branch. Given we are already in the main branch we can merge a branch with master like this:
 
 .. code-block:: bash
 
@@ -269,12 +283,37 @@ More information `here <https://git-scm.com/docs/git-merge>`.
 
    Create a new branch, and make two commits to this branch and merge it with the master branch.
 
+Tagging
+=======
+
+It can happen that you will want to highlight important points in the history of your project. This is called **tagging** and it can be done with the ``git tag`` command. For example a good point to tag would be the version of the repository during at point of submission, revision or publication of a manuscript, to make all changes that happen during the review process are transparent to you and reviewers.
+
+Here are a few examples of how tagging is used in git:
+
+.. code-block:: bash
+
+   $ git tag
+   v0.1
+   v0.4
+   v1.2
+   $ git tag -a v1.5 -m "New version 1.5"
+   $ git show v1.5
+   tag v1.5
+   Tagger: Philipp Resl <xxx@yyy.coom>
+   Date:   Sat May 21 19:19:14 2022 -0700
+
+   New version 1.5
+
+
+The first command lists all tags. The second command creates a new tag called ``v.15``. It also uses a tagging message ``-m``, to describe what the tag refers to. With ``git show`` you can get additional information on a tag.
+
+
 Working with online Git repositories
 ====================================
 
-There are several services that provide online services that provide hosting of git repositories. The three large services are `Github <https://github.com/>`_ `Gitlab <https://about.gitlab.com/>`_ and `BitBucket <https://bitbucket.org/>`_. Many different bioinformatic software packages are hosted and developed using one of these platforms. It is one of the great strengths of git to be able to access repositories that are located on different computers. It greatly facilitates collabrative work, transparency and reproducibility. 
+There are several services that provide online hosting of git repositories. The three largest services are `Github <https://github.com/>`_, `Gitlab <https://about.gitlab.com/>`_ and `BitBucket <https://bitbucket.org/>`_. Many different bioinformatic software packages are hosted and developed using one of these platforms. It is one of the great strengths of git to be able to access repositories that are located on different computers. It greatly facilitates collabrative work, transparency and reproducibility.
 
-Each of the three platforms have their own special features complementing the core functionality of git. There is a lot you can do on these platforms going far beyond this introduction here. We will therefore only provide a very general introduction to how to interact with online repositories. Here is a simple example:
+Each of the three platforms have their own special features complementing the core functionality of git. There is a lot you can do on these platforms going far beyond what we can show here. We will therefore only provide a very general introduction to how to interact with online repositories. Here is a simple example:
 
 .. code-block:: bash
 
@@ -290,6 +329,8 @@ Each of the three platforms have their own special features complementing the co
 
 More information `here <https://git-scm.com/docs/git-clone>`_.
 
+
+It is even possible to host a git repository on your own server.
 
 Transfering local changes to an online repository
 =================================================
@@ -316,6 +357,11 @@ It can happen that changes have been pushed to an online repository, but your lo
 This command will compare the remote and local repositories and will download all changes from the remot version of the repository
 
 More information `here <https://git-scm.com/docs/git-pull>`_.
+
+
+.. admonition:: bash
+
+   Find a git repository on Github, maybe some software you have been using. Clone the code and investigate the repository using what you have learning in this exercise. When was the last commit? Do you find the commit messages helpful? How many tags to you find? Are there any branches?
 
 There is a lot more...
 =======================

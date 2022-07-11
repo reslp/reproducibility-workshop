@@ -1,5 +1,5 @@
 =======================================
-Installing software reproducibly
+Exercise 2 - Installing software reproducibly
 =======================================
 
 Ubuntu and other UNIX-like systems have package management tools that

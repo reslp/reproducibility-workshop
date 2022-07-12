@@ -295,7 +295,7 @@ In this case only the packages that have been installed explicitly (with ``conda
 
 .. admonition:: Exercise
   
-   Your task is to try to get the exported environment to install properly and mamba working inside the environment as if you where on a different computer. If you have conda installed locally on your computer you can try it there. If not, we provide an alternative way for you to perform this exercise. Run: ``debian-alternate-miniconda`` in the same directory where your YAML environment file is. This will bring you into a stripped down version of Debian Linux with Miniconda 4.7.12 installed. You may use ``vim`` or ``nano`` to edit the file there. Use ``exit`` to close this environment when you are done. 
+   Your task is to try to get the exported environment to install properly and mamba working inside the environment as if you where on a different computer. If you have conda installed locally on your computer you can try it there. If not, we provide an alternative way for you to perform this exercise. Run: ``debian-alternative-miniconda`` in the same directory where your YAML environment file is. This will bring you into a stripped down version of Debian Linux with Miniconda 4.7.12 installed. You may use ``vim`` or ``nano`` to edit the file there. Use ``exit`` to close this environment when you are done. 
 
 
 Incompatible packages from small channels
@@ -446,6 +446,7 @@ It is possible to install a specific version of a package, given you have devtoo
   'help.start()' for an HTML browser interface to help.
   Type 'q()' to quit R.
   
+  > install.packages("devtools", repos = "http://cran.us.r-project.org")
   > require(devtools)
   > install_version("ggplot2", version = "3.3.6", repos = "http://cran.us.r-project.org")
 
@@ -595,8 +596,6 @@ When working with R in conda
 
 A nice way to increase reproducibility and create very solid environments is to use containerization. We will look into this topic in the next exercise.
 
-Other virtual environment managers
-==================================
 
 
 

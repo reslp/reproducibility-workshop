@@ -5,14 +5,14 @@
 Exercise 1 - Virtual environments
 =================================
 
-In recent years virtual environments have become more and more common in bioinformatics and scientific computing. Researchers work with many different software packages and may depend on specific versions of other software for their code to run. This problem is intensified when working on remote servers or high performance computing clusters because usually on these systems regular users will have no possibility to install their own software system wide (eg. with :bash:`sudo apt-get` or similar). Here virtual environment software can help. Virtual environments are typically run and/or installed locally in the context of a single user and do not interfer with software installed globally on the respective machine.
+In recent years virtual environments have become more and more common in bioinformatics and scientific computing. Researchers work with many different software packages and may depend on specific versions of other software for their code to run. This problem is intensified when working on remote servers or high performance computing clusters because usually on these systems regular users will have no possibility to install their own software system wide (eg. with :bash:`sudo apt-get` or similar). Also on different systems you will get different versions by default using apt-get. In these cases virtual environment managing software can help. Virtual environments are typically run and/or installed locally in the context of a single user and do not interfer with software installed globally on the respective machine.
 
 .. hint::
 
     There are different variants of virtual environments each with its own strengths, weaknesses and use cases. Some prominent examples include `python venv <https://docs.python.org/3/library/venv.html>`_ for all things in the python ecosystem, `environment modules <https://modules.readthedocs.io/en/latest/index.html>`_ which are often used on HPC clusters to load different software. Here we will focos in the ``conda`` virtual-environment and package manager.
 
 
-A now very common way to work with virtual environments is `conda <https://www.anaconda.com/>`_. Conda provides convenient handling of virtual environments and it serves as an installer for many open-sources tools used in bioinformatics, statistics, machine-learning etc. In the conda ecosystem software is provided as so-called packages. Conda packages are somewhat loosely grouped by topic in software repositories called channels. Common channels containing bioinformatic packages are :bash:`bioconda` and :bash:`conda-forge`. Conda offers version controlled installation and works without administrator privileges on most operating systems.
+A now very common way to work with virtual environments is `conda <https://www.anaconda.com/>`_. Conda provides convenient handling of virtual environments and it serves as a package manager to install many open-source tools used in bioinformatics, statistics, machine-learning etc. In the conda ecosystem software is provided as so-called packages. Conda packages are somewhat loosely grouped by topic in software repositories called channels. Common channels containing bioinformatic packages are :bash:`bioconda` and :bash:`conda-forge`. Conda offers version controlled installation and works without administrator privileges on most operating systems.
 
 .. warning::
 
@@ -167,10 +167,10 @@ When you run the :bash:`conda activate` command, you will see that your command 
 
 .. code-block:: bash
 
-   (myenvironment) $ conda install -c conda-forge mamba=0.24.0
+   (myenvironment) $ conda install -c conda-forge mamba=0.23.3
    # output of command omitted due to length
 
-This is the basic syntax of how to install conda packages. Notice the ``=0.24.0`` after the package name. This is the exact version number of the package. It is very important to specify version numbers with conda, otherwise you will end up with the latest version available on conda and your work may not be reproducible when you recreate the environment at a later time.
+This is the basic syntax of how to install conda packages. Notice the ``=0.23.3`` after the package name. This is the exact version number of the package. It is very important to specify version numbers with conda, otherwise you will end up with the latest version available on conda and your work may not be reproducible when you recreate the environment at a later time.
 
 The package we installed is called ``mamba`` and we installed it through the `conda forge <https://conda-forge.org/>`_ channel (``-c conda-forge``) which contains over 18.000 utility packages. `mamba <https://github.com/mamba-org/mamba>`_ is a replacement for the ``conda`` command executable. While it does not have every feature ``conda`` has we still highly recommend using ``mamba`` when installing packages because it is a lot faster than regular ``conda`` when resolving dependencies.
 
@@ -450,7 +450,7 @@ It is possible to install a specific version of a package, given you have devtoo
   > install_version("ggplot2", version = "3.3.6", repos = "http://cran.us.r-project.org")
 
 
-The ggplot package in R is probably one of the most commonly used packages for data visualization. Due to its popularity it is also available as conda package. In fact there are multiple available ggplot packages available for conda:
+The ggplot package in R is probably one of the most commonly used packages for data visualization. Due to its popularity it is also available as a conda package. In fact there are multiple available ggplot packages available for conda:
 
 - `ggplot on conda-forge <https://anaconda.org/conda-forge/r-ggplot2>`_
 - `an old version of ggplot <https://anaconda.org/conda-forge/ggplot>`_ (also on conda-forge)
@@ -590,11 +590,13 @@ When working with R in conda
 - Avoid installing R packages from different channels
 - Don't mix R packages installed through conda and directly in R (eg. with ``install.packages()``).
 - If possible avoid the r channel and make sure to use a more up to date channel.
+- Keep your environments small
 - Be prepared to run into problems.
 
 A nice way to increase reproducibility and create very solid environments is to use containerization. We will look into this topic in the next exercise.
 
-
+Other virtual environment managers
+==================================
 
 
 

@@ -315,6 +315,7 @@ Once present as a Docker tar archive the image can be easily converted to a Sing
 Now, run it through singularity (based on your local ``sif`` file.
 
 .. code:: bash
+
    (host)-$ singularity exec ${USER}s_automatic_blast_image.sif blastn -h
 
 

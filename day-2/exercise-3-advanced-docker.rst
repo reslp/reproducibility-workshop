@@ -310,7 +310,7 @@ Once present as a Docker tar archive the image can be easily converted to a Sing
 
 .. code:: bash
 
-   (host)-$ singularity build ${USER}s_automatic_blast_image.sif ${USER}s_automatic_blast_image.tar
+   (host)-$ singularity build ${USER}s_automatic_blast_image.sif docker-archive://${USER}s_automatic_blast_image.tar
 
 Now, run it through singularity (based on your local ``sif`` file.
 

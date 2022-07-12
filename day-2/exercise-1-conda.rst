@@ -483,7 +483,7 @@ Here is an example of strange behaviour that can prevent achieving reproducibili
    $ conda create -n r-test
    $ conda activate r-test
    (r-test) $ conda install -c conda-forge r-base=4.0.5
-   (r-test) $ conda install -c conda-forge r-ggplot=3.3.0
+   (r-test) $ conda install -c conda-forge r-ggplot2=3.3.0
    (r-test) $ conda list | grep ggplot2
    r-ggplot2                 3.3.0             r40h6115d3f_1    conda-forge
 

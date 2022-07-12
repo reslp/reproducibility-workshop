@@ -306,6 +306,18 @@ the archive.
 
     (host)-$ docker load -i ${USER}s_automatic_blast_image.tar
 
+Once present as a Docker tar archive the image can be easily converted to a Singularity image file (SIF).
+
+.. code:: bash
+
+   (host)-$ singularity build ${USER}s_automatic_blast_image.sif ${USER}s_automatic_blast_image.tar
+
+Now, run it through singularity (based on your local ``sif`` file.
+
+.. code:: bash
+   (host)-$ singularity exec ${USER}s_automatic_blast_image.sif blastn -h
+
+
 Share your image with the world - Dockerhub
 -------------------------------------------
 
@@ -369,8 +381,9 @@ reprodcibly organize one's Docker containers.
 
 Check out this example `here <https://hub.docker.com/r/chrishah/ncbi-blast>`_.
 
+
 Exercises
-~~~~~~~~~
+=========
 
 .. admonition:: Exercise 1
 
@@ -384,7 +397,7 @@ Exercises
    `Flye <https://github.com/fenderglass/Flye>`_ is a denovo genome assembler built for long reads (PacBio and ONT). It performs very well and is relatively fast and memory efficient, as far as denovo assemblers go.. ;-) 
    Check out the installation instructions of Flye on their Github `page <https://github.com/fenderglass/Flye/blob/flye/docs/INSTALL.md>`_.
    
-   Write a ``Dockerfile`` and build an image for the Flye assembler running in Ubuntu 20.04. According to the installation `instructions <https://github.com/fenderglass/Flye/blob/flye/docs/INSTALL.md>`_ you could get it through conda or build it locally. A possible solution can be found `<here https://github.com/chrishah/flye-docker/blob/main/Dockerfile>`_.
+   Write a ``Dockerfile`` and build an image for the Flye assembler running in Ubuntu 20.04. According to the installation `instructions <https://github.com/fenderglass/Flye/blob/flye/docs/INSTALL.md>`_ you could get it through conda or build it locally. A possible solution can be found `here <https://github.com/chrishah/flye-docker/blob/main/Dockerfile>`_.
 
 
 .. admonition:: Exercise 3
@@ -394,6 +407,7 @@ Exercises
    Write a ``Dockerfile`` and build an image for LongStitch. A possible solution can be found `here <https://github.com/chrishah/longstitch-docker/blob/main/Dockerfile>`_.
 
 Phew, for a minute there ... **Well Done !!!**
+
 
 Demos
 =====
@@ -406,7 +420,7 @@ Demos
 Running an RStudio server
 -------------------------
 
-The demo is inspired by `this<http://ropenscilabs.github.io/r-docker-tutorial/>`_ tutorial (last accessed 24.04.2020) and relies on images provided by
+The demo is inspired by `this <http://ropenscilabs.github.io/r-docker-tutorial/>`_ tutorial (last accessed 24.04.2020) and relies on images provided by
 The Rocker Project (see also the Github `Wiki <https://github.com/rocker-org/rocker/wiki>`_).
 
 Start the RStudio server Docker container like so:

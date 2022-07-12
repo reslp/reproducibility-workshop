@@ -444,14 +444,13 @@ container, you can extend the above command, like so, e.g.:
 For an example Dockerfile you can use to build an Rstudio image that has
 some packages already pre-installed, see this
 `Dockerfile <https://github.com/chrishah/docker-intro/tree/master/Dockerfiles/Dockerfile>`__.
-Incidentally, this is the setup I used for doing the Differential
-Expression analyses a few lectures ago.
+Incidentally, this is the RStudio server setup I used for doing the Differential
+Expression analyses a few lectures ago. For a Dockerfile setting up plain R with all dependencies for running SarTools go `here <https://github.com/chrishah/R-SARTools-plus-docker/blob/main/Dockerfile>`_ and find the corresponding image `here <https://hub.docker.com/r/chrishah/r-sartools-plus>`_.
 
 Jupyter Notebook
 ----------------
 
-Cyverse US has created a number of Docker images and deposited the
-contexts on Github here.
+`Cyverse <https://cyverse.org/>`_ US has created a number of Docker images and deposited the contexts on Github `here <https://github.com/cyverse-vice/>`_.
 
 Very nice are for example their Jupyterlab Servers in Docker containers.
 Try the following, but note that this image is rather large and may take
@@ -473,9 +472,7 @@ Here's another one that has ``snakemake`` setup within it.
 Mkdocs server
 -------------
 
-MkDocs (mkdocs.org) is a neat tool for creating project documentation
-sites. Instead of installing and running it locally, why not build it
-into an image and run it from within a Docker container?
+MkDocs (`mkdocs.org <https://www.mkdocs.org/>`_) is a neat tool for creating project documentation sites. Instead of installing and running it locally, why not build it into an image and run it from within a Docker container?
 
 To keep things organized, let's first make a new directory.
 
@@ -536,9 +533,9 @@ want to modify it, like so
 Links
 =====
 
--  Dockerhub
--  Dockerhub's documentation
--  The Rocker Project Main / Github Wiki
+-  `Dockerhub <https://hub.docker.com/>`_
+-  Dockerhub's `documentation <https://docs.docker.com/docker-hub/>`_
+-  The Rocker Project `Main <https://www.rocker-project.org/>`_ / Github `Wiki <https://github.com/rocker-org/rocker/wiki>`_
 
 Contact
 =======

@@ -323,25 +323,25 @@ Manual push
 ~~~~~~~~~~~
 
 I have made public repository to show you how to deposit custom images
-on Dockerhub - it's here.
+on Dockerhub - it's `here <https://hub.docker.com/r/chrishah/docker-training-push-demo>`_ .
 
 Let's deposit our image there. In order for Dockerhub to know where the
 image should go I need to rename it to match the name of the repository
 which is usually something like ``username/reponame``. My Dockerhub
 username is ``chrishah``, and I called the repo
 ``docker-training-push-demo``. Note that I will also give the image a
-specific tag ``v07092020``. This could be anything as long as it's in
+specific tag ``v11072022``. This could be anything as long as it's in
 one word an all lower case.
 
 .. code:: bash
 
-    (host)-$ docker tag automatic_blast_image chrishah/docker-training-push-demo:v07092020
+    (host)-$ docker tag ${USER}s_automatic_blast_image chrishah/docker-training-push-demo:v11072022
 
 Now we can push it Dockerhub.
 
 .. code:: bash
 
-    (host)-$ docker push chrishah/docker-training-push-demo:v07092020
+    (host)-$ docker push chrishah/docker-training-push-demo:v11072022
 
 Done! Check it out on Dockerhub.
 
@@ -349,7 +349,7 @@ This image can now be pulled and used by anybody!
 
 .. code:: bash
 
-    (host)-$ docker run --rm chrishah/docker-training-push-demo:v07092020
+    (host)-$ docker run --rm chrishah/docker-training-push-demo:v11072022
 
 Also, if you happen to be using ``Singularity`` rather than ``Docker``,
 this image is compatible. Assuming you have ``Singularity`` up and
@@ -358,25 +358,56 @@ afresh):
 
 .. code:: bash
 
-    (host)-$ singularity run docker://chrishah/docker-training-push-demo:v07092020 blastn -h
+    (host)-$ singularity run docker://chrishah/docker-training-push-demo:v11072022 blastn -h
 
 Automated build
 ~~~~~~~~~~~~~~~
 
-A very neat feature feature in my opinion is that Dockerhub allows you
+A very neat feature in my opinion is that Dockerhub allows you
 to link its repos to Github repositories. By this, one can neatly and
 reprodcibly organize one's Docker containers.
 
-Check out this example here.
+Check out this example `here <https://hub.docker.com/r/chrishah/ncbi-blast>`_.
+
+Exercises
+~~~~~~~~~
+
+.. admonition:: Exercise 1
+
+   `Clustalo <http://www.clustal.org/omega/>`_ is a very popular tool for multiple sequence alignemnt. It can be easily installed with conda, or built from source, or simply setup with precompiled binaries.
+   
+   Write a ``Dockerfile`` and build an image to run ``clustalo`` version 1.2.4. One possible solution can be found `here <https://github.com/reslp/dockerfiles/blob/master/clustalo/Dockerfile>`_
+
+
+.. admonition:: Exercise 2
+
+   `Flye <https://github.com/fenderglass/Flye>`_ is a denovo genome assembler built for long reads (PacBio and ONT). It performs very well and is relatively fast and memory efficient, as far as denovo assemblers go.. ;-) 
+   Check out the installation instructions of Flye on their Github `page <https://github.com/fenderglass/Flye/blob/flye/docs/INSTALL.md>`_.
+   
+   Write a ``Dockerfile`` and build an image for the Flye assembler running in Ubuntu 20.04. According to the installation `instructions <https://github.com/fenderglass/Flye/blob/flye/docs/INSTALL.md>`_ you could get it through conda or build it locally. A possible solution can be found `<here https://github.com/chrishah/flye-docker/blob/main/Dockerfile>`_.
+
+
+.. admonition:: Exercise 3
+
+   Another interesting tool in the context of long read genome assembly is `LongStitch <https://github.com/bcgsc/longstitch>`_. This is a pipeline for scaffolding of draft assemblies with long reads incorporating multiple tools and controlled through ``make``. I found it relatively difficult to set up because of the many dependencies it requires, but if you like a challenge .. ;-)
+
+   Write a ``Dockerfile`` and build an image for LongStitch. A possible solution can be found `here <https://github.com/chrishah/longstitch-docker/blob/main/Dockerfile>`_.
+
+Phew, for a minute there ... **Well Done !!!**
 
 Demos
 =====
 
+.. warning::
+
+    The following demos are assuming that you are running Docker locally on your computer. They can also be run on a server and forwarded to your local computer via port forwarding, but this is a little bit more advanced topic.
+
+
 Running an RStudio server
 -------------------------
 
-The demo is inspired by this tutorial and relies on images provided by
-The Rocker Project (see also the Github Wiki).
+The demo is inspired by `this<http://ropenscilabs.github.io/r-docker-tutorial/>`_ tutorial (last accessed 24.04.2020) and relies on images provided by
+The Rocker Project (see also the Github `Wiki <https://github.com/rocker-org/rocker/wiki>`_).
 
 Start the RStudio server Docker container like so:
 

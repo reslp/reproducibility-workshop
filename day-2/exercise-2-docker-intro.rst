@@ -480,6 +480,6 @@ The commands and examples provided here are really only the tip of the iceberg. 
 - Extensive Reference of the `docker <https://docs.docker.com/engine/reference/commandline/cli/>`_ CLI.
 - `More <https://docs.docker.com/storage/volumes/>`_ on Docker Volumes
 - `Docker Hub <https://hub.docker.com>`_
-
+- Github `repository <https://github.com/chrishah/short-read-processing-and-assembly>`_ with an exercise we made for another course. It focusses on short read genome assembly using existing Docker images.
 
 

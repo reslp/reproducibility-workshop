@@ -329,8 +329,13 @@ Each of the three platforms have their own special features complementing the co
 
 More information `here <https://git-scm.com/docs/git-clone>`_.
 
-
 It is even possible to host a git repository on your own server.
+
+
+.. admonition:: Exercise
+
+   Find the secret message hidden in the repository. You can use what you have learned so far to discover it.
+
 
 Transfering local changes to an online repository
 =================================================
@@ -362,6 +367,11 @@ More information `here <https://git-scm.com/docs/git-pull>`_.
 .. admonition:: bash
 
    Find a git repository on Github, maybe some software you have been using. Clone the code and investigate the repository using what you have learned in this exercise. When was the last commit? Do you find the commit messages helpful? How many tags to you find? Are there any branches?
+
+Moving and removing files in a git repository
+=============================================
+
+Sometimes you will want to relocate files inside your repository or stop tracking them with git. You should not use ``mv`` and ``rm`` in these situations. Git can get confused if you simple delete a file or put it into a different place. It is not smart enough for that. Instead what you should do is use ``git mv`` to move files to a different place and ``git rm`` to remove files. By default ``git rm`` will not delete the fil though, it will simply tell git that the file should not be tracked anymore. It basically makes it invisible to git again.
 
 There is a lot more...
 =======================

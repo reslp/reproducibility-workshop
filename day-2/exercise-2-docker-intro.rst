@@ -428,6 +428,14 @@ To remove a volume you can run:
     my_data
 
 
+.. admonition:: Exercise
+
+   We have prepared a Docker image for you that runs a very special script. Get it from Dockerhub `chrishah/welldone:1.0` and try to run it successfully. The snag is that it requires a key file to be made available to the container in a certain location of the containers file system, specifically the script in the container will look for `/data/key`. We have deposited the `key` in a Docker volume called `key`. 
+
+   Run the container `chrishah/welldone:1.0` with the Docker volume `key` mounted to `/data`. If you need help you can find it in the Github repository that is the base of the container `here <https://github.com/chrishah/welldone-docker>`_
+
+
+
 Mounting directories
 --------------------
 

@@ -5,9 +5,9 @@
 Exercise 2 - Working with Docker
 ================================
 
-A successful Docker installation runs in the background out of sight of the user. At its core is the so-called Docker deamon (or dockerd) which manages different docker objects such as containers, images or volumes.
+A successful Docker installation runs in the background out of sight of the user. At its core is the so-called Docker deamon (or ``dockerd``) which manages different docker objects such as containers, images or volumes.
 The way to interact with the Docker daemon and tell it what to do is through a command line interface (CLI) program which is called :bash:`docker`. We refer to this here as the :bash:`docker` command. 
-The docker command is very powerful and it allows us to change many aspects of how Docker runs containers, manages images or creates volumes. In this first live coding session, we will be introducing the :bash:`docker` command and show how to run and interact with Docker images.
+The docker command is very powerful and it allows us to change many aspects of how Docker runs containers, manages images or creates volumes. In this exercise, we will be introducing the :bash:`docker` command and show how to run and interact with Docker images.
 
 Definitions
 ===========
@@ -116,7 +116,9 @@ To get an idea what we can do with docker you can run the docker command without
 
 This may look overwhelming at first but it illustrates that Docker is capable of many different things and there are many different ways how to do them. Also, during your daily docker use, you may actually only need a subset of what is listed above. Because Docker can do so many different things the :bash:`docker` command is organized in sub-commands which correspond to different aspects of Docker. Docker sub-commands can be further customized with traditional command-line flags.
 
-.. hint:: "Getting help"
+.. hint:: 
+
+        **Getting help**
 
 	If you would like to know about the different options you can use the docker command like so to display additional help: docker COMMAND --help. For example `docker run --help` will only display options associated with the docker run command.
 
@@ -157,7 +159,9 @@ Probably the first container every new Docker user runs is the `hello-world <htt
 
 A lot is going on when this command is executed apart from printing the traditional "Hello" message. It also provides some additional information about what just happened: As you can see from the output above when executing the command :bash:`docker run hello-world:latest` :bash:`docker` communicates with the docker deamon and requests a container of the hello-world image. The docker daemon realized that this image is not yet available on our computer, so it downloads it from the `Docker Hub <https://hub.docker>`_ (this is usually referred to as *pulling*). The Docker daemon stores the hello-world image on the host and creates a virtualized runtime environment (the *container*). When this container is executed it can produce some output (in case of hello-world this is the message above), which is displayed on the terminal screen.
 
-.. tip::  "DockerHub"
+.. tip::  
+
+    **Dockerhub**
 
     Docker Hub is a large online repository of custom Docker images made by other users. We will have a closer look on how it works in the next session. 
 
@@ -168,7 +172,9 @@ As already mentioned :bash:`docker run` automatically pulls an image if it is no
     (host) $ docker pull ubuntu:18.04
 
 
-.. hint:: "Be explicit with image versions"
+.. hint:: 
+
+    **Be explicit with image versions**
 
     Usually it is good practice to always specify the version of an image when creating a container. This ensures reproducability and the same behavior during every run. In the case of hello-world we ran the latest version. The latest version of the image is pulled if no version number is specified explicitly. This could break your workflow if the image is updated because if a newer version is available it will automatically download it. This new image then replaces the old one.
 
@@ -262,7 +268,7 @@ Inside our container we can do all kinds of things: Create files, install softwa
 
 .. hint::
 
-    Changes you make in interactivte mode inside a container are restricted to the currently running container. Each docker run command will spawn a new container instance which only contains what is in the underlying Docker image.
+    Changes you make in interactive mode inside a container are restricted to the currently running container. Each docker run command will spawn a new container instance which only contains what is in the underlying Docker image.
 
 
 
@@ -350,13 +356,13 @@ This gives an overview of your downloaded images as well as intermediate images 
 Sharing data with the host system
 =================================
 
-Often, it is desired to share data from the host computer with the container. For example you may want to analyse files you created inside your container or you may want to copy files from inside your container to your computer. Docker provides two ways to do this: Docker volumes and bind-mounting whole directories. We will introduce both approaches here:
+Often, you will want share data from the host computer with the container. For example you may want to analyse files you created inside your container or you may want to copy files from inside your container to your computer after an analysis has finished. Docker provides two ways to do this: Docker volumes and bind-mounting whole directories. We will introduce both approaches here:
 
 Docker volumes
 --------------
 
-A Docker volume is a special place in the host file-system which is used to store data generated by the runnning container. Docker will automatically create a volume for each running container. The idea behind this is to keep files created during runtime seperated from the image to make it easy to transition to different image versions. In this case Docker will create a new container of the updated image but your local files will stay unchanged. 
-Apart from these automatically created volumes, we can also create one manually:
+Docker volume is a special place in the host file-system which is used to store data generated by the runnning container. Docker will automatically create a volume for each running container. The idea behind this is to keep files created during runtime seperated from the image to make it easy to transition to different image versions. In this case Docker will create a new container of the updated image but your local files will stay unchanged. 
+Apart from these automatically created volumes, we can also create volumes manually:
 
 .. code-block:: bash
     
@@ -375,9 +381,8 @@ With :bash:`docker volume ls` we can list our current volumes:
 
 .. hint::
 
-    Volumes are especially handy to share data between more complex setups with multiple containers. e.g. databases
+    Volumes are especially handy to share data between more complex setups with multiple containers. e.g. databases.
 	
-
 After we created the volume we can tell Docker to make it available when a container is run. This is done like this:
 
 .. code-block:: bash
@@ -397,6 +402,7 @@ Now, inside the container we can move to the bound volume and create some dummy 
     root@eca8560a6bd1:/data# ls
     file_inside_the_container  testdata
     root@eca8560a6bd1:/data# exit
+
 We can now run a completely different container, have it include the same volume and then list its contents:
 
 .. code-block:: bash
@@ -420,7 +426,6 @@ To remove a volume you can run:
 
     (host) $ docker volume rm my_data
     my_data
-
 
 
 Mounting directories

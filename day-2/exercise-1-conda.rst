@@ -596,8 +596,6 @@ When working with R in conda
 
 A nice way to increase reproducibility and create very solid environments is to use containerization. We will look into this topic in the next exercise.
 
-Other virtual environment managers
-==================================
 
 
 

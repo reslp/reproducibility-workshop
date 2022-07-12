@@ -33,6 +33,10 @@ The suggested directory structure is intuitive (it follows basic naming conventi
 
    Your first task is to create a new project directory in your home directory with the subdirectories as listed above. Is there someting you are missing.
 
+.. hint::
+
+   We have created a shell script to initialize new projects. This script also initializes a git repository (we will learn about this in the next exercise) and adds your project's bin directory to the PATH if you want. You can find the script here on Github: `create-project.sh <https://github.com/reslp/reproducibility-workshop/blob/main/additional-data/create-project.sh>`_. 
+
 Keeping track of your work
 ==========================
 

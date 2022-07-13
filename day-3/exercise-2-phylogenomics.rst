@@ -20,14 +20,17 @@ for the data download can be found in this table.
 All software used in the demo is deposited as Docker images on Dockerhub
 and all data is freely and publicly available.
 
-The workflow we will demonstrate is as follows: - Download genomes from
-Genbank - Identifying complete BUSCO genes in each of the genomes -
-pre-filtering of orthology/BUSCO groups - For each BUSCO group: - build
-alignment - trim alignment - identify model of protein evolution - infer
-phylogenetic tree (ML) - construct supermatrix from individual gene
-alignments - infer phylogenomic tree with paritions corresponding to the
-original gene alignments using ML - map internode certainty (IC) onto
-the phylogenomic tree
+The workflow we will demonstrate is as follows:
+
+ - Download genomes from Genbank
+ - Identifying complete BUSCO genes in each of the genomes
+ - pre-filtering of orthology/BUSCO groups
+ - For each BUSCO group:
+   - build alignment
+   - trim alignment
+   - identify model of protein evolution
+   - infer phylogenetic tree (ML) - construct supermatrix from individual gene alignments
+ - infer phylogenomic tree with paritions corresponding to the original gene alignments using ML
 
 Let's begin
 ~~~~~~~~~~~

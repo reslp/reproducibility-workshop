@@ -315,7 +315,7 @@ Actually, running would happen if you remove the ``-n`` flag.
 
 .. code:: bash
 
-    (user@host)-$ snakemake -rp --use-singularity auto/trimmed/193525at7742.clustalo.trimal.fasta auto/trimmed/406935at7742.clustalo.trimal.fasta
+    (user@host)-$ snakemake -rp --use-singularity --jobs 4 auto/trimmed/193525at7742.clustalo.trimal.fasta auto/trimmed/406935at7742.clustalo.trimal.fasta
 
 **Well Done!**
 
@@ -335,10 +335,14 @@ Actually, running would happen if you remove the ``-n`` flag.
   Run your pipeline including the following genes:
 
   - 409625at7742
-  - 359032at7742
-  - 413149at7742
   - 409719at7742
-  - 406935at7742
+  - 413149at7742
+  - 42971at7742
+  - 97645at7742
+
+.. code:: bash
+
+    (snakemake) (user@host)-$ snakemake -nrp --use-singularity --jobs 4 super.treefile
 
 
 **Well Done!!!**

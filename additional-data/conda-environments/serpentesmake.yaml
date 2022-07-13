@@ -1,0 +1,8 @@
+name: serpentesmake
+channels:
+  - conda-forge
+  - bioconda
+  - defaults
+dependencies:
+  - snakemake==5.9.1
+prefix: /home/ubuntu/conda/miniconda3/envs/serpentesmake

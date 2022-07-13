@@ -249,6 +249,18 @@ We have installed snakemake in a conda environment for you already. You can acti
    $ conda activate serpentesmake
    (serpentesmake) $ snakemake -v
 
+The corresponding yaml file of the environment is in the repository in ``additional-data/conda-environments/serpentesmake.yml``. Here is the content of this file:
+
+.. code-block:: bash
+
+   name: serpentesmake
+   channels:
+     - conda-forge
+     - bioconda
+     - defaults
+   dependencies:
+     - snakemake==5.9.1
+   prefix: /home/ubuntu/conda/miniconda3/envs/serpentesmake
 
 The test workflow in snakemake
 ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~

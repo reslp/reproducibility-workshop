@@ -420,79 +420,51 @@ R and conda
 
 Many of you probably also work with R. In case your are not familiar with R, R is a `statistical programming language <https://en.wikipedia.org/wiki/R_(programming_language)>`_ that has become heavily used in natural sciences. It has countless user-developed extensions for different kinds of analyses and for visualizing data. If you rely on `R` heavily as we do, it may be tempting to install R in conda to keep track of your R packages and have reproducible R environments. This may be especially necessary to keep different R versions and according versions of R packages for example if you would like to reanalyze the data of an older publication.
 
-If you plan to do so, there are several things to keep in mind. The first thing (and this is a very small digression into working with R) is that in R it is not the standard to install specific versions (although you definitely should) of packages. Simply search the internet a bit and you will quickly realize that very rarely r package versions are given.
-
-It is possible to install a specific version of a package, given you have devtools installed: 
-
-.. code-block:: bash
-
-  $ R
-    
-  R version 4.1.3 (2022-03-10) -- "One Push-Up"
-  Copyright (C) 2022 The R Foundation for Statistical Computing
-  Platform: x86_64-conda-linux-gnu (64-bit)
-  
-  R is free software and comes with ABSOLUTELY NO WARRANTY.
-  You are welcome to redistribute it under certain conditions.
-  Type 'license()' or 'licence()' for distribution details.
-  
-    Natural language support but running in an English locale
-  
-  R is a collaborative project with many contributors.
-  Type 'contributors()' for more information and
-  'citation()' on how to cite R or R packages in publications.
-  
-  Type 'demo()' for some demos, 'help()' for on-line help, or
-  'help.start()' for an HTML browser interface to help.
-  Type 'q()' to quit R.
-  
-  > install.packages("devtools", repos = "http://cran.us.r-project.org")
-  > require(devtools)
-  > install_version("ggplot2", version = "3.3.6", repos = "http://cran.us.r-project.org")
-
-
-The ggplot package in R is probably one of the most commonly used packages for data visualization. Due to its popularity it is also available as a conda package. In fact there are multiple available ggplot packages available for conda:
-
-- `ggplot on conda-forge <https://anaconda.org/conda-forge/r-ggplot2>`_
-- `an old version of ggplot <https://anaconda.org/conda-forge/ggplot>`_ (also on conda-forge)
-- `ggplot on bioconda <https://anaconda.org/bioconda/r-ggplot2>`_ 
-
-and probably others on small channels. This is not ideal and does not help with making analyses reproducible. One additional complication is that conda channels are ordered and it will search them based on the order you specified. We have already seen this with the example of mamba above.
-
-You can list channels like so:
-
-.. code-block:: bash
-
-   $ conda config --list channels
-   channels:
-    - bioconda
-    - conda-forge
-    - defaults
-
-If you would install ggplot with this channel order and without specifying a version number and channel (eg. ``conda install r-ggplot2``) you would end up with the ggplot package from ``bioconda`` which is quite outdated compared to the version in ``conda-forge``. This is simply because the ``bioconda`` channel is listed before ``conda-forge``. The channel order is also relevant in environment files. If you want to know more about how to manage channels you can go `here <https://docs.conda.io/projects/conda/en/latest/user-guide/tasks/manage-channels.html>`_ .
-
-Here is an example of strange behaviour that can prevent achieving reproducibility. In this example we will create a new environment and install a specific version of R and ``ggplot`` using conda. Next we will open the R console and install ggplot again from inside R. Let us see what happens.
-
-.. hint::
-  
-   Output of most commands below is omitted to save space.
-
+If you plan to do so, there are several things to keep in mind and problems can occur. To illustrate what you may run into, let us install three packages to get started with R in conda:
 
 .. code-block:: bash
 
    $ conda create -n r-test
    $ conda activate r-test
    (r-test) $ conda install -c conda-forge r-base=4.0.5
+   (r-test) $ conda install -c conda-forge r-devtools=2.4.3
    (r-test) $ conda install -c conda-forge r-ggplot2=3.3.0
    (r-test) $ conda list | grep ggplot2
    r-ggplot2                 3.3.0             r40h6115d3f_1    conda-forge
 
-Ok, we have successfully installed R and ggplot2 using conda. We have used the same channel as well so there should be no dependency issues. Now let's start R and install ggplot again. Why would we even do this you may ask? One reason why we would do this could be that ggplot gets an update and we would like to use the new features. In R we are not really used to keep track of version numbers. Typically we will simply install packages with ``install.packages("packagename")`` and be done with it. In combination with conda this can lead to problems. Let us see how:
+.. hint::
+  
+   Output of the ``conda install`` commands above is omitted to save space.
+
+.. warning::
+
+   The ggplot2 package in R is probably one of the most commonly used packages for data visualization. Probably due to it's popularity there are multiple ``ggplot2`` packages available for conda:
+   
+   - `ggplot2 on conda-forge <https://anaconda.org/conda-forge/r-ggplot2>`_
+   - `an old version of ggplot <https://anaconda.org/conda-forge/ggplot>`_ (also on conda-forge)
+   - `ggplot2 on bioconda <https://anaconda.org/bioconda/r-ggplot2>`_ 
+   
+   and probably others on small channels. This is not ideal and does not help with making analyses reproducible. One additional complication is that conda channels are ordered and it will search them based on the order you specified. We have already seen this with the example of mamba above.
+   
+   You can list channels like so:
+   
+   .. code-block:: bash
+   
+      $ conda config --list channels
+      channels:
+       - bioconda
+       - conda-forge
+       - defaults
+   
+   If you would install ggplot2 with this channel order and without specifying a version number and channel (eg. ``conda install r-ggplot2``) you would end up with the ggplot package from ``bioconda`` which is quite outdated compared to the version in ``conda-forge``. This is simply because the ``bioconda`` channel is listed before ``conda-forge``. The channel order is also relevant in environment files. If you want to know more about how to manage channels you can go `here <https://docs.conda.io/projects/conda/en/latest/user-guide/tasks/manage-channels.html>`_ .
+
+
+Let us now start the ``R`` console and investigate the installation:
 
 .. code-block:: bash
 
   (r-test) $ R
-  > library(ggplot)
+  > library(ggplot2)
   > sessionInfo()
   R version 4.0.5 (2021-03-31)
   Platform: x86_64-conda-linux-gnu (64-bit)
@@ -522,10 +494,29 @@ Ok, we have successfully installed R and ggplot2 using conda. We have used the s
   [13] cli_3.3.0        vctrs_0.4.1      ellipsis_0.3.2   glue_1.6.2      
   [17] munsell_0.5.0    compiler_4.0.5   pkgconfig_2.0.3  colorspace_2.0-3
   [21] tibble_3.1.7
+
+Nice, this shows that the installation of ``ggplot2 3.3.0`` worked correctly through conda. However installing R packages like so is not the usual way of installing packages and many R script contain package installation instructions with the R function ``install.packages()``.
+
+Additionally, what we want is to controll the installed version of the package, however this information is rarely given in R scripts. Most of the time, simply the latest version is installed. 
+If you want proove for this claim, simply search the internet a bit for R tutorials of different packes and you will quickly realize that very rarely the R package versions are given.
+
+That said, it *is* possible to install a specific version of a package, given you have devtools installed (this is why we installed it earlier) and you should certainly do so whenever possible. With the following commands (we are still working inside the R console) we can install the specific version of a package directly in R without using ``conda``.
+
+.. code-block:: bash
+
   > detach("package:ggplot2")  
-  > install.packages("ggplot2", repos = "http://cran.us.r-project.org")   
-  > quit()
-  $ R
+  > require(devtools)
+  > install_version("ggplot2", version = "3.3.6", repos = "http://cran.us.r-project.org")
+
+.. hint::
+  
+   If you are working in ``R`` inside a ``conda`` environment, installing devtools (and also many other packages) can fail. This is because several requirements that R needs to compile packages are missing. This is strange since we would expect that ``conda`` managed to install everything that R needs. This does not seem to be the case.
+
+
+After this has finished, we can load the package and look at the output of ``sessionInfo()`` again:
+
+.. code-block:: bash
+
   > library(ggplot2)
   > sessionInfo()
   R version 4.0.5 (2021-03-31)
@@ -557,14 +548,17 @@ Ok, we have successfully installed R and ggplot2 using conda. We have used the s
   [17] munsell_0.5.0    compiler_4.0.5   pkgconfig_2.0.3  colorspace_2.0-3
   [21] tibble_3.1.7
 
-Isn't this strange? It seems like we now have a newer version of ggplot installed directly through R. Let's check which version conda shows as being installed:
+It looks like we now have a newer version of ggplot2 installed directly through R. Let's check which version conda shows as being installed:
 
 .. code-block:: bash
 
+   > quit() 
    (r-test) $ conda list | grep ggplot2
    r-ggplot2                 3.3.0             r40h6115d3f_1    conda-forge
 
-Looks like it still shows the version we installed through conda. There is something wrong here! While this particular example may not be very problematic in a real life scenario, you can see how easy it is to mess up your environment and R set up and loose reproducibility. Especially when you only share your conda environment file without the information of how you installed R packages. 
+Looks like it still shows the version we installed through conda. There is something wrong here! If we would share our conda environment, it would be different from what we are actually using (inside the R console).
+
+While this particular example may not be very problematic in a real life scenario, you can see how easy it is to mess up your environment and R set up and loose reproducibility. Especially when you only share your conda environment file without the information of how you installed R packages. 
 
 .. admonition:: Exercise
 

@@ -5,7 +5,7 @@ Workflow management systems help to structure complex workflows. When a workflow
 
 In this exercise we will introduce different ways how to automate workflows to increase productivity and reproducibility.
 
-We will be using a very small test dataset to illustrate the principle of what we want to do. The task is this: We want to combine the content of several files into a single file and convert all text in the combined file to lower case. The resulting file should be called ``lower.txt``. The data for this exercise is in ``additional-data/simple-workflow-example/input`` in the workshops repository.
+We will be using a very small test dataset to illustrate the principle of what we want to do. The task is this: We want to combine the content of several files into a single file and convert all text in the combined file to lower case. The resulting file should be called ``lower1.txt``. The data for this exercise is in ``additional-data/simple-workflow-example/input1`` in the workshops repository.
 
 First, let us prepare the working environment for today. Run these commands in your home directory:
 
@@ -27,39 +27,40 @@ As you probably figured out, what we want to do can be achieved by using a bash 
 
 .. code-block:: bash
 
-   $ cat input/*.txt | tr [:upper:] [:lower:] > lower.txt
+   $ cat input1/*.txt | tr [:upper:] [:lower:] > lower1.txt
 
 However we will now try to divide this command into individual steps for the sake of this exercise and then make an automated workflow out of it. 
 
 The command above does several things:
 
-1. First, it gets a list of all ``.txt`` files in the ``input`` directory by using the ``*`` expansion.
+1. First, it gets a list of all ``.txt`` files in the ``input1`` directory by using the ``*`` expansion.
 2. It shows the content of all the files gather by 1 using ``cat``.
 3. It pipes the output of 2 into ``tr`` which converts the streamed content to lower case.
-4. Finally the result is piped into a file called ``lower.txt``
+4. Finally the result is piped into a file called ``lower1.txt``
 
 As we have mentioned earlier it is generally a good idea to keep more complex bash operations in shell script files, so they can be reused. How does this command look if we write a shell script.
 
 .. code-block:: bash
 
+   $ cat workflow-scripts/workflow-single.sh
    #!/usr/bin/env bash
 
-   rm -f combined.txt lower.txt # remove output from previous runs
+   rm -f combined1.txt lower1.txt # remove output from previous runs
 
-   files=$(ls input/*.txt) # get input files (see 1 above)
+   files=$(ls input1/*.txt) # get input files (see 1 above)
 
    for file in $files # the for loop helps to combine the files (see 2 above)
    do
-           cat $file >> combined.txt
+           cat $file >> combined1.txt
    done
    
-   cat combined.txt | tr [:upper:] [:lower:] > lower.txt # convert the content of the intermediate file to lower case and pipe to lower.txt (see 3 and 4 above)
+   cat combined1.txt | tr [:upper:] [:lower:] > lower1.txt # convert the content of the intermediate file to lower case and pipe to lower.txt (see 3 and 4 above)
    
 .. hint::
 
    What we show here is probably overly complicated for a task like this. The point here is to show how to separate more complex tasks (and in the end complete bioinformatic analyses) into individual tasks. This is something you will have to do when you plan to develop a complex analysis pipleine.
 
-Using a script already increases reproducibility quite a bit. We can take this script, transfer it to a different folder or computer and run it again to generate the final output ``lower.txt``. If we were to run it on the same input files again we would get the same output.
+Using a script already increases reproducibility quite a bit. We can take this script, transfer it to a different folder or computer and run it again to generate the final output ``lower1.txt``. If we were to run it on the same input files again we would get the same output.
 
 However, there are several potential pitfalls to keep in mind. One problem with an approach like this is that for complex analyses such a script can quickly become hard to understand. A solution would be to create different scripts (eg. for our test case ``step-1-get-input-files.sh step-2-combine-files.sh step-3-convert-to-lower.sh``). This would help to detect errors and make the code easier to understand because each script only contains code for a single part of the analysis.
 
@@ -87,10 +88,10 @@ Here is how this could look for our task of converting a file to lower case:
 
 .. code-block:: bash
 
-   lower.txt: combined.txt
-        cat combined.txt | tr [:upper:] [:lower:] > lower.txt
+   lower1.txt: combined1.txt
+        cat combined1.txt | tr [:upper:] [:lower:] > lower1.txt
 
-The *target* (output) of this rule is the file ``lower.txt`` and the *dependency* (input) is ``combined.txt``. The *recipe* for this rule is the second line. Typically all rules are combined into one or more socalled Makefiles which typically are named ``Makefile`` or ``makefile``.
+The *target* (output) of this rule is the file ``lower1.txt`` and the *dependency* (input) is ``combined1.txt``. The *recipe* for this rule is the second line. Typically all rules are combined into one or more socalled Makefiles which typically are named ``Makefile`` or ``makefile``.
 
 Our simple test workflow in make
 ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
@@ -99,32 +100,32 @@ How would our simple test workflow look written in make? Let us have a look at t
 
 .. code-block:: bash
    
-   $ cat Makefile
-   all: lower.txt
+   $ cat workflow-scripts/Makefile-single
+   all: lower1.txt
 
-   combined.txt: input/*.txt 
+   combined1.txt: input1/*.txt 
            for file in $^; do \
-                   cat $$file >> combined.txt; \
+                   cat $$file >> combined1.txt; \
            done
    
-   lower.txt: combined.txt
-           cat combined.txt | tr [:upper:] [:lower:] > lower.txt
+   lower1.txt: combined1.txt
+           cat combined1.txt | tr [:upper:] [:lower:] > lower1.txt
 
    clean:
-           rm -rf combined.txt lower.txt 
+           rm -rf combined1.txt lower1.txt 
 
-In this makefile there are four rules: ``combined.txt``, ``lower.txt``, ``all`` and ``clean``. The first two rules have file targets making it clear what they should do: Generate the files ``combined.txt`` and ``lower.txt``. Let's look at the ``combined.txt`` rule in more detail:
+In this makefile there are four rules: ``combined1.txt``, ``lower1.txt``, ``all`` and ``clean``. The first two rules have file targets making it clear what they should do: Generate the files ``combined1.txt`` and ``lower1.txt``. Let's look at the ``combined1.txt`` rule in more detail:
 
 .. code-block:: bash
    :linenos:
 
-   combined.txt: input/*.txt 
+   combined1.txt: input1/*.txt 
         for file in $^; do \
-                cat $$file >> combined.txt; \
+                cat $$file >> combined1.txt; \
         done
    
 
-In the first line, the target and input is specified, seperated by a colon (:). We use ``input/*.txt`` to expand to all ``*.txt`` files in the ``input`` directory. The recipe in the rule is a simple bash ``for`` loop. What is new here is the variable ``$^`` which is make specific (look `here <https://www.gnu.org/software/make/manual/html_node/Automatic-Variables.html>`_ for additional details). It holds a list of all input files which the for loop should iterate over. Also multi-line statements as given here (the recipe consits of lines 2-4) have to be separated by a backslash ``\``. This is a peculiarity of make, which requires recipies to only contain one line of code. With the backslash make knows that the command continues in the next line. The third line contains the actual ``cat`` command. In bash we would write ``cat $file`` instead of ``cat $$file``. Since make also has variables which start with ``$`` we need to let make know that this is a bash variable which is why we need the extra ``$``.
+In the first line, the target and input is specified, seperated by a colon (:). We use ``input1/*.txt`` to expand to all ``*.txt`` files in the ``input1`` directory. The recipe in the rule is a simple bash ``for`` loop. What is new here is the variable ``$^`` which is make specific (look `here <https://www.gnu.org/software/make/manual/html_node/Automatic-Variables.html>`_ for additional details). It holds a list of all input files which the for loop should iterate over. Also multi-line statements as given here (the recipe consits of lines 2-4) have to be separated by a backslash ``\``. This is a peculiarity of make, which requires recipies to only contain one line of code. With the backslash make knows that the command continues in the next line. The third line contains the actual ``cat`` command. In bash we would write ``cat $file`` instead of ``cat $$file``. Since make also has variables which start with ``$`` we need to let make know that this is a bash variable which is why we need the extra ``$``.
 
 .. tip::
 
@@ -148,23 +149,22 @@ Executing a make workflow is simple. You have to navigate to the directory where
 
 .. code-block:: bash
 
+   $ cp workflow-scripts/Makefile-single Makefile
    $ make
-   for file in input/A.txt input/B.txt input/C.txt input/D.txt; do \
-   	cat $file >> combined.txt; \
+   for file in input1/A.txt input1/B.txt input1/C.txt input1/D.txt; do \
+   	cat $file >> combined1.txt; \
    done
-   cat combined.txt | tr [:upper:] [:lower:] > lower.txt
+   cat combined1.txt | tr [:upper:] [:lower:] > lower1.txt
    $
 
 Here are some other examples:
 
 .. code-block:: bash
 
-   $ make combined.txt # this will only create the combined file
-   for file in input/A.txt input/B.txt input/C.txt input/D.txt; do \
-   	cat $file >> combined.txt; \
-   done
+   $ make combined1.txt # this will only create the combined file
+   make: 'combined1.txt' is up to date.
    $ make clean # this will remove all files:
-   rm -rf combined.txt lower.txt
+   rm -rf combined1.txt lower1.txt
    $ make all # equivalent to make (in this case)
 
 This is it. Given that the makefile is correct and it finds all the files, this is all you have to do to execute the workflow and you should find the final output file ``lower.txt`` in the same directory.
@@ -184,6 +184,7 @@ Our workflow has one major flaw. Currently our workflow works only with a single
 .. code-block:: bash
    :linenos:
 
+   $ cat workflow-scripts/Makefile-multi
    all: lower1.txt lower2.txt
       
    combined%.txt: input%/*.txt
@@ -210,6 +211,8 @@ We can now execute the workflow in parallel:
 
 .. code-block:: bash
 
+   $ make clean
+   $ cp workflow-scripts/Makefile-multi Makefile
    $ make all -j 2
 
 
@@ -245,10 +248,11 @@ Snakemake is written in python and also it's syntax is basically a python dialec
 
 .. code-block:: bash
    :linenos:
-   
+
+   $ cat workflow-scripts/Snakefile-single
    rule combine:
-           input: "input/A.txt", "input/B.txt", "input/C.txt"
-           output: "combined.txt"
+           input: "input1/A.txt", "input1/B.txt", "input1/C.txt"
+           output: "combined1.txt"
            shell:
                    """
                    cat {input} >> {output}
@@ -256,18 +260,18 @@ Snakemake is written in python and also it's syntax is basically a python dialec
    
    rule lower:
            input: rules.combine.output
-           output: "lower.txt"
+           output: "lower1.txt"
            shell:
                    """
                    cat {input} | tr [:upper:] [:lower:] > {output}
                    """
    rule all:
-           input: "lower.txt"
+           input: "lower1.txt"
 
 
 In snakemake rules are specified by the keyword ``rule`` followed by the rule name. Snakemake follows the indentantion style of python. Your not allowed to mix different styles (spaces and tabs) to indent line. Rules in snakemake have different directives such as ``input:``, ``output:`` and ``shell:``.  ``input:`` and ``output:`` require one or more files which will be used by the rule as input and output. The ``shell`` directive is where the code we would like to execute is located. We can also access our input and output inside the ``shell`` part of the rule with curly brackets ``{}``. In snakemake rules can be connected by referring to other rules' output directly through the rules object: ``rules.combine.output``. This is a nice feature because the connection between the rules will stay intact even if you change the name of the output file in the combine rule.
 
-Similar to GNU make we can have an ``all`` rule. As you can see, the ``all`` does not have an output. It only requires the ``lower.txt`` file as ``input``.
+Similar to GNU make we can have an ``all`` rule. As you can see, the ``all`` does not have an output. It only requires the ``lower1.txt`` file as ``input``.
 
 There are many additional directives in snakemake to modify how rules work. For example you can specify a conda yml file with ``conda:``. Snakemake will then create a conda environment for you and run the code in the shell part inside this environment. Similarly with ``container:`` cou can specify a singularity container which is then used as runtime environment for you code. With ``params:`` you can specify additional parameters eg. read from a YAML file. 
 
@@ -278,58 +282,49 @@ Similar to GNU make, snakemake expects a file containing all the rules to be pre
 
 .. code-block:: bash
 
+   $ rm *.txt # make sure all output files from previous runs are removed first
+   $ cp workflow-scripts/Snakefile-single Snakefile #copy Snakefile
    $ snakemake --cores 1 all
    Building DAG of jobs...
    Using shell: /bin/bash
    Provided cores: 1 (use --cores to define parallelism)
    Rules claiming more threads will be scaled down.
-   Job stats:
-   job        count    min threads    max threads
-   -------  -------  -------------  -------------
-   all            1              1              1
-   combine        1              1              1
-   lower          1              1              1
-   total          3              1              1
+   Job counts:
+   	count	jobs
+   	1	all
+   	1	combine
+   	1	lower
+   	3
    
-   Select jobs to execute...
-   
-   [Thu Jul  7 13:13:09 2022]
+   [Wed Jul 13 09:43:15 2022]
    rule combine:
-       input: input/A.txt, input/B.txt, input/C.txt
-       output: combined.txt
+       input: input1/A.txt, input1/B.txt, input1/C.txt
+       output: combined1.txt
        jobid: 2
-       reason: Missing output files: combined.txt
-       resources: tmpdir=/tmp
    
-   [Thu Jul  7 13:13:09 2022]
+   [Wed Jul 13 09:43:15 2022]
    Finished job 2.
    1 of 3 steps (33%) done
-   Select jobs to execute...
    
-   [Thu Jul  7 13:13:09 2022]
+   [Wed Jul 13 09:43:15 2022]
    rule lower:
-       input: combined.txt
-       output: lower.txt
+       input: combined1.txt
+       output: lower1.txt
        jobid: 1
-       reason: Missing output files: lower.txt; Input files updated by another job: combined.txt
-       resources: tmpdir=/tmp
    
-   [Thu Jul  7 13:13:09 2022]
+   [Wed Jul 13 09:43:15 2022]
    Finished job 1.
    2 of 3 steps (67%) done
-   Select jobs to execute...
    
-   [Thu Jul  7 13:13:09 2022]
+   [Wed Jul 13 09:43:15 2022]
    localrule all:
-       input: lower.txt
+       input: lower1.txt
        jobid: 0
-       reason: Input files updated by another job: lower.txt
-       resources: tmpdir=/tmp
    
-   [Thu Jul  7 13:13:09 2022]
+   [Wed Jul 13 09:43:15 2022]
    Finished job 0.
    3 of 3 steps (100%) done
-   Complete log: .snakemake/log/2022-07-07T131309.374584.snakemake.log 
+   Complete log: /home/user22/day3/reproducibility-workshop/additional-data/simple-workflow-example/.snakemake/log/2022-07-13T094315.367603.snakemake.log
    $
 
 
@@ -367,6 +362,7 @@ First, let us have a look at how our workflow looks when we extend it to use wil
 .. code-block:: bash
    :linenos:
 
+   $ cat workflow-scripts/Snakefile-multi
    mynumbers = [1, 2]
    
    rule combine:
@@ -398,75 +394,62 @@ Now, how does snakemake know which files it should generate and which rules it n
 Let's make a dry run of the workflow: 
 
 .. code-block:: bash
-
+   
+   $ rm -rf *.txt # remove output from previous runs
+   $ cp workflow-scripts/Snakefile-multi Snakefile
    $ snakemake all -n
    Building DAG of jobs...
-   Job stats:
-   job        count    min threads    max threads
-   -------  -------  -------------  -------------
-   all            1              1              1
-   combine        2              1              1
-   lower          2              1              1
-   total          5              1              1
+   Job counts:
+   	count	jobs
+   	1	all
+   	2	combine
+   	2	lower
+   	5
    
-   
-   [Thu Jul  7 14:44:25 2022]
+   [Wed Jul 13 09:46:58 2022]
    rule combine:
-       input: input2
+       input: input1/
+       output: combined1.txt
+       jobid: 3
+       wildcards: number=1
+   
+   
+   [Wed Jul 13 09:46:58 2022]
+   rule combine:
+       input: input2/
        output: combined2.txt
        jobid: 4
-       reason: Missing output files: combined2.txt
        wildcards: number=2
-       resources: tmpdir=/tmp
    
    
-   [Thu Jul  7 14:44:25 2022]
-   rule combine:
-       input: input1
-       output: combined1.txt
+   [Wed Jul 13 09:46:58 2022]
+   rule lower:
+       input: combined2.txt
+       output: lower2.txt
        jobid: 2
-       reason: Missing output files: combined1.txt
-       wildcards: number=1
-       resources: tmpdir=/tmp
+       wildcards: number=2
    
    
-   [Thu Jul  7 14:44:25 2022]
+   [Wed Jul 13 09:46:58 2022]
    rule lower:
        input: combined1.txt
        output: lower1.txt
        jobid: 1
-       reason: Missing output files: lower1.txt; Input files updated by another job: combined1.txt
        wildcards: number=1
-       resources: tmpdir=/tmp
    
    
-   [Thu Jul  7 14:44:25 2022]
-   rule lower:
-       input: combined2.txt
-       output: lower2.txt
-       jobid: 3
-       reason: Missing output files: lower2.txt; Input files updated by another job: combined2.txt
-       wildcards: number=2
-       resources: tmpdir=/tmp
-   
-   
-   [Thu Jul  7 14:44:25 2022]
+   [Wed Jul 13 09:46:58 2022]
    localrule all:
        input: lower1.txt, lower2.txt
        jobid: 0
-       reason: Input files updated by another job: lower1.txt, lower2.txt
-       resources: tmpdir=/tmp
    
-   Job stats:
-   job        count    min threads    max threads
-   -------  -------  -------------  -------------
-   all            1              1              1
-   combine        2              1              1
-   lower          2              1              1
-   total          5              1              1
-   
-   
-   This was a dry-run (flag -n). The order of jobs does not reflect the order of execution
+   Job counts:
+   	count	jobs
+   	1	all
+   	2	combine
+   	2	lower
+   	5
+   This was a dry-run (flag -n). The order of jobs does not reflect the order of execution.
 
 
 As you can see each rule will now be executed twice execpt the all rule.
@@ -506,25 +489,26 @@ Another, slightly different Workflow manager is `Nextflow <https://nextflow.io/>
 .. code-block:: bash
    :linenos:
 
-   params.indir = "$baseDir/input/"
+   $ cat workflow-scripts/workflow.nf
+   params.indir = "$baseDir/input1/"
    
    process combine {
        input: path indir
-       output: file "combined.txt"
+       output: file "combined1.txt"
        shell:
            """
                for file in \$(ls $indir/*.txt); do
-                   cat \$file >> combined.txt
+                   cat \$file >> combined1.txt
                done
            """
    }
    
    process lower {
-       input: file "combined.txt"
-       output: file "lower.txt"
+       input: file "combined1.txt"
+       output: file "lower1.txt"
        shell:
           """
-             cat combined.txt | tr [:upper:] [:lower:] > lower.txt
+             cat combined1.txt | tr [:upper:] [:lower:] > lower1.txt
           """
    }
    
@@ -547,11 +531,12 @@ Let us disect the line: ``combine(params.indir) | lower | view``. The first part
 Execute Nextflow
 ~~~~~~~~~~~~~~~~
 
-Let us execute the workflow now:
+Let us execute the workflow now. We will be running nextflow from a docker container:
 
 .. code-block:: bash
 
-   $ nextflow lower.nf
+   $ cp workflow-scripts/workflow.nf .
+   $ docker run --rm -it -v $(pwd):/data -w /data nextflow/nextflow:22.04.4 nextflow workflow.nf
    N E X T F L O W  ~  version 22.04.4
    Launching `lower.nf` [hungry_borg] DSL2 - revision: 369f0fca2c
    WARN: Process with name 'combine' overrides a built-in operator with the same name
@@ -562,10 +547,6 @@ Let us execute the workflow now:
 
 
 Nextflow prints some information about what it did on screen. You you see the two processes and that the have finished sucessfully as indicated by the ``✔``. The last line gives the path to the output file.
-
-.. admonition::
-
-   Create a ``.nf`` file and run the workflow with Nextflow.
 
 Some additional features
 ~~~~~~~~~~~~~~~~~~~~~~~~

@@ -1,4 +1,4 @@
-params.indir = "$baseDir/input/"
+params.indir = "$baseDir/input1/"
 
 process combine {
     input: path indir

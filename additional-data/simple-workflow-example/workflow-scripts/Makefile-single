@@ -1,0 +1,12 @@
+all: lower1.txt
+
+combined1.txt: input1/*.txt
+	for file in $^; do \
+		cat $$file >> combined1.txt; \
+	done
+
+lower1.txt: combined1.txt
+	cat combined1.txt | tr [:upper:] [:lower:] > lower1.txt
+
+clean:
+	rm -rf combined1.txt lower1.txt

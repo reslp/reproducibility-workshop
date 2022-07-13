@@ -1,9 +1,6 @@
-#files = ["A", "B", "C"]
 mynumbers = [1, 2]
 
 rule combine:
-#	input: expand("input1/{file}.txt", file = files)
-#	input: "input/A.txt", "input/B.txt", "input/C.txt"
 	input: "input{number}/"
 	output: "combined{number}.txt"
 	shell:

@@ -1,0 +1,18 @@
+rule combine:
+	input: "input1/A.txt", "input1/B.txt", "input1/C.txt"
+	output: "combined1.txt"
+	shell:
+		"""
+		cat {input} >> {output}
+		"""
+
+rule lower:
+ 	input: rules.combine.output
+ 	output: "lower1.txt"
+ 	shell:
+ 		"""
+ 		cat {input} | tr [:upper:] [:lower:] > {output}
+ 		"""
+
+rule all:
+	input: "lower1.txt"

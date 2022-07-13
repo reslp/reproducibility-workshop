@@ -2,21 +2,21 @@ params.indir = "$baseDir/input/"
 
 process combine {
     input: path indir
-    output: file "combined.txt"
+    output: file "combined1.txt"
     shell:
         """
             for file in \$(ls $indir/*.txt); do
-                cat \$file >> combined.txt
+                cat \$file >> combined1.txt
             done
         """
 }
 
 process lower {
-    input: file "combined.txt"
-    output: file "lower.txt"
+    input: file "combined1.txt"
+    output: file "lower1.txt"
     shell:
        """
-          cat combined.txt | tr [:upper:] [:lower:] > lower.txt
+          cat combined1.txt | tr [:upper:] [:lower:] > lower1.txt
        """
 }
 

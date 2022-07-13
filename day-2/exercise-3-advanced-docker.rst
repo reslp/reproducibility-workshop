@@ -386,11 +386,22 @@ Check out this example `here <https://hub.docker.com/r/chrishah/ncbi-blast>`_.
 Exercises
 =========
 
+.. warning::
+
+   If you do the following exercises on a shared resource, i.e. you are sharing Docker with multiple users on a single computer (e.g. AWS instance), please make sure that you build your images under unique names. Something like ``${USER}_imagename``.
+
+
+
 .. admonition:: Exercise 1
 
    `Clustalo <http://www.clustal.org/omega/>`_ is a very popular tool for multiple sequence alignemnt. It can be easily installed with conda, or built from source, or simply setup with precompiled binaries.
    
-   Write a ``Dockerfile`` and build an image to run ``clustalo`` version 1.2.4. One possible solution can be found `here <https://github.com/reslp/dockerfiles/blob/master/clustalo/Dockerfile>`_
+   Write a ``Dockerfile`` and build an image to run ``clustalo`` version 1.2.4. 
+   Possible solutions can be found here: 
+   - `apt <https://github.com/reslp/reproducibility-workshop/blob/main/additional-data/dockerfiles/clustalo.apt.Dockerfile>`_
+   - `binaries <https://github.com/reslp/reproducibility-workshop/blob/main/additional-data/dockerfiles/clustalo.binaries.Dockerfile>`_
+   - `conda <https://github.com/reslp/reproducibility-workshop/blob/main/additional-data/dockerfiles/clustalo.conda.Dockerfile>`_
+   - `mamba <https://github.com/reslp/reproducibility-workshop/blob/main/additional-data/dockerfiles/clustalo.mamba.Dockerfile>`_.
 
 
 .. admonition:: Exercise 2
@@ -398,14 +409,18 @@ Exercises
    `Flye <https://github.com/fenderglass/Flye>`_ is a denovo genome assembler built for long reads (PacBio and ONT). It performs very well and is relatively fast and memory efficient, as far as denovo assemblers go.. ;-) 
    Check out the installation instructions of Flye on their Github `page <https://github.com/fenderglass/Flye/blob/flye/docs/INSTALL.md>`_.
    
-   Write a ``Dockerfile`` and build an image for the Flye assembler running in Ubuntu 20.04. According to the installation `instructions <https://github.com/fenderglass/Flye/blob/flye/docs/INSTALL.md>`_ you could get it through conda or build it locally. A possible solution can be found `here <https://github.com/chrishah/flye-docker/blob/main/Dockerfile>`_.
+   Write a ``Dockerfile`` and build an image for the Flye assembler running in Ubuntu 20.04. According to the installation `instructions <https://github.com/fenderglass/Flye/blob/flye/docs/INSTALL.md>`_ you could get it through conda or build it locally. 
+   Possible solutions can be found here:
+   - `build <https://github.com/reslp/reproducibility-workshop/blob/main/additional-data/dockerfiles/flye.build.Dockerfile>`_
+   - `mamba <https://github.com/reslp/reproducibility-workshop/blob/main/additional-data/dockerfiles/flye.mamba.Dockerfile>`_.
 
 
 .. admonition:: Exercise 3
 
    Another interesting tool in the context of long read genome assembly is `LongStitch <https://github.com/bcgsc/longstitch>`_. This is a pipeline for scaffolding of draft assemblies with long reads incorporating multiple tools and controlled through ``make``. I found it relatively difficult to set up because of the many dependencies it requires, but if you like a challenge .. ;-)
 
-   Write a ``Dockerfile`` and build an image for LongStitch. A possible solution can be found `here <https://github.com/chrishah/longstitch-docker/blob/main/Dockerfile>`_.
+   Write a ``Dockerfile`` and build an image for LongStitch.
+   A possible solution can be found `here <https://github.com/reslp/reproducibility-workshop/blob/main/additional-data/dockerfiles/longstitch.Dockerfile>`_
 
 Phew, for a minute there ... **Well Done !!!**
 

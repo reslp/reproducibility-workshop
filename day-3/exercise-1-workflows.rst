@@ -5,16 +5,25 @@ Workflow management systems help to structure complex workflows. When a workflow
 
 In this exercise we will introduce different ways how to automate workflows to increase productivity and reproducibility.
 
-We will be using a simplified dummy dataset to illustrate the principle of what we want to do. The task is simple: We want to combine the content of several files into a single file and convert all text in the combined file to lower case. The resulting file should be called ``lower.txt``. The data for this exercise is in ``additional-data/simple-workflow-example/input``.
+We will be using a very small test dataset to illustrate the principle of what we want to do. The task is this: We want to combine the content of several files into a single file and convert all text in the combined file to lower case. The resulting file should be called ``lower.txt``. The data for this exercise is in ``additional-data/simple-workflow-example/input`` in the workshops repository.
+
+First, let us prepare the working environment for today. Run these commands in your home directory:
+
+.. code-block:: bash
+
+   $ mkdir day3
+   $ cd day3
+   $ git clone https://github.com/reslp/reproducibility-workshop.git
 
 .. admonition:: Exercise
 
-   Copy the ``simple-workflow-example`` to your home directory and familiarize yourself with the input data. If possible try to come up with a solution to the proposed task from above by using bash before reading on.
+   Navigate to the directory ``additional-data/simple-workflow-example/input`` and familiarize yourself with the input data file. If possible try to come up with a solution to the proposed task in ``bash`  before reading on.
+
 
 Using commandline scripting
 ----------------------------
 
-As you probably figured out yourself, the task we have to do is simple and can easily be achieved by using a bash oneliner:
+As you probably figured out, what we want to do can be achieved by using a bash oneliner:
 
 .. code-block:: bash
 
@@ -22,7 +31,7 @@ As you probably figured out yourself, the task we have to do is simple and can e
 
 However we will now try to divide this command into individual steps for the sake of this exercise and then make an automated workflow out of it. 
 
-The command iabove does several things:
+The command above does several things:
 
 1. First, it gets a list of all ``.txt`` files in the ``input`` directory by using the ``*`` expansion.
 2. It shows the content of all the files gather by 1 using ``cat``.
@@ -48,7 +57,7 @@ As we have mentioned earlier it is generally a good idea to keep more complex ba
    
 .. hint::
 
-   Of course it is clear that it is overly complicated to write it like that given that we could also use a simple oneliner for this task. The point here is to show how to separate more complex tasks (and in the end complete bioinformatic analyses) into individual tasks.
+   What we show here is probably overly complicated for a task like this. The point here is to show how to separate more complex tasks (and in the end complete bioinformatic analyses) into individual tasks. This is something you will have to do when you plan to develop a complex analysis pipleine.
 
 Using a script already increases reproducibility quite a bit. We can take this script, transfer it to a different folder or computer and run it again to generate the final output ``lower.txt``. If we were to run it on the same input files again we would get the same output.
 
@@ -59,12 +68,12 @@ Another problem is that if you run a script again (on purpose or by accident) th
 GNU Make
 --------
 
-`GNU Make <https://www.gnu.org/software/make/>`_, make or sometimes gmake was first introduced in 1976 to build the source code of Unix and it has a long and successful track record in computer science. Typically make is used to compile software from source. Previous to make Unix was compiled using custom shell scripts. If you have installed software on Linux or Unix you may be familiar with commands like ``make``, ``make install`` or ``make clean``. As already mentioned make is usually used to build software, however it can be used to automate almost any task and even large bioinformatics projects (such as `LongStitch <https://github.com/bcgsc/longstitch>`_) use make as a workflow manager.
+`GNU Make <https://www.gnu.org/software/make/>`_, make or sometimes ``gmake`` was first introduced in 1976 to build the source code of Unix and it has a long and successful track record in computer science. Typically make is used to compile software from source. Previous to make Unix was compiled using custom shell scripts. If you have installed software on Linux or Unix you may be familiar with commands like ``make``, ``make install`` or ``make clean``. As already mentioned make is usually used to build software, however it can be used to automate almost any task and even large bioinformatics projects (such as `LongStitch <https://github.com/bcgsc/longstitch>`_) use make as a workflow manager.
 
 How does make work?
 ~~~~~~~~~~~~~~~~~~~
 
-Make uses the concept of rules. You can think of rules as individual tasks that are executed in a given order determined by other rules. If we take our example from above, we have already identified the steps that need to happen for the whole workflow to complete successfully. Each rule has a target and one (or more) dependencies. Other words for that would be: output (target) and input (dependencies). The rule then contains all instructions (the recipe) to build the output from the input. This is a common concept also in other workflow managers.
+Make uses the concept of rules. You can think of rules as individual tasks that are executed in a given order determined by other rules. If we take our example from above, we have already identified the steps that need to happen for the whole workflow to complete successfully. Each rule has a target (the output) and one (or more) dependencies (the input). The rule then contains all instructions (the recipe) to build the output from the input. This is a common concept also in other workflow managers.
 
 Let's have a look at the general structure of a rule in make:
 
@@ -86,7 +95,7 @@ The *target* (output) of this rule is the file ``lower.txt`` and the *dependency
 Our simple test workflow in make
 ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 
-How would our simple test workflow look written in make? Let us have a look at the complete ``makefile`` and then discuss it.
+How would our simple test workflow look written in make? Let us have a look at the complete ``Makefile`` and then discuss it.
 
 .. code-block:: bash
    
@@ -119,7 +128,7 @@ In the first line, the target and input is specified, seperated by a colon (:). 
 
 .. tip::
 
-   If you are familiar with ``bash`` scripting, the escaping rules and formatting of multi line commands may look weird. Keep in mind that although it looks similar ``make`` is not ``bash`` and the syntax is different. Here are a few links where escaping rules are explained in more detail:
+   If you are familiar with ``bash`` scripting, the escaping rules and formatting of multiline commands may look weird. Keep in mind that although it looks similar ``make`` is not ``bash`` and the syntax is different. Here are a few links where escaping rules are explained in more detail:
 
    - `Escaping $ in Makefiles <https://til.hashrocket.com/posts/k3kjqxtppx-escape-dollar-sign-on-makefiles>`_
    - `GNU Make Escaping: A Walk on the Wild Side <https://www.cmcrossroads.com/article/gnu-make-escaping-walk-wild-side>`_

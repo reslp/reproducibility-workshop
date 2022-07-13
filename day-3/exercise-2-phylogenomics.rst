@@ -89,8 +89,9 @@ underscores, rather than spaces) - see example for *L. chalumnae* above.
 
 **2.) Run BUSCO on each assembly**
 
-***Attention*** > Since these genomes are relatively large BUSCO takes
-quite a while to run so this step has been already done for you.
+.. warning::
+
+   Since these genomes are relatively large BUSCO takes quite a while to run so this step has been already done for you.
 
 A reduced representation of the BUSCO results for each species ships
 with the repository in the directory
@@ -228,7 +229,12 @@ You can try it out, but first let's have a quick look at the terminal.
 **5.) Run the process for multiple genes**
 
 Now, let's say we want to go over these steps for multiple genes, say
-these: - 359032at7742 - 413149at7742 - 409719at7742 - 406935at7742
+these:
+
+ - 359032at7742
+ - 413149at7742
+ - 409719at7742
+ - 406935at7742
 
 For loop would do the job right? See the below code. Do you manage to
 add the tree inference step in, too? It's not in there yet.
@@ -311,7 +317,34 @@ Actually, running would happen if you remove the ``-n`` flag.
 
     (user@host)-$ snakemake -rp --use-singularity auto/trimmed/193525at7742.clustalo.trimal.fasta auto/trimmed/406935at7742.clustalo.trimal.fasta
 
-Have fun playing around with this for a while ;-)
+**Well Done!**
+
+
+.. admonition:: Exercise 1
+
+   Add two rules to the ``Snakefile``:
+
+   - ``rule gene_tree`` - infer a gene tree for each alignment
+   - ``rule supermatrix`` - infer the final tree for the supermatrix created from the individual gene alignments
+
+   A possible solution can be found `here <https://github.com/chrishah/phylogenomics_intro_vertebrata/blob/main/backup/Snakefile_with_ml>`_. It also ships with the repository ``backup/Snakefile_with_ml``. 
+
+
+.. admonition:: Exercise 2
+
+  Run your pipeline including the following genes:
+
+  - 409625at7742
+  - 359032at7742
+  - 413149at7742
+  - 409719at7742
+  - 406935at7742
+
+
+**Well Done!!!**
+
+All that you need now is to practice .. ;-)
+
 
 **6.) Full automation**
 

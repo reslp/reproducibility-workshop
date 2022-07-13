@@ -306,6 +306,19 @@ the archive.
 
     (host)-$ docker load -i ${USER}s_automatic_blast_image.tar
 
+Once present as a Docker tar archive the image can be easily converted to a Singularity image file (SIF).
+
+.. code:: bash
+
+   (host)-$ singularity build ${USER}s_automatic_blast_image.sif docker-archive://${USER}s_automatic_blast_image.tar
+
+Now, run it through singularity (based on your local ``sif`` file.
+
+.. code:: bash
+
+   (host)-$ singularity exec ${USER}s_automatic_blast_image.sif blastn -h
+
+
 Share your image with the world - Dockerhub
 -------------------------------------------
 
@@ -369,8 +382,9 @@ reprodcibly organize one's Docker containers.
 
 Check out this example `here <https://hub.docker.com/r/chrishah/ncbi-blast>`_.
 
+
 Exercises
-~~~~~~~~~
+=========
 
 .. admonition:: Exercise 1
 
@@ -384,7 +398,7 @@ Exercises
    `Flye <https://github.com/fenderglass/Flye>`_ is a denovo genome assembler built for long reads (PacBio and ONT). It performs very well and is relatively fast and memory efficient, as far as denovo assemblers go.. ;-) 
    Check out the installation instructions of Flye on their Github `page <https://github.com/fenderglass/Flye/blob/flye/docs/INSTALL.md>`_.
    
-   Write a ``Dockerfile`` and build an image for the Flye assembler running in Ubuntu 20.04. According to the installation `instructions <https://github.com/fenderglass/Flye/blob/flye/docs/INSTALL.md>`_ you could get it through conda or build it locally. A possible solution can be found `<here https://github.com/chrishah/flye-docker/blob/main/Dockerfile>`_.
+   Write a ``Dockerfile`` and build an image for the Flye assembler running in Ubuntu 20.04. According to the installation `instructions <https://github.com/fenderglass/Flye/blob/flye/docs/INSTALL.md>`_ you could get it through conda or build it locally. A possible solution can be found `here <https://github.com/chrishah/flye-docker/blob/main/Dockerfile>`_.
 
 
 .. admonition:: Exercise 3
@@ -394,6 +408,7 @@ Exercises
    Write a ``Dockerfile`` and build an image for LongStitch. A possible solution can be found `here <https://github.com/chrishah/longstitch-docker/blob/main/Dockerfile>`_.
 
 Phew, for a minute there ... **Well Done !!!**
+
 
 Demos
 =====
@@ -406,7 +421,7 @@ Demos
 Running an RStudio server
 -------------------------
 
-The demo is inspired by `this<http://ropenscilabs.github.io/r-docker-tutorial/>`_ tutorial (last accessed 24.04.2020) and relies on images provided by
+The demo is inspired by `this <http://ropenscilabs.github.io/r-docker-tutorial/>`_ tutorial (last accessed 24.04.2020) and relies on images provided by
 The Rocker Project (see also the Github `Wiki <https://github.com/rocker-org/rocker/wiki>`_).
 
 Start the RStudio server Docker container like so:
@@ -429,14 +444,13 @@ container, you can extend the above command, like so, e.g.:
 For an example Dockerfile you can use to build an Rstudio image that has
 some packages already pre-installed, see this
 `Dockerfile <https://github.com/chrishah/docker-intro/tree/master/Dockerfiles/Dockerfile>`__.
-Incidentally, this is the setup I used for doing the Differential
-Expression analyses a few lectures ago.
+Incidentally, this is the RStudio server setup I used for doing the Differential
+Expression analyses a few lectures ago. For a Dockerfile setting up plain R with all dependencies for running SarTools go `here <https://github.com/chrishah/R-SARTools-plus-docker/blob/main/Dockerfile>`_ and find the corresponding image `here <https://hub.docker.com/r/chrishah/r-sartools-plus>`_.
 
 Jupyter Notebook
 ----------------
 
-Cyverse US has created a number of Docker images and deposited the
-contexts on Github here.
+`Cyverse <https://cyverse.org/>`_ US has created a number of Docker images and deposited the contexts on Github `here <https://github.com/cyverse-vice/>`_.
 
 Very nice are for example their Jupyterlab Servers in Docker containers.
 Try the following, but note that this image is rather large and may take
@@ -458,9 +472,7 @@ Here's another one that has ``snakemake`` setup within it.
 Mkdocs server
 -------------
 
-MkDocs (mkdocs.org) is a neat tool for creating project documentation
-sites. Instead of installing and running it locally, why not build it
-into an image and run it from within a Docker container?
+MkDocs (`mkdocs.org <https://www.mkdocs.org/>`_) is a neat tool for creating project documentation sites. Instead of installing and running it locally, why not build it into an image and run it from within a Docker container?
 
 To keep things organized, let's first make a new directory.
 
@@ -521,9 +533,9 @@ want to modify it, like so
 Links
 =====
 
--  Dockerhub
--  Dockerhub's documentation
--  The Rocker Project Main / Github Wiki
+-  `Dockerhub <https://hub.docker.com/>`_
+-  Dockerhub's `documentation <https://docs.docker.com/docker-hub/>`_
+-  The Rocker Project `Main <https://www.rocker-project.org/>`_ / Github `Wiki <https://github.com/rocker-org/rocker/wiki>`_
 
 Contact
 =======

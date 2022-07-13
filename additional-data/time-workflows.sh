@@ -1,6 +1,6 @@
 #!/usr/bin/env bash
 
-conda activate sm7.8.5
+#conda activate serpentesmake
 # function modified from https://stackoverflow.com/a/54920339
 avg_time() {	
     #
@@ -23,7 +23,7 @@ avg_time() {
                }'
 }
 
-ntimes=100
+ntimes=10
 echo "$ntimes GNU Make runs take:"
 avg_time $ntimes make all -B
 echo
@@ -31,4 +31,4 @@ echo "$ntimes Snakemake runs take:"
 avg_time $ntimes snakemake --forceall all
 echo
 echo "$ntimes Nextflow runs take:"
-avg_time $ntimes nextflow lower.nf
+avg_time $ntimes docker run --rm -it -v $(pwd):/data -w /data nextflow/nextflow:22.04.4 nextflow lower.nf

@@ -241,6 +241,15 @@ Snakemake
 
 `Snakemake <https://snakemake.readthedocs.io/en/stable/>`_ is another commonly used workflow management system with lots of features. Many bioinformatics pipelines use snakemake such as our own `phylociraptor <https://github.com/reslp/phylociraptor>`_. Snakemake also heavily uses the concept of rules and wildcards and has many features allowing to operate on HPC clusters, or other cloud computing infrastructures such as AWS, Google cloud and a lot more. Snakemake is developed rapidly and it can happen that snakemake pipelines written in older versions of snakemake stop working in newer versions. It is therefore important to be version specific when using it.
 
+
+We have installed snakemake in a conda environment for you already. You can activate it like so:
+
+.. code-block:: bash
+   
+   $ conda activate serpentesmake
+   (serpentesmake) $ snakemake -v
+
+
 The test workflow in snakemake
 ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 
@@ -249,7 +258,7 @@ Snakemake is written in python and also it's syntax is basically a python dialec
 .. code-block:: bash
    :linenos:
 
-   $ cat workflow-scripts/Snakefile-single
+   (serpentesmake) $ cat workflow-scripts/Snakefile-single
    rule combine:
            input: "input1/A.txt", "input1/B.txt", "input1/C.txt"
            output: "combined1.txt"
@@ -282,9 +291,9 @@ Similar to GNU make, snakemake expects a file containing all the rules to be pre
 
 .. code-block:: bash
 
-   $ rm *.txt # make sure all output files from previous runs are removed first
-   $ cp workflow-scripts/Snakefile-single Snakefile #copy Snakefile
-   $ snakemake --cores 1 all
+   (serpentesmake) $ rm *.txt # make sure all output files from previous runs are removed first
+   (serpentesmake) $ cp workflow-scripts/Snakefile-single Snakefile #copy Snakefile
+   (serpentesmake) $ snakemake --cores 1 all
    Building DAG of jobs...
    Using shell: /bin/bash
    Provided cores: 1 (use --cores to define parallelism)
@@ -362,7 +371,7 @@ First, let us have a look at how our workflow looks when we extend it to use wil
 .. code-block:: bash
    :linenos:
 
-   $ cat workflow-scripts/Snakefile-multi
+   (serpentesmake) $ cat workflow-scripts/Snakefile-multi
    mynumbers = [1, 2]
    
    rule combine:
@@ -395,9 +404,9 @@ Let's make a dry run of the workflow:
 
 .. code-block:: bash
    
-   $ rm -rf *.txt # remove output from previous runs
-   $ cp workflow-scripts/Snakefile-multi Snakefile
-   $ snakemake all -n
+   (serpentesmake) $ rm -rf *.txt # remove output from previous runs
+   (serpentesmake) $ cp workflow-scripts/Snakefile-multi Snakefile
+   (serpentesmake) $ snakemake all -n
    Building DAG of jobs...
    Job counts:
    	count	jobs
@@ -563,10 +572,14 @@ A superficial speed comparison
 
 Now that we have written the same simple workflow we can compare how fast they execute to see if we can find a difference between them. We have prepared a small script which helps us do that. The script is in ``additional-data/time-workflows.sh``. You will have to copy it over to the directory where you have created the different workflows. Here is how it looks:
 
+.. hint::
+
+   You have to make sure that the snakemake conda environment is active!
+
 .. code-block:: bash
    :linenos   :linenos::
 
-   $ cat time-workflows.sh
+   (serpentesmake) $ cat time-workflows.sh
    #!/usr/bin/env bash
    
    conda activate sm7.8.5
@@ -657,9 +670,8 @@ Nextflow
 **pros**
 
 - rock solid integration with different cloud computing plattforms
-- speed
 - not dependent on files to connect workflow parts
-- many available 
+- many workflows available (eg. at nf-core)
 
 **cons**
 

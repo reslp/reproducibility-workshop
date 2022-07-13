@@ -394,7 +394,7 @@ Exercises
 
 .. admonition:: Exercise 1
 
-   `Clustalo <http://www.clustal.org/omega/>`_ is a very popular tool for multiple sequence alignemnt. It can be easily installed with conda, or built from source, or simply setup with precompiled binaries.
+   `Clustalo <http://www.clustal.org/omega/>`_ is a very popular tool for multiple sequence alignment. It can be easily installed with conda, or built from source, or simply setup with precompiled binaries.
    
    Write a ``Dockerfile`` and build an image to run ``clustalo`` version 1.2.4. 
    Possible solutions can be found here:

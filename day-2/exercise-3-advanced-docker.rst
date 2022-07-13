@@ -397,7 +397,8 @@ Exercises
    `Clustalo <http://www.clustal.org/omega/>`_ is a very popular tool for multiple sequence alignemnt. It can be easily installed with conda, or built from source, or simply setup with precompiled binaries.
    
    Write a ``Dockerfile`` and build an image to run ``clustalo`` version 1.2.4. 
-   Possible solutions can be found here: 
+   Possible solutions can be found here:
+ 
    - `apt <https://github.com/reslp/reproducibility-workshop/blob/main/additional-data/dockerfiles/clustalo.apt.Dockerfile>`_
    - `binaries <https://github.com/reslp/reproducibility-workshop/blob/main/additional-data/dockerfiles/clustalo.binaries.Dockerfile>`_
    - `conda <https://github.com/reslp/reproducibility-workshop/blob/main/additional-data/dockerfiles/clustalo.conda.Dockerfile>`_
@@ -411,6 +412,7 @@ Exercises
    
    Write a ``Dockerfile`` and build an image for the Flye assembler running in Ubuntu 20.04. According to the installation `instructions <https://github.com/fenderglass/Flye/blob/flye/docs/INSTALL.md>`_ you could get it through conda or build it locally. 
    Possible solutions can be found here:
+
    - `build <https://github.com/reslp/reproducibility-workshop/blob/main/additional-data/dockerfiles/flye.build.Dockerfile>`_
    - `mamba <https://github.com/reslp/reproducibility-workshop/blob/main/additional-data/dockerfiles/flye.mamba.Dockerfile>`_.
 

@@ -248,6 +248,7 @@ We have installed snakemake in a conda environment for you already. You can acti
    
    $ conda activate serpentesmake
    (serpentesmake) $ snakemake -v
+   5.9.1
 
 The corresponding yaml file of the environment is in the repository in ``additional-data/conda-environments/serpentesmake.yml``. Here is the content of this file:
 

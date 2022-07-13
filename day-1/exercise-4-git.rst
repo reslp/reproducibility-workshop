@@ -208,13 +208,26 @@ This will revert (checkout) your repository to how it was when you made your fir
 
 .. admonition:: Exercise
 
-    Revert your reporitory to the second commit we made earlier. Hint you may use :bash:`git reflog` to get the hash.
+    Revert your reporitory to the second commit we made earlier. Hint: you may use :bash:`git reflog` to get the hash.
 
 .. hint:: 
 
    Using ``git checkout`` is crucial if you would like to use the exact same version of a repository which is hosted on some online platform such as GitHub or Gitlab.
 
 More information `here <https://git-scm.com/docs/git-checkout>`_.
+
+Back to the HEAD commit
+=======================
+
+After this exercise we should still be at the second commit we made earlier. How do we get back to the latest commit? This can be done with ``git reset``. Let us see how it works:
+
+.. code-block:: bash
+
+   $ git reset --hard HEAD
+   HEAD is now at c3f028d Merge branch 'testbranch'
+
+Your repository should now be back at the original (latest) commit we made.
+
 
 Ignoring files
 ==============
@@ -334,7 +347,7 @@ It is even possible to host a git repository on your own server.
 
 .. admonition:: Exercise
 
-   Find the secret message hidden in the repository. You can use what you have learned so far to discover it.
+   Find the secret message hidden in the repository. You can use what you have learned so far to discover it. Using ``git branch -a`` could help.
 
 
 Transfering local changes to an online repository

@@ -117,6 +117,7 @@ Singularity installation
 This is how we installed Singularity, originally given in the Github issue thread `here <https://github.com/hpcng/singularity/issues/4765>`_ (way down in the thread).
 
 .. code-block:: bash
+
    $ sudo apt-get update && \
      sudo apt-get install -y build-essential \
    $ libseccomp-dev pkg-config squashfs-tools cryptsetup

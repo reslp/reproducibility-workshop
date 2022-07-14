@@ -20,14 +20,17 @@ for the data download can be found in this table.
 All software used in the demo is deposited as Docker images on Dockerhub
 and all data is freely and publicly available.
 
-The workflow we will demonstrate is as follows: - Download genomes from
-Genbank - Identifying complete BUSCO genes in each of the genomes -
-pre-filtering of orthology/BUSCO groups - For each BUSCO group: - build
-alignment - trim alignment - identify model of protein evolution - infer
-phylogenetic tree (ML) - construct supermatrix from individual gene
-alignments - infer phylogenomic tree with paritions corresponding to the
-original gene alignments using ML - map internode certainty (IC) onto
-the phylogenomic tree
+The workflow we will demonstrate is as follows:
+
+ - Download genomes from Genbank
+ - Identifying complete BUSCO genes in each of the genomes
+ - pre-filtering of orthology/BUSCO groups
+ - For each BUSCO group:
+   - build alignment
+   - trim alignment
+   - identify model of protein evolution
+   - infer phylogenetic tree (ML) - construct supermatrix from individual gene alignments
+ - infer phylogenomic tree with paritions corresponding to the original gene alignments using ML
 
 Let's begin
 ~~~~~~~~~~~
@@ -315,7 +318,7 @@ Actually, running would happen if you remove the ``-n`` flag.
 
 .. code:: bash
 
-    (user@host)-$ snakemake -rp --use-singularity auto/trimmed/193525at7742.clustalo.trimal.fasta auto/trimmed/406935at7742.clustalo.trimal.fasta
+    (user@host)-$ snakemake -rp --use-singularity --jobs 4 auto/trimmed/193525at7742.clustalo.trimal.fasta auto/trimmed/406935at7742.clustalo.trimal.fasta
 
 **Well Done!**
 
@@ -335,10 +338,14 @@ Actually, running would happen if you remove the ``-n`` flag.
   Run your pipeline including the following genes:
 
   - 409625at7742
-  - 359032at7742
-  - 413149at7742
   - 409719at7742
-  - 406935at7742
+  - 413149at7742
+  - 42971at7742
+  - 97645at7742
+
+.. code:: bash
+
+    (snakemake) (user@host)-$ snakemake -nrp --use-singularity --jobs 4 super.treefile
 
 
 **Well Done!!!**

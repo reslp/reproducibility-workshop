@@ -35,7 +35,7 @@ Getting started
 ----------------------
 
 * Get on overview of the course `here <introduction/about.html>`_. 
-
+* Learn how we set up the working environment `here <introduction/setup.html>`.
 
 
 .. toctree::
@@ -45,6 +45,7 @@ Getting started
    :hidden:
 
    introduction/about.rst
+   introduction/setup.rst
 
 .. toctree::
    :caption: Day 1

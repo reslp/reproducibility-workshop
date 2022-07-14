@@ -88,7 +88,7 @@ We are using ``Miniconda3 v4.8.2`` installed globally. Here is some additional i
 Already created conda environments
 ----------------------------------
 
-You should have a conda environment available that we created called ``serpentesmake`` which we will be using in the exercise on Snakemake. In case it is not available you can get the YAML file `here <https://github.com/reslp/reproducibility-workshop/blob/main/additional-data/conda-environments/serpentesmake.yaml`_.
+You should have a conda environment available that we created called ``serpentesmake`` which we will be using in the exercise on Snakemake. In case it is not available you can get the YAML file `here <https://github.com/reslp/reproducibility-workshop/blob/main/additional-data/conda-environments/serpentesmake.yaml>`_.
 
 
 Docker installation

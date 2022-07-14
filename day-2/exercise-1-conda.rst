@@ -414,7 +414,9 @@ You may recognize several of these programs. Most of them are standard phylogene
    
 
 Welcome to `dependency hell <https://en.wikipedia.org/wiki/Dependency_hell>`_ ! Looks like we are now having the same problem conda set out to solve. 
- 
+
+.. image:: https://imgs.xkcd.com/comics/python_environment.png
+
 R and conda
 -----------
 

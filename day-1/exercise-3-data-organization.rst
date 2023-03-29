@@ -132,6 +132,12 @@ The above command converts a file from Markdown to reStructuredText.
 
    Play around with pandoc and convert your .md file into a few different formats. You may also look at the pandoc website `https://pandoc.org/ <https://pandoc.org/>`_ for more information and possible conversions.
 
+
+A powerful command-line open-source note taking application
+===========================================================
+
+Many people have struggled with the above mentioned aspects of easily taking notes in a command line setting. A tool which combines many of the tools mentioned above to make note taking less painful is the application `nb <https://xwmx.github.io/nb/>`. It also has several advanced features like encryption or syncing with git repositories. It is easy to use and scriptable. An introduction to nb would be beyond the scope of this course, but I suggest you give it a try. I think if you start using it you will quickly come accross the concepts mentioned in this exercise.
+
 Additional resources
 ====================
 

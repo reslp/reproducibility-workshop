@@ -40,57 +40,6 @@ We use several bash aliases to mask complex docker commands which we added globa
    alias switch-on_ubuntu_20-04="docker run -it --rm --hostname ubuntu-20-04 -w /home ubuntu:20.04"
    alias switch-on_ubuntu_22-04="docker run -it --rm --hostname ubuntu-22-04 -w /home ubuntu:22.04" 
 
-The conda setup
----------------
-
-We are using ``Miniconda3 v4.8.2`` installed globally. Here is some additional information on the exact configuration:
-
-.. code-block:: bash
-
-   $ conda --version
-   conda 4.8.2
-   $ conda info
-   conda info
-   
-        active environment : None
-               shell level : 0
-          user config file : /home/ubuntu/.condarc
-    populated config files : /home/ubuntu/.condarc
-             conda version : 4.8.2
-       conda-build version : not installed
-            python version : 3.7.6.final.0
-          virtual packages : __glibc=2.27
-          base environment : /home/ubuntu/conda/miniconda3  (writable)
-              channel URLs : https://conda.anaconda.org/conda-forge/linux-64
-                             https://conda.anaconda.org/conda-forge/noarch
-                             https://conda.anaconda.org/bioconda/linux-64
-                             https://conda.anaconda.org/bioconda/noarch
-                             https://repo.anaconda.com/pkgs/main/linux-64
-                             https://repo.anaconda.com/pkgs/main/noarch
-                             https://repo.anaconda.com/pkgs/r/linux-64
-                             https://repo.anaconda.com/pkgs/r/noarch
-             package cache : /home/ubuntu/conda/miniconda3/pkgs
-                             /home/ubuntu/.conda/pkgs
-          envs directories : /home/ubuntu/conda/miniconda3/envs
-                             /home/ubuntu/.conda/envs
-                  platform : linux-64
-                user-agent : conda/4.8.2 requests/2.22.0 CPython/3.7.6 Linux/5.4.0-1080-aws ubuntu/16.04.5 glibc/2.27
-                   UID:GID : 1000:1000
-                netrc file : None
-              offline mode : False
-   $ cat /home/ubuntu/.condarc
-   channels:
-     - conda-forge
-     - bioconda
-     - defaults
-   auto_activate_base: false
-
-Already created conda environments
-----------------------------------
-
-You should have a conda environment available that we created called ``serpentesmake`` which we will be using in the exercise on Snakemake. In case it is not available you can get the YAML file `here <https://github.com/reslp/reproducibility-workshop/blob/main/additional-data/conda-environments/serpentesmake.yaml>`_.
-
-
 Docker installation
 -------------------
 
@@ -150,3 +99,70 @@ This is how we installed Singularity, originally given in the Github issue threa
      sudo make install
     
    $ singularity version
+
+The conda setup
+---------------
+
+We are using ``Miniconda3 v4.8.2`` installed globally, like so:
+
+.. code-block:: bash
+
+   $ cd ~
+   $ mkdir conda
+   $ cd conda
+   $ wget https://repo.anaconda.com/miniconda/Miniconda3-py37_4.8.2-Linux-x86_64.sh
+   $ bash ./Miniconda3-py37_4.8.2-Linux-x86_64.sh 
+   $ #basedir: /home/ubuntu/conda/miniconda3
+   $ #conda init -> yes
+   $ . ~/.bashrc
+   $ conda config --set auto_activate_base false
+
+
+Here is some additional information on the exact configuration as we have it on the server:
+
+.. code-block:: bash
+
+   $ conda --version
+   conda 4.8.2
+   $ conda info
+   conda info
+   
+        active environment : None
+               shell level : 0
+          user config file : /home/ubuntu/.condarc
+    populated config files : /home/ubuntu/.condarc
+             conda version : 4.8.2
+       conda-build version : not installed
+            python version : 3.7.6.final.0
+          virtual packages : __glibc=2.27
+          base environment : /home/ubuntu/conda/miniconda3  (writable)
+              channel URLs : https://conda.anaconda.org/conda-forge/linux-64
+                             https://conda.anaconda.org/conda-forge/noarch
+                             https://conda.anaconda.org/bioconda/linux-64
+                             https://conda.anaconda.org/bioconda/noarch
+                             https://repo.anaconda.com/pkgs/main/linux-64
+                             https://repo.anaconda.com/pkgs/main/noarch
+                             https://repo.anaconda.com/pkgs/r/linux-64
+                             https://repo.anaconda.com/pkgs/r/noarch
+             package cache : /home/ubuntu/conda/miniconda3/pkgs
+                             /home/ubuntu/.conda/pkgs
+          envs directories : /home/ubuntu/conda/miniconda3/envs
+                             /home/ubuntu/.conda/envs
+                  platform : linux-64
+                user-agent : conda/4.8.2 requests/2.22.0 CPython/3.7.6 Linux/5.4.0-1080-aws ubuntu/16.04.5 glibc/2.27
+                   UID:GID : 1000:1000
+                netrc file : None
+              offline mode : False
+   $ cat /home/ubuntu/.condarc
+   channels:
+     - conda-forge
+     - bioconda
+     - defaults
+   auto_activate_base: false
+
+Already created conda environments
+----------------------------------
+
+You should have a conda environment available that we created called ``serpentesmake`` which we will be using in the exercise on Snakemake. In case it is not available you can get the YAML file `here <https://github.com/reslp/reproducibility-workshop/blob/main/additional-data/conda-environments/serpentesmake.yaml>`_.
+
+

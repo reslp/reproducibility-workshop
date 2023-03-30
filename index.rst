@@ -6,13 +6,13 @@ Reproducibility in Bioinformatics
 
 Here you will find the materials for the `Physalia course <https://www.physalia-courses.org/courses-workshops/bioinformatics-reproducibility/>`_ **Reproducibility in Bioinformatics**. 
 
-The course will be held online via Zoom on **July 11-13 2022**.
+The course will be held online on **Apr 03-05 2022**.
 
 ---------------
 Course overview
 ---------------
 
-This course aims at increasing awareness and introduces strategies on how to improve reproducibility in bioinformatic analyses. Through a mixture of theoretical blocks and hands-on exercises the instructors will guide participants to develop skills to increase reproducibility of bioinformatic analyses and workflows using containers, versioning and virtual environments.
+In this course we want to increase awareness and introduce strategies how to improve reproducibility of bioinformatic analyses. Through a mixture of theoretical blocks and hands-on exercises the instructors will guide participants to develop skills to increase reproducibility of bioinformatic analyses and workflows using containers, versioning and virtual environments.
 
 --------------------------------------
 Target audience and assumed background

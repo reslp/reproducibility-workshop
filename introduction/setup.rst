@@ -106,6 +106,7 @@ The conda setup
 We are using ``Miniconda3 v4.8.2`` installed globally, like so:
 
 .. code-block:: bash
+
    $ cd ~
    $ mkdir conda
    $ cd conda

@@ -386,6 +386,11 @@ Moving and removing files in a git repository
 
 Sometimes you will want to relocate files inside your repository or stop tracking them with git. You should not use ``mv`` and ``rm`` in these situations. Git can get confused if you simple delete a file or put it into a different place. It is not smart enough for that. Instead what you should do is use ``git mv`` to move files to a different place and ``git rm`` to remove files. By default ``git rm`` will not delete the fil though, it will simply tell git that the file should not be tracked anymore. It basically makes it invisible to git again.
 
+Use Digital Object Identifiers for your code and data
+=====================================================
+
+You probably already came accross DOIs. These digital object identifiers are a great tool to increase reproducibility because the are snapshots of different data. Most researchers are familiar with them in the conext of scientific publications. Most journals will assign DOIs to their published articles to provide a long-term reference to a specific work. However, DOIs can be used for many other things such as datasets, code etc. In fact, ideally each dataset behind a scientific publication should be available online and connected to a DOI so that other researchers can easily find and reuse them. Luckily there are several websites which make it easy to create DOIs for code and other data such as `Zenodo <https://zenodo.org/>`_ or `Figshare <https://figshare.com/>`_. We highly encourage you to use these in your next publication and we would be happy if you request that data is deposited in public databases connected with a DOI when you review other researchers work. As an example you can look at the `GitHub <https://github.com/reslp/reproducibility-workshop>`_ page of this course, where each past iteration of this course has its own DOI number, which corresponds to the specific version of the course and how it was taught.
+
 There is a lot more...
 =======================
 

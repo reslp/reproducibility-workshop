@@ -398,7 +398,7 @@ Exercises
 
    `Clustalo <http://www.clustal.org/omega/>`_ is a very popular tool for multiple sequence alignment. It can be easily installed with conda, or built from source, or simply setup with precompiled binaries.
    
-   Write a ``Dockerfile`` and build an image to run ``clustalo`` version 1.2.4. 
+   Write a ``Dockerfile`` and build an image to run ``clustalo`` version 1.2.4 in Ubuntu:20.04 or Ubuntu:22.04. 
    Possible solutions can be found here:
  
    - `apt <https://github.com/reslp/reproducibility-workshop/blob/main/additional-data/dockerfiles/clustalo.apt.Dockerfile>`_
@@ -424,7 +424,9 @@ Exercises
    Another interesting tool in the context of long read genome assembly is `LongStitch <https://github.com/bcgsc/longstitch>`_. This is a pipeline for scaffolding of draft assemblies with long reads incorporating multiple tools and controlled through ``make``. I found it relatively difficult to set up because of the many dependencies it requires, but if you like a challenge .. ;-)
 
    Write a ``Dockerfile`` and build an image for LongStitch.
-   A possible solution can be found `here <https://github.com/reslp/reproducibility-workshop/blob/main/additional-data/dockerfiles/longstitch.Dockerfile>`_
+
+   A possible solution can be found `here <https://github.com/reslp/reproducibility-workshop/blob/main/additional-data/dockerfiles/longstitch.Dockerfile>`_.
+
 
 Phew, for a minute there ... **Well Done !!!**
 

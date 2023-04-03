@@ -27,6 +27,7 @@ repository
 commit
 	A snapshot of your repository with all the changes since your last commit. They are essential to your repository to keep track of all changes. You can also jump between commits to recover different versions of file.
 
+
 Initialize a new repository
 ---------------------------
 
@@ -180,9 +181,15 @@ Git offers several commands which let you quickly check the history of your repo
  
 The difference between the two commands presented above is simply the amount of information you get controlled by the :bash:`--oneline` flag. The standard :bash:`git log` command show additional information such as who contributed to the repository and the exact date and time of the commits. The last commit is always on top of the list. It is also called HEAD. This is also indicated by :bash:`(HEAD -> master)` which also tells you the branch you are on. In this case: master. We did not talk about branches yet. This will come a little bit later.
 
-To make them identifiable commits get unique IDs that consists of combinations of numbers and letters. These are also called hashes. We can use commit hashes to switch between different versions of the repository. For example let us try to switch back to the First commit with the hash :bash:`50d2cf8` (long version: :bash:`50d2cf80c9461eef8f67c9273eec8fd3e687162b`). Mind you, that your hashes will be different. You need to use the ones from your :bash:`git log` output. 
+To make them identifiabl, commits get unique IDs that consists of combinations of numbers and letters. These are also called `hashes <https://en.wikipedia.org/wiki/Hash_function>`_. We can use commit hashes to switch between different versions of the repository. For example let us try to switch back to the First commit with the hash :bash:`50d2cf8` (long version: :bash:`50d2cf80c9461eef8f67c9273eec8fd3e687162b`). Mind you, that your hashes will be different. You need to use the ones from your :bash:`git log` output. 
 
-More information `here <https://git-scm.com/docs/git-log>`.
+More information `here <https://git-scm.com/docs/git-log>`_.
+
+
+.. hint::
+
+   Hashing by itself is very powerful. It is used in many different fields of compuetr science. Calculating hashes can already help to increase reproducibility because hashes (of files) can be used to check if files are identical. 
+
 
 Reverting to an older version of your repository
 ================================================
@@ -255,6 +262,7 @@ The above ``.gitignore`` file covers several practical examples of how you can e
 .. admonition:: Exercise
 
    Create two files in your repository and add one of these files to your :bash:`.gitignore` file. Hint: You can use :bash:`git status` to keep track of the files and find you what git "sees". 
+
 
 Branches
 ========

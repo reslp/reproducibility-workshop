@@ -65,7 +65,7 @@ Let’s create a bit of directory structure and navigate through it.
 
 .. admonition:: Task 1
 
-   Copy a file called ``README.md`` from a directory called ``Day1`` in ``{HOME}/Share`` to ``linux-intro/data``. 
+   Copy a file called ``README.md`` from a directory called ``Day1`` in ``${HOME}/Share`` to ``linux-intro/data``. 
    **Make sure to retain the timestamp of the original file**.
 
 

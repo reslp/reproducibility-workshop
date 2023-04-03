@@ -5,7 +5,7 @@
 Exercise 3 - Data organization
 ==============================
 
-Organizing data properly is the first step to reproducible bioinformatic analysis. It will help you and your collaborators and it is porbably one of the largest time savers when developing and maintaining computational workflows. Here we will have a look into how you can put structure into your research projects files and folder on your computer. We have used the proposed structure in different projects and have come to the conclusion that this system works pretty well. Additionally we will introduce a common format called Markdown which you can use as digital lab books and to specify parameters for your analyses to make the more reproducible and transparent.
+Organizing data properly is the first step to reproducible bioinformatic analyses. It will help you and your collaborators and it is porbably one of the largest time savers when developing and maintaining computational workflows. Here we will have a look into how you can put structure into your research projects files and folder on your computer. We have used the proposed structure in different projects and have come to the conclusion that this system works pretty well. Additionally we will introduce a common format called Markdown which you can use as digital lab books and to specify parameters for your analyses to make the more reproducible and transparent.
 
 Objectives
 ==========
@@ -136,7 +136,7 @@ The above command converts a file from Markdown to reStructuredText.
 A powerful command-line open-source note taking application
 ===========================================================
 
-Many people have struggled with the above mentioned aspects of easily taking notes in a command line setting. A tool which combines many of the tools mentioned above to make note taking less painful is the application `nb <https://xwmx.github.io/nb/>`. It also has several advanced features like encryption or syncing with git repositories. It is easy to use and scriptable. An introduction to nb would be beyond the scope of this course, but I suggest you give it a try. I think if you start using it you will quickly come accross the concepts mentioned in this exercise.
+Many people have struggled with the above mentioned aspects of easily taking notes in a command line setting. A tool which combines many of the tools mentioned above to make note taking less painful is the application `nb <https://xwmx.github.io/nb/>`_. It also has several advanced features like encryption or syncing with git repositories. It is easy to use and scriptable. An introduction to nb would be beyond the scope of this course, but I suggest you give it a try. I think if you start using it you will quickly come accross the concepts mentioned in this exercise.
 
 Additional resources
 ====================

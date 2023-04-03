@@ -399,6 +399,44 @@ Use Digital Object Identifiers for your code and data
 
 You probably already came accross DOIs. These digital object identifiers are a great tool to increase reproducibility because the are snapshots of different data. Most researchers are familiar with them in the conext of scientific publications. Most journals will assign DOIs to their published articles to provide a long-term reference to a specific work. However, DOIs can be used for many other things such as datasets, code etc. In fact, ideally each dataset behind a scientific publication should be available online and connected to a DOI so that other researchers can easily find and reuse them. Luckily there are several websites which make it easy to create DOIs for code and other data such as `Zenodo <https://zenodo.org/>`_ or `Figshare <https://figshare.com/>`_. We highly encourage you to use these in your next publication and we would be happy if you request that data is deposited in public databases connected with a DOI when you review other researchers work. As an example you can look at the `GitHub <https://github.com/reslp/reproducibility-workshop>`_ page of this course, where each past iteration of this course has its own DOI number, which corresponds to the specific version of the course and how it was taught.
 
+Common mistakes with Git
+========================
+
+Git can be difficult and it is easy to make mistakes. You will surely come accross the same problems several times and if you are like us you may be scratching your head trying to remember the git commands to solve the problem. Luckily your are not alone. Many people struggle with git and there are plenty of answers on StackOverflow and other website for many problems associated with git. Here two examples of common mistakes we have made many times with git and how to fix them. Hopefully these examples will also help you:
+
+Changing commit messages of a commit
+~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+
+If you would like to change the commit message of the last commited commit you can use:
+
+.. code-block:: bash
+
+  $ git commit --amend
+
+If you have already pushed this commit you have to push the changes again with this slightly different push command:
+
+
+.. code-block:: bash
+
+  $ git push --force-with-lease origin YOURBRANCH
+
+
+I commited to the wrong branch
+~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+
+If you accidently commited changes to the wrong branch, this is how you can fix it and move the last commit to the correct branch:
+
+.. code-block:: bash
+
+  $ git log # identify the hash of the last commit in main
+  $ git checkout correct-branch
+  $ git cherry-pick COMMIT_HASH
+  $ git checkout main # back to main branch
+  $ git reset --hard HEAD~1 #remove last commit in main
+
+
+
+
 There is a lot more...
 =======================
 
@@ -412,3 +450,4 @@ This practical can only be considered a basic introduction to git. Git can do a 
     - `Linus Torvalds talking about Git <https://www.youtube.com/watch?v=4XpnKHJAok8>`_
     - `A Quick Introduction to Version Control with Git and GitHub <https://journals.plos.org/ploscompbiol/article?id=10.1371/journal.pcbi.1004668>`_
     - `What comes after Git? <https://matt-rickard.com/what-comes-after-git/>`_
+    - `Gut (an alterantive CLI for Git) <https://gut-cli.dev/>`_ Also a great learning resource for git.

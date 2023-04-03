@@ -35,7 +35,7 @@ Getting started
 ----------------------
 
 * Get on overview of the course `here <introduction/about.html>`_. 
-* Learn how we set up the working environment `here <introduction/setup.html>`.
+* Learn how we set up the working environment `here <introduction/setup.html>`_.
 
 
 .. toctree::

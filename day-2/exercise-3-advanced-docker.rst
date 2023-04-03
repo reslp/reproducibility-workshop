@@ -364,7 +364,7 @@ This image can now be pulled and used by anybody!
 
 .. code:: bash
 
-    (host)-$ docker run --rm chrishah/docker-training-push-demo:v04042023
+    (host)-$ docker run --rm chrishah/docker-training-push-demo:v04042023 blastn -h
 
 Also, if you happen to be using ``Singularity`` rather than ``Docker``,
 this image is compatible. Assuming you have ``Singularity`` up and

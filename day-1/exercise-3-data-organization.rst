@@ -31,7 +31,7 @@ The suggested directory structure is intuitive (it follows basic naming conventi
 
 .. admonition:: Exercise
 
-   Your first task is to create a new project directory in your home directory with the subdirectories as listed above. Is there someting you are missing.
+   Your first task is to create a new project directory in your home directory with the subdirectories as listed above. Is there someting you are missing?
 
 .. hint::
 
@@ -119,8 +119,7 @@ Other Markdown languages
 
 Many different markdown languages exist for different purposes and with different features. In fact, the course material you are currently reading is also written in a markup language called `reStructedText <https://de.wikipedia.org/wiki/ReStructuredText>`_. A cool thing about markdown languages is that they can be converted in one another relatively easily. With ``pandoc`` you can convert between different markdown languages and also produce PDF files and MS Word documents. Is can be very handy when you want to share documents with collaborators or bring them into a format where they are better suited to be printed.
 
-Let's see how it works::w
-
+Let's see how it works:
 
 .. code-block:: bash
 

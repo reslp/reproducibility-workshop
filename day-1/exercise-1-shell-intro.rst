@@ -109,23 +109,30 @@ Print a random number between 1 and 1000 to screen.
    Devise a for loop to generate 10 random numbers between 1 and 1000, consecutively. Repeat three times.
 
 
-.. admonition:: Task 4
+.. admonition:: Task 5
 
    Make the ‘random’ number generation reproducible by setting a seed - **42** seems to be a good choice.
 
 
-Write your solution into a bash script, and make it executable so you
-can execute it like so:
+.. admonition:: Task 6
 
-.. code:: bash
+   Write a bash script for the above task, and make it executable so you
+   can execute it like so:
 
-   user40@ip-172-31-4-141:~$ ${HOME}/linux-intro/Day1/bin/random_numbers.sh 10 42
+   .. code:: bash
 
-Where the first number is the number of random integers between 1 and
-1000 to generate and the second number is your seed.
+      user40@ip-172-31-4-141:~$ ./linux-intro/bin/random_numbers.sh 10 42
 
-Add the directory ``${HOME}/linux-intro/Day1/bin`` to your users ${PATH}
+   Where the first number is the number of random integers between 1 and
+   1000 to generate and the second number is your seed.
+
+
+
+Add the directory ``./linux-intro/Day1/bin`` to your users ``${PATH}``
 so that your script will be available globally.
+
+
+
 
 Read in a csv file called ``${HOME}/Share/Day1/subfolder2/results.txt``,
 find and copy the files that are listed in first the column and have the

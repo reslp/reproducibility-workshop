@@ -35,4 +35,17 @@
    user40@ip-172-31-4-141:~$ RANDOM=42; for i in {1..10}; do echo "$i: $((1 + RANDOM % 1000))"; done
    user40@ip-172-31-4-141:~$ RANDOM=42; for i in {1..10}; do echo "$i: $((1 + RANDOM % 1000))"; done
 
+**Task 5 - possible solution for ./linux-intro/bin/random_numbers.sh**
+
+.. code:: bash
+
+   #!/bin/bash
+
+   n=$1
+   seed=$2
+
+   RANDOM=$seed
+
+   for i in $(seq 1 $n); do echo "$i: $((1 + RANDOM % 1000))"; done
+
 

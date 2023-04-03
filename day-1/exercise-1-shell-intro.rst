@@ -11,6 +11,11 @@ piping ``|`` works.
 
 Let’s do a few small things to get you warmed up.
 
+.. admonition:: In case you need help
+
+   Solutions to the below tasks can be found `here <https://github.com/reslp/reproducibility-workshop/blob/main/day-1/solutions/ex-1.rst>`_, if need be.
+
+
 First, let’s connect to the server.
 
 You’ve been provided with ``*.pem`` file that contains your users
@@ -20,9 +25,9 @@ variables first:
 
 .. code:: bash
 
-   (user@host)-$ pem="biorepo.pem"
+   (user@host)-$ pem="biorepo.pem" #your file may be called c1.pem, c2.pem, etc. depending on your user
    (user@host)-$ IP="18.237.42.108" #this will change every day
-   (user@host)-$ user="ubuntu" #change to reflect your username
+   (user@host)-$ user="ubuntu" #change to reflect your username, user1, user2, user3, etc.
    (user@host)-$ ssh -i $pem $user@$IP #connect - confirm with yes if you connect for the first time
 
 If successful you’ll find yourself connected and your prompt will look
@@ -42,7 +47,7 @@ stage.
    user40@ip-172-31-4-141:~$ ls
    Share
 
-Let’s create a bit of direcotory structure and navigate through it.
+Let’s create a bit of directory structure and navigate through it.
 
 .. code:: bash
 
@@ -58,11 +63,7 @@ Let’s create a bit of direcotory structure and navigate through it.
    user40@ip-172-31-4-141:~$ cd
 
 Copy a file called ``README.md`` from a directory called ``Day1`` in
-``{HOME}/Share`` to ``linux-intro/data``, making sure that you retain the timestamp of the original file. 
-
-.. code:: bash
-
-   user40@ip-172-31-4-141:~$ cp -p ${HOME}/Share/Day1/README.md linux-intro/data/
+``{HOME}/Share`` to ``linux-intro/data``, **make sure to retain the timestamp of the original file**. 
 
 
 Copy the directory ``${HOME}/Share/Day1/subfolder1/level2/level3/`` and it's content to ``linux-intro/data``, but make sure to also bring about the entire directory structure from ``Day1`` onwards, but not subfolders ``subfolder2`` and ``subfolder3`` of ``Day1``.

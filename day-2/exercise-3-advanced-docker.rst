@@ -26,7 +26,7 @@ running only a particular piece of software of your choosing.
 
 As an example I have chosen ``BLAST``, which is used to find regions of
 similarity between biological sequences, DNA- and/or Protein. The BLAST
-algorithm (Basic Local Alignment Search Tool) and it's derivatives is
+algorithm (Basic Local Alignment Search Tool) and its derivatives is
 among the most used tools in DNA-sequence based research. There is an
 online version hosted by NCBI, but there are many situations where it's
 handy to have it running locally.
@@ -141,7 +141,7 @@ Great! Now you have ``blastn`` running in a container. But how to make
 this permanent?
 
 Let's exit the container and see what we can do. The following will
-bring your original prompt back.
+get you out of the container and bring your original prompt back.
 
 .. code:: bash
 
@@ -199,8 +199,8 @@ file, the so-called ``Dockerfile``. This is simply a text document that
 contains all the commands you would normally execute manually in order
 to build your Docker image.
 
-A full reference to all features and extensions is provided at Docker's
-official documentation here.
+The official reference to all features and extensions is provided at Docker's
+official documentation `here <https://docs.docker.com/engine/reference/builder/>`_.
 
 Let's try to create your first ``Dockerfile`` and design it to build an
 image as the one we did manually above.
@@ -212,7 +212,7 @@ To keep things tidy, let's first make and move to a new directory.
     (host)-$ mkdir automatic-blast && cd automatic-blast
 
 Using your favorite text editor, create a file called ``Dockerfile`` and
-copy/paste the following text into it.
+copy/paste/type the following text into it.
 
 ::
 
@@ -222,8 +222,8 @@ copy/paste the following text into it.
 
     RUN apt-get install ncbi-blast+
 
-Note that these are the exact same commands that we just ran
-interactively. We just prepend specific directives that will be
+Note that these are mostly the exact same commands that we just ran
+interactively, but that we prepend specific directives that will be
 interpreted by Docker.
 
 -  ``FROM`` - tells Docker to start building our image onto a certain
@@ -241,15 +241,14 @@ a command for that.
 Note the flag ``-t`` which I use to name the image
 ``automatic_blast_image``. The ``.`` is mandatory and just tells it to
 look for a file called ``Dockerfile`` (per default) in your current
-working directory. This behavior can be changed, but you can try to
+working directory. This behavior can be changed, i.e. you can specifiy a custom filename for your Dockerfile, but you can try to
 figure that one out for yourself if you want.
 
 You will see the same information as before during system update, but
 then unfortunately we get an error. Remember you've been prompted to
 agree that extra diskspace is used before? Docker does not allow user
 interaction during build. Let's make a small change to the Dockerfile to
-fix that - just add ``-y``, which is an option of the install command
-and just means 'don't prompt - yes to all'.
+fix that - add ``-y`` to the ``apt install`` command, which tells apt: 'don't prompt - yes to all'.
 
 ::
 
@@ -266,7 +265,7 @@ Try again.
     (host)-$ docker build -t ${USER}s_automatic_blast_image .
 
 Looks good! Take a second to inspect the output Docker created and note
-that during the second build attempt Docker has not redone the update,
+that **during the second build attempt Docker has not redone the update**,
 but rather continued from from the first line in the Dockerfile that
 caused the error.
 
@@ -322,20 +321,20 @@ Now, run it through singularity (based on your local ``sif`` file.
 Share your image with the world - Dockerhub
 -------------------------------------------
 
-Docker runs an online repository where users can deposit and host their
-images: Dockerhub. An extensive documentation of what Dockerhub can do,
-far beyond what we can cover in today's introduction can be found in
-Docker's official Dockerhub documentation here.
+Docker hosts an online repository where users can deposit and host their
+images: `Dockerhub <>`_. An extensive documentation of what Dockerhub can do,
+far beyond what we can cover in todays introduction can be found in
+Docker's official Dockerhub documentation `here <https://docs.docker.com/docker-hub/>`_.
 
 In order to use it you'll need to register. With the free registration
-you can deposite as many images as you want publicly, plus one private
-image that is only accessible to you. You can buy more space if you want
+you can deposit as many images as you want publicly, plus one private
+image that is only accessible to you. You can buy more space for private images if you want
 that.
 
 Manual push
 ~~~~~~~~~~~
 
-I have made public repository to show you how to deposit custom images
+I have made a public repository to show you how to deposit custom images
 on Dockerhub - it's `here <https://hub.docker.com/r/chrishah/docker-training-push-demo>`_ .
 
 Let's deposit our image there. In order for Dockerhub to know where the
@@ -343,26 +342,26 @@ image should go I need to rename it to match the name of the repository
 which is usually something like ``username/reponame``. My Dockerhub
 username is ``chrishah``, and I called the repo
 ``docker-training-push-demo``. Note that I will also give the image a
-specific tag ``v11072022``. This could be anything as long as it's in
+specific tag ``v04042023``. This could be anything as long as it's in
 one word an all lower case.
 
 .. code:: bash
 
-    (host)-$ docker tag ${USER}s_automatic_blast_image chrishah/docker-training-push-demo:v11072022
+    (host)-$ docker tag ${USER}s_automatic_blast_image chrishah/docker-training-push-demo:v04042023
 
 Now we can push it Dockerhub.
 
 .. code:: bash
 
-    (host)-$ docker push chrishah/docker-training-push-demo:v11072022
+    (host)-$ docker push chrishah/docker-training-push-demo:v04042023
 
-Done! Check it out on Dockerhub.
+Done! Check it out on `Dockerhub <https://hub.docker.com/r/chrishah/docker-training-push-demo>`_.
 
 This image can now be pulled and used by anybody!
 
 .. code:: bash
 
-    (host)-$ docker run --rm chrishah/docker-training-push-demo:v11072022
+    (host)-$ docker run --rm chrishah/docker-training-push-demo:v04042023
 
 Also, if you happen to be using ``Singularity`` rather than ``Docker``,
 this image is compatible. Assuming you have ``Singularity`` up and
@@ -371,14 +370,14 @@ afresh):
 
 .. code:: bash
 
-    (host)-$ singularity run docker://chrishah/docker-training-push-demo:v11072022 blastn -h
+    (host)-$ singularity exec docker://chrishah/docker-training-push-demo:v11072022 blastn -h
 
 Automated build
 ~~~~~~~~~~~~~~~
 
 A very neat feature in my opinion is that Dockerhub allows you
 to link its repos to Github repositories. By this, one can neatly and
-reprodcibly organize one's Docker containers.
+reprodcibly organize ones Docker containers.
 
 Check out this example `here <https://hub.docker.com/r/chrishah/ncbi-blast>`_.
 

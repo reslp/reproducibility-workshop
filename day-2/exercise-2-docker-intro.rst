@@ -440,7 +440,7 @@ Mounting directories
 --------------------
 
 While volumes are very helpful when sharing data between containers, it is often also necessary to copy files between the host and the container. It is possible to find your created volumes (they are just folders on your host computer), but they are usally stored in place we don't normally access (e.g. on Linux Docker stores them in :bash:`/usr/lib/docker/volumes`). We could navigate to this directory and copy data frame there.
-However, you can also bin-mount directories directly to your containers again using the :bash:`-v` flag in :bash:`docker run`:
+However, you can also bind-mount directories directly to your containers again using the :bash:`-v` flag in :bash:`docker run`:
 
 .. code-block:: bash
 
@@ -467,13 +467,13 @@ We will now create a :bash:`testfile` in the current directory. Then we will sta
     root@a0f138701fc5:/data# exit
     exit
     (host) $ ls
-    testfile
+    testfile another_testfile
     (host) $
 
 Summary
 =======
 
-In this first live-coding session we have had a first look at the :bash:`docker` command and how we can use it to run and interact with containers from pre-built images. We have also seen how we can share data between containers and between the contatiner and the host system. The main command to create and run a container is :bash:`docker run`. We can change it's behavior with command-line flags such as :bash:`-it` to make the container interactive ore :bash:`-v` to mount folders or volumes. We saw that it is possible to list running containers with :bash:`docker container ls` and view all available images with :bash:`docker images` (an alternative command would be :bash:`docker image ls`). We can create Docker volumes with :bash:`docker volume create` and delete them with :bash:`docker volume rm`.
+In this first live-coding session we have had a first look at the :bash:`docker` command and how we can use it to run and interact with containers from pre-built images. We have also seen how we can share data between containers and between the container and the host system. The main command to create and run a container is :bash:`docker run`. We can change its behavior with command-line flags such as :bash:`-it` to make the container interactive or :bash:`-v` to mount folders or volumes. We saw that it is possible to list running containers with :bash:`docker container ls` and view all available images with :bash:`docker images` (an alternative command would be :bash:`docker image ls`). We can create Docker volumes with :bash:`docker volume create`, list existing volumes with :bash:`docker volume ls` and delete them with :bash:`docker volume rm <volume>`.
 
 The commands and examples provided here are really only the tip of the iceberg. There are many more things you can do, which would have been outside of the scope of this first introduction. If you are curious what else you can do, here are some interesting links from the Docker documentation:
 

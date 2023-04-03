@@ -169,6 +169,7 @@ What to do if this hadn’t solved it? What other options do we have?
 Well, you can normally build software from source. Augustus comes with
 instructions for that
 `here <https://github.com/Gaius-Augustus/Augustus/blob/master/docs/INSTALL.md>`__.
+
 We are not doing that now, but have a look at them for 3 minutes and see
 that this is not necessarily straightforward. There’s lots of
 dependencies you’ll need and believe me it doesn’t just work out of the
@@ -181,3 +182,10 @@ Docker as a valid option for setting up the software. See
 `here <https://github.com/Gaius-Augustus/Augustus#docker>`__. They
 provide a so-called Dockerfile. Isn’t that neat. We’ll return to that in
 the section ‘Pitfalls and caveates of Docker’ on Day2.
+
+Finally, you could use another package management system called ``conda``.
+Augustus has a conda recipe - see `here <https://anaconda.org/bioconda/augustus>`__.
+We'll discuss ``conda`` including potential pitfalls as well on Day2.
+
+Thanks for joining us today!!
+

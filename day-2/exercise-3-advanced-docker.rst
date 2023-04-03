@@ -2,10 +2,6 @@
 Exercise 3 - Advanced Docker and Singularity
 ============================================
 
-**Disclaimer**: Parts of the session below were inspired and indeed
-reuse examples from the Cyverse documentation (Release 0.2.0; March 05,
-2020; pdf).
-
 The following session assumes that you have Docker running on your
 computer (we tested with Docker version 18.09.7, build 2d0083d). If
 you're running on a Linux host it further assumes that you have it set
@@ -16,6 +12,13 @@ the Docker daemon as a non-root user (find some more info/instructions
 here). If for some reason you don't want to or can do any of these
 things, all of the below should also work if you simply prepend ``sudo``
 to the ``docker`` command.
+
+.. admonition:: Disclaimer
+
+   Parts of the session below were inspired and indeed
+   reuse examples from a CyVerse workshop documentation (Release 0.2.0; March 05,
+   2020; `online <https://cyverse-foss-2020.readthedocs-hosted.com/en/latest/Containers/dockerintro.html>`_ - dowloaded as `pdf <https://github.com/reslp/reproducibility-workshop/blob/main/additional-data/external_documentations/cyverse-foss-2020-readthedocs-hosted-com-en-latest.pdf>`_ 03.04.2023).
+
 
 Build your own image
 ====================

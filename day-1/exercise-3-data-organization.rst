@@ -5,7 +5,7 @@
 Exercise 3 - Data organization
 ==============================
 
-Organizing data properly is the first step to reproducible bioinformatic analysis. It will help you and your collaborators and it is porbably one of the largest time savers when developing and maintaining computational workflows. Here we will have a look into how you can put structure into your research projects files and folder on your computer. We have used the proposed structure in different projects and have come to the conclusion that this system works pretty well. Additionally we will introduce a common format called Markdown which you can use as digital lab books and to specify parameters for your analyses to make the more reproducible and transparent.
+Organizing data properly is the first step to reproducible bioinformatic analyses. It will help you and your collaborators and it is porbably one of the largest time savers when developing and maintaining computational workflows. Here we will have a look into how you can put structure into your research projects files and folder on your computer. We have used the proposed structure in different projects and have come to the conclusion that this system works pretty well. Additionally we will introduce a common format called Markdown which you can use as digital lab books and to specify parameters for your analyses to make the more reproducible and transparent.
 
 Objectives
 ==========

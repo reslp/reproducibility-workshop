@@ -132,16 +132,6 @@ Add the directory ``./linux-intro/Day1/bin`` to your users ``${PATH}``
 so that your script will be available globally.
 
 
-
-
-Read in a csv file called ``${HOME}/Share/Day1/subfolder2/results.txt``,
-find and copy the files that are listed in first the column and have the
-label ‘complete’ in the second to ``${HOME}/linux-intro/Day1/results/``.
-Note that the table has a header line. The files are in
-``${HOME}/Share/Day1/subfolder3/``.
-
-If you like a challenge, then try to do it all in one command..
-
 Now you should be warmed up .. ;-)
 
 

@@ -13,4 +13,9 @@
    user40@ip-172-31-4-141:~$ rsync -avpuzP --relative ${HOME}/Share/./Day1/subfolder1 linux-intro/data/
 
 
-  
+**Task 3 - find differences between text files**
+
+.. code:: bash
+
+   user40@ip-172-31-4-141:~$ diff ${HOME}/Share/Day1/README.md linux-intro/data/README.md 
+

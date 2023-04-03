@@ -8,7 +8,7 @@ RUN apt update && apt install -y build-essential python3 git zlib1g zlib1g-dev l
 
 RUN git clone https://github.com/fenderglass/Flye && \
 	cd Flye && \
-	git reset --hard 192de706210a96768eb69eed778fe1b81e887165 && \
+	git reset --hard f6ec19e41632f36bb441a2ce6a574632a94694ed && \
 	make
 
 ENV PATH="${PATH}:/usr/src/Flye/bin"

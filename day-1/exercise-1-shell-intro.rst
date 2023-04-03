@@ -95,29 +95,24 @@ Now, let's add a line of text to the file ``linux-intro/data/README.md``
 ``diff`` is very useful, but the output can be a bit tricky to interpret. A slightly more complex example can be found `here <https://www.geeksforgeeks.org/diff-command-linux-examples/>`_. 
 
 
+Random number seeds are common in bioinformatics software employing different kinds of heuristics. Let's play with that.
+
 Print a random number between 1 and 1000 to screen.
 
 .. code:: bash
 
    user40@ip-172-31-4-141:~$ echo "$((1 + RANDOM % 1000))"
 
-Now, produce 10 random numbers between 1 and 1000, consecutively. Repeat
-three times.
 
-.. code:: bash
+.. admonition:: Task 4
 
-   user40@ip-172-31-4-141:~$ for i in {1..10}; do echo "$i: $((1 + RANDOM % 1000))"; done
-   user40@ip-172-31-4-141:~$ for i in {1..10}; do echo "$i: $((1 + RANDOM % 1000))"; done
-   user40@ip-172-31-4-141:~$ for i in {1..10}; do echo "$i: $((1 + RANDOM % 1000))"; done
+   Devise a for loop to generate 10 random numbers between 1 and 1000, consecutively. Repeat three times.
 
-Make the ‘random’ number generation reproducible by setting a seed -
-``42`` seems to be a good choice.
 
-.. code:: bash
+.. admonition:: Task 4
 
-   user40@ip-172-31-4-141:~$ RANDOM=42; for i in {1..10}; do echo "$i: $((1 + RANDOM % 1000))"; done
-   user40@ip-172-31-4-141:~$ RANDOM=42; for i in {1..10}; do echo "$i: $((1 + RANDOM % 1000))"; done
-   user40@ip-172-31-4-141:~$ RANDOM=42; for i in {1..10}; do echo "$i: $((1 + RANDOM % 1000))"; done
+   Make the ‘random’ number generation reproducible by setting a seed - **42** seems to be a good choice.
+
 
 Write your solution into a bash script, and make it executable so you
 can execute it like so:
@@ -130,7 +125,7 @@ Where the first number is the number of random integers between 1 and
 1000 to generate and the second number is your seed.
 
 Add the directory ``${HOME}/linux-intro/Day1/bin`` to your users ${PATH}
-so that your script will be avaiable globally.
+so that your script will be available globally.
 
 Read in a csv file called ``${HOME}/Share/Day1/subfolder2/results.txt``,
 find and copy the files that are listed in first the column and have the

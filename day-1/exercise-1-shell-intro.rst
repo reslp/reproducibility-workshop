@@ -62,14 +62,21 @@ Let’s create a bit of directory structure and navigate through it.
    /home/user40/linux-intro/data
    user40@ip-172-31-4-141:~$ cd
 
-Copy a file called ``README.md`` from a directory called ``Day1`` in
-``{HOME}/Share`` to ``linux-intro/data``, **make sure to retain the timestamp of the original file**. 
+
+.. admonition:: Task 1
+
+   Copy a file called ``README.md`` from a directory called ``Day1`` in ``{HOME}/Share`` to ``linux-intro/data``. 
+   **Make sure to retain the timestamp of the original file**.
 
 
-Copy the directory ``${HOME}/Share/Day1/subfolder1/level2/level3/`` and it's content to ``linux-intro/data``, but make sure to also bring about the entire directory structure from ``Day1`` onwards, but not subfolders ``subfolder2`` and ``subfolder3`` of ``Day1``.
+.. admonition:: Task 2
 
-.. code:: bash
-   user40@ip-172-31-4-141:~$ rsync -avpuzP --relative ${HOME}/Share/./Day1/subfolder1/level2/level3 linux-intro/data/
+   Copy the directory ``${HOME}/Share/Day1/subfolder1/`` and all it's content to ``linux-intro/data``.
+
+   - make sure to also bring about the entire directory structure from ``Day1`` onwards
+   - do not copy subfolders ``subfolder2`` and ``subfolder3`` of ``Day1``.
+   - keep original timestamps
+
 
 Print a random number between 1 and 1000 to screen.
 

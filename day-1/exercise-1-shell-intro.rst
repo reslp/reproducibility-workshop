@@ -88,9 +88,11 @@ Now, let's add a line of text to the file ``linux-intro/data/README.md``
 .. admonition:: Task 3
 
    Fast forward 3 months into the future. You've been otherwise occupied and return to the current project. You vaguely remember that you made some change to the ``README.md`` file, but what did you change?
-   - use the ``diff`` command to compare the two files ``${HOME}/Share/Day1/README.md`` and ``linux-intro/data/README.md``.
+   
+   use the ``diff`` command to compare the two files ``${HOME}/Share/Day1/README.md`` and ``linux-intro/data/README.md``.
 
-``diff`` is very useful, but the output can be a bit tricky to interpret. A slightly more complex examples can be found `here <https://www.geeksforgeeks.org/diff-command-linux-examples/>`_. 
+
+``diff`` is very useful, but the output can be a bit tricky to interpret. A slightly more complex example can be found `here <https://www.geeksforgeeks.org/diff-command-linux-examples/>`_. 
 
 
 Print a random number between 1 and 1000 to screen.

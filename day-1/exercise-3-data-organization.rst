@@ -136,7 +136,7 @@ The above command converts a file from Markdown to reStructuredText.
 A powerful command-line open-source note taking application
 ===========================================================
 
-Many people have struggled with the above mentioned aspects of easily taking notes in a command line setting. A tool which combines many of the tools mentioned above to make note taking less painful is the application `nb <https://xwmx.github.io/nb/>`. It also has several advanced features like encryption or syncing with git repositories. It is easy to use and scriptable. An introduction to nb would be beyond the scope of this course, but I suggest you give it a try. I think if you start using it you will quickly come accross the concepts mentioned in this exercise.
+Many people have struggled with the above mentioned aspects of easily taking notes in a command line setting. A tool which combines many of the tools mentioned above to make note taking less painful is the application `nb <https://xwmx.github.io/nb/>`_. It also has several advanced features like encryption or syncing with git repositories. It is easy to use and scriptable. An introduction to nb would be beyond the scope of this course, but I suggest you give it a try. I think if you start using it you will quickly come accross the concepts mentioned in this exercise.
 
 Additional resources
 ====================

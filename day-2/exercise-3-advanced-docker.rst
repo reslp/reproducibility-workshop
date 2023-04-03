@@ -412,7 +412,7 @@ Exercises
    `Flye <https://github.com/fenderglass/Flye>`_ is a denovo genome assembler built for long reads (PacBio and ONT). It performs very well and is relatively fast and memory efficient, as far as denovo assemblers go.. ;-) 
    Check out the installation instructions of Flye on their Github `page <https://github.com/fenderglass/Flye/blob/flye/docs/INSTALL.md>`_.
    
-   Write a ``Dockerfile`` and build an image for the Flye assembler running in Ubuntu 20.04. According to the installation `instructions <https://github.com/fenderglass/Flye/blob/flye/docs/INSTALL.md>`_ you could get it through conda or build it locally. 
+   Write a ``Dockerfile`` and build an image for the Flye assembler **(version 2.9)** running in Ubuntu 20.04. According to the installation `instructions <https://github.com/fenderglass/Flye/blob/flye/docs/INSTALL.md>`_ you could get it through conda or build it locally. 
    Possible solutions can be found here:
 
    - `build <https://github.com/reslp/reproducibility-workshop/blob/main/additional-data/dockerfiles/flye.build.Dockerfile>`_

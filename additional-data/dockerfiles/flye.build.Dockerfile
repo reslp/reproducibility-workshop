@@ -13,4 +13,4 @@ RUN git clone https://github.com/fenderglass/Flye && \
 
 ENV PATH="${PATH}:/usr/src/Flye/bin"
 
-CMD ["flye", "h"]
+CMD ["flye", "-h"]

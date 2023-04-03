@@ -153,12 +153,12 @@ get you out of the container and bring your original prompt back.
 Now, if you type ``docker container ls -a`` (in older docker versions
 this is the same as ``docker ps -a``) you will see the list of all
 containers that you ran so far (the ones that are running as well as
-those which are already exited), including ``user*s_manual_blast``,
+those which are already exited), including ``${USER}s_manual_blast``,
 which you have just exited.
 
 We can convert this container, including the changes you made to the
 base Ubuntu image to a new image - I will call it
-``user*s_manual_blast_image``. Docker has a subroutine for that, called
+``${USER}s_manual_blast_image``. Docker has a subroutine for that, called
 ``commit``. You need to also provide a commit message via the ``-m``
 flag. This is usually short information about how you changed the image,
 so when you look at it later you will be able to remember what the
@@ -325,7 +325,7 @@ Share your image with the world - Dockerhub
 -------------------------------------------
 
 Docker hosts an online repository where users can deposit and host their
-images: `Dockerhub <>`_. An extensive documentation of what Dockerhub can do,
+images: `Dockerhub <https://hub.docker.com/>`_. An extensive documentation of what Dockerhub can do,
 far beyond what we can cover in todays introduction can be found in
 Docker's official Dockerhub documentation `here <https://docs.docker.com/docker-hub/>`_.
 

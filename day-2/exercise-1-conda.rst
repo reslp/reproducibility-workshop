@@ -18,6 +18,12 @@ A now very common way to work with virtual environments is `conda <https://www.a
 
    Although conda is a convenient tool, we would like to point out already here that it comes with several issues that can prevent full reproducibility and can cause different, sometimes very difficult to solve problems. It is important to keep this in mind when relying on conda environments in your work. We will highlight some of the problems you may come across and how to solve them.
 
+
+.. hint::
+
+   You can find the solutions to the exercises `here <https://github.com/reslp/reproducibility-workshop/tree/main/day-2/exercise-solutions/exercise-1-conda-solutions.md>`_
+
+
 Working with conda
 ==================
 
@@ -292,6 +298,17 @@ As you can see this will create an environment file that still has the version n
    prefix: /home/user/.miniconda3/envs/myenvironment 
 
 In this case only the packages that have been installed explicitly (with ``conda install``) will be listed here. Unfortunately without version numbers and also a package channel (``conda-forge``) is missing.
+
+Create environments from yaml files
+-----------------------------------
+
+If you have a saved environment this is how you can create a conda environment from it:
+
+
+.. code-block:: bash
+
+   $ conda env create -f myenvironment.yml
+
 
 .. admonition:: Exercise
   

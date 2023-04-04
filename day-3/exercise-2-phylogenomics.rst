@@ -108,22 +108,19 @@ Take a few minutes to explore the reports.
 .. admonition:: Important Information
 
   In this tutorial we'll be using Docker containers through Singularity.
-  When calling `singularity exec docker://<containername:version>` as below the corresponding container will be downloaded from Dockerhub automatically if it is not yet present locally. This is very convenient, but might in some instances take a bit of time. 
-
-  **Please wait here to get instructions**
+  When calling ``singularity exec docker://<containername:version>`` as below the corresponding container will be downloaded from Dockerhub automatically if it is not yet present locally. This is very convenient, but might in some instances take a bit of time. 
 
   If you are doing this exercise as part of a course you might be provided with local copies of the images to save some time. 
 
-  In some courses for example you'll find local ``*sif`` files in ``~/Share/singularity/`` - Please doublecheck with your instructor(s) if this is the case.
-
-  If it is the case you can use the local files instead of the images from the cloud, so you can replace a singularity call:
+  In some courses for example you'll find local ``*sif`` files in ``~/Share/singularity/`` - **Please doublecheck with your instructor(s) if this is the case**.
+  If it is the case you are encouraged to use the local files instead of the images from the cloud, so whenever there is a singularity call you can replace the cloud id with the path to the local ``*sif`` file. Filenames should correspond to the docker ids, like e.g. the following:
 
   .. code-block:: bash
 
      (user@host)-$ singularity exec docker://reslp/biopython_plus:1.77 \
                    <rest of the command>
 
-  with:
+  could be replaced with:
   
   .. code-block:: bash
 
@@ -136,7 +133,7 @@ Take a few minutes to explore the reports.
      .. code-block:: bash
      
         (user@host)-$ singularity pull docker://reslp/biopython_plus:1.77
-        (user@host)-$ ls -hrlt
+        (user@host)-$ ls -hrlt #see what happened
 
 
 Now, assuming that we ran BUSCO across a number of genomes, we're going

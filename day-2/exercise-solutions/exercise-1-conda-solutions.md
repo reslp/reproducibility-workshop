@@ -9,7 +9,7 @@ First let us export the environments in different ways:
 $ conda env export -n myenvironment > myenvironment.yml
 $ conda env export -n myenvironment --no-builds > myenvironment_nobuilds.yml
 $ conda env export -n myenvironment --from-history > myenvironment_fromhistory.yml
-
+```
 
 
 ```

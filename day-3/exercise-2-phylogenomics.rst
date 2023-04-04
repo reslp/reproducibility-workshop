@@ -113,7 +113,7 @@ Take a few minutes to explore the reports.
 
   If you are doing this exercise as part of a course you might be provided with local copies of the images to save some time. 
 
-  In some courses for example you'll find local ``*sif`` files in ``~/Share/singularity/`` - **Please doublecheck with your instructor(s) if this is the case**.
+  In some courses for example you'll find local ``*sif`` files in ``~/Share/Singularity_images/`` - **Please doublecheck with your instructor(s) if this is the case**.
   If it is the case you are encouraged to use the local files instead of the images from the cloud, so whenever there is a singularity call you can replace the cloud id with the path to the local ``*sif`` file. Filenames should correspond to the docker ids, like e.g. the following:
 
   .. code-block:: bash
@@ -125,7 +125,7 @@ Take a few minutes to explore the reports.
   
   .. code-block:: bash
 
-     (user@host)-$ singularity exec ~/Share/singularity/biopython_plus_1.77.sif \
+     (user@host)-$ singularity exec ~/Share/Singularity_images/biopython_plus_1.77.sif \
                    <rest of the command>
 
 
@@ -320,37 +320,64 @@ A backup ships with the repository in ``backup/five_genes.treefile``.
 
     (user@host)-$ cat five_genes.treefile
 
-**Congratulations, you've built your first phylogenomic tree!!!**
+
+Now, we can also try to build a speciestree from the 5 individual gene trees using ASTRAL. 
+
+First bring the individual gene trees together into one file. Let's call the file ``trees.txt``, then run ASTRAL:
+
+.. code:: bash
+
+  (user@host)-$ cat by_gene/phylogeny/*/*.treefile > trees.txt 
+  (user@host)-$ singularity exec docker://reslp/astral:5.7.1 \
+                java -jar /ASTRAL-5.7.1/Astral/astral.5.7.1.jar \
+                -i trees.txt -o species_tree.astral.tre 
+
+
+Have a look at the result.
+
+.. code:: bash
+
+  (user@host)-$ cat species_tree.astral.tre #or try backup/species_tree.astral.tre instead if you had trouble
+
+
+Instead of looking at the plain text representation you can also explore the trees e.g. via `ITOL <https://itol.embl.de/upload.cgi>`_.
+
+**Congratulations, you've just built your first phylogenomic tree(s)!!!**
+
 
 **5.) Automate the workflow with Snakemake**
 
 A very neat way of handling this kind of thing is
 `Snakemake <https://snakemake.readthedocs.io/en/stable/>`__.
 
-The repository ships with a file called ``Snakefile``. This file
-contains the instructions for running a basic workflow with Snakemake.
-Let's have a look.
+.. admonition:: Important Information
+
+  Snakemake should be installed on your system. An easy way to get it set up is through ``conda``. If you haven't set it up yet, we provide some instructions `here <https://github.com/chrishah/phylogenomics_intro_vertebrata/tree/main/Snakemake_intro/README.md>`_.
+
+
+The very minimum you'll need to create Snakemake workflow is a so called Snakefile. The repository ships with a file called ``Snakemake_intro/Snakefile_cloud``. This file contains the instructions for running a basic workflow with Snakemake. Let's have a look. Note that we have prepared also a file ``Snakemake_intro_Snakefile_local`` in case you've been instructed to use local ``*sif`` files.
 
 .. code:: bash
 
-    (user@host)-$ less Snakefile #exit less with 'q'
+    (user@host)-$ less Snakemake_intro/Snakefile_cloud #exit less with 'q'
+    (user@host)-$ less Snakemake_intro/Snakefile_local #exit less with 'q'
 
-In the Snakefile you'll see 'rules' (that's what individual steps in the
+In the Snakefile you'll see *rules* (that's what individual steps in the
 analyses are called in the Snakemake world). Some of which should look
 familiar, because we just ran them manually, and then from within a
 simple bash script. Filenames etc. are replaced with variables but other
 than that..
 
-Snakemake is installed on your system. In order run Snakemake you first
-need to enter a ``conda`` environment that we've set up.
+Assuming you've set up a ``conda`` environment called ``snakemake`` (either you just did or it's already set up for you), in order to run Snakemake you first need to enter this environment.
 
 .. code:: bash
 
     (user@host)-$ conda activate snakemake
     (snakemake) (user@host)-$ snakemake -h
 
-Now, let's try to do a Snakemake 'dry-run', providing a specific target
-file and see what happens.
+Now, let's try to do a Snakemake 'dry-run' (flag ``-n``), providing a specific target
+file and see what happens. Remember that ``snakemake`` expects a file called ``Snakefile``
+in the working directory per default, so you could copy the file ``Snakemake_intro/Snakefile_local`` or ``Snakemake_intro/Snakefile_cloud`` here, renamed ``Snakefile`` (this is what will be assumed) or find another way (``-s <path/to/Snakefile>``).
 
 .. code:: bash
 
@@ -362,7 +389,7 @@ Now, you could extend the analyses to further genes.
 
     (user@host)-$ snakemake -n -rp auto/trimmed/193525at7742.clustalo.trimal.fasta auto/trimmed/406935at7742.clustalo.trimal.fasta
 
-Actually, running would happen if you remove the ``-n`` flag.
+Actually running would happen if you remove the ``-n`` flag. Note that I've added another flag (``--use-singularity``) which tells snakemake to use containers for certain rules if so indicated in the ``Snakefile``. 
 
 .. code:: bash
 

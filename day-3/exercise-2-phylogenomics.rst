@@ -274,10 +274,12 @@ these:
  - 409719at7742
  - 406935at7742
 
-For loop would do the job right? See the below code. Do you manage to
-add the tree inference step in, too? It's not in there yet.
+.. admonition:: Exercise
 
-.. code:: bash
+  For loop would do the job right? See the below code. Do you manage to
+  add the tree inference step in, too? It's not in there yet.
+
+  .. code:: bash
 
     (user@host)-$ for gene in $(echo "359032at7742 413149at7742 409719at7742 406935at7742")
     do
@@ -289,7 +291,16 @@ add the tree inference step in, too? It's not in there yet.
             echo -e "$(date)\tDone"
     done
 
-Now, let's infer an ML tree using a supermatrix of all 5 genes that we
+  Possible solutions using docker images or local ``*sif`` files (make sure to change the path to the ``*sif`` files) can be found `here <https://github.com/chrishah/phylogenomics_intro_vertebrata/blob/main/backup/bygene.sh>`_ and `here <https://github.com/chrishah/phylogenomics_intro_vertebrata/blob/main/backup/bygene_local.sh>`_, respectively. See scripts ``backup/bygene.sh`` and ``backup/bygene_local.sh`` in this repository.
+
+  If you want to skip this step alltogehter you can fetch the files that would be produced by this step from the ``backup`` directory, like so:
+
+  .. code:: bash
+
+    (user@host)-$ rsync -avpuzP backup/by_gene .
+
+
+Now, let's infer a ML tree using a supermatrix of all 5 genes that we
 have processed so far.
 
 .. code:: bash
@@ -300,8 +311,10 @@ have processed so far.
                   --prefix five_genes \
                   -m MFP --seqtype AA -T 2 -bb 1000 
 
+
 This will run for about 10 Minutes. You can check out the result
 ``five_genes.treefile``, once it's done.
+A backup ships with the repository in ``backup/five_genes.treefile``.
 
 .. code:: bash
 

@@ -402,7 +402,7 @@ Actually running would happen if you remove the ``-n`` flag. Note that I've adde
 **Well Done!**
 
 
-.. admonition:: Exercise
+.. admonition:: Challenge
 
    Add two rules to the ``Snakefile``:
 
@@ -410,15 +410,16 @@ Actually running would happen if you remove the ``-n`` flag. Note that I've adde
    - ``rule supermatrix`` - infer the final tree (target filename: ``super.treefile``) based the supermatrix created from the individual gene alignments
 
    Further, make sure your workflow includes the following genes:
+
    - 409625at7742
    - 409719at7742
    - 413149at7742
    - 42971at7742
    - 97645at7742
 
-   A possible solution can be found `here <https://github.com/chrishah/phylogenomics_intro_vertebrata/blob/main/backup/Snakefile_with_ml>`_. It also ships with the repository ``backup/Snakefile_with_ml``. 
+   A possible solution can be found `here <https://github.com/chrishah/phylogenomics_intro_vertebrata/blob/main/backup/Snakefile_with_ml>`_. It also ships with the repository ``backup/Snakefile_with_ml`` or ``backup/Snakefile_with_ml_local``.
 
-   The snakemake call could look something like this:
+   The snakemake call could look something like this (assuming you've first put a file called ``Snakefile`` in place):
 
    .. code:: bash
 

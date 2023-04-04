@@ -96,9 +96,10 @@ underscores, rather than spaces) - see example for *L. chalumnae* above.
 .. warning::
 
    Since these genomes are relatively large BUSCO takes quite a while to run so this step has been already done for you.
+   For a separate session detailing common steps for evaluating draft genome assemblies, including an example on how to run BUSCO, we refer you to `this <https://github.com/chrishah/post-assembly-intro>`_ repo.
 
 A reduced representation of the BUSCO results for each species ships
-with the repository in the directory
+with our repository in the directory
 ``results/orthology/busco/busco_runs``.
 
 Take a few minutes to explore the reports.

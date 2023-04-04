@@ -3,11 +3,12 @@ Exercise 2 - Creating a self sustained bioinformatic pipeline
 
 Phylogenomics tutorial based on BUSCO genes
 
-***Disclaimer*** To follow the demo and make the most of it, it helps if
-you have some basic skills with running software tools and manipulating
-files using the Unix shell command line. It assumes you have Docker
-installed on your computer (tested with Docker version 18.09.7, build
-2d0083d; on Ubuntu 18.04).
+.. admonition:: Disclaimer
+
+  To follow the demo and make the most of it, it helps if
+  you have some basic skills with running software tools and manipulating
+  files using the Unix shell command line. It assumes you have Singularity
+  installed on your computer (tested with Singularity version 3.6.3 on Ubuntu 18.04).
 
 Introduction
 ------------
@@ -15,9 +16,9 @@ Introduction
 We will be reconstructing the phylogenetic relationships of some
 (iconic) vertebrates based on previously published whole genome data.
 The list of species we will be including in the analyses, and the URL
-for the data download can be found in this table.
+for the data download can be found in `this <https://github.com/chrishah/phylogenomics_intro_vertebrata/blob/main/data/samples.csv>`_ table.
 
-All software used in the demo is deposited as Docker images on Dockerhub
+All software used in the demo is deposited as Docker images on `Dockerhub <https://hub.docker.com/>`_
 and all data is freely and publicly available.
 
 The workflow we will demonstrate is as follows:
@@ -59,7 +60,7 @@ and have a look. And indeed we are
 
 Let's get it downloaded. Note that the ``(user@host)-$`` part of the
 code below just mimics a command line prompt. This will look differently
-on each computer. The command you actually need to exectue is the part
+on each computer. The command you actually need to execute is the part
 after that, so only, e.g. ``mkdir assemblies``:
 
 .. code:: bash
@@ -106,11 +107,24 @@ Take a few minutes to explore the reports.
 
 Now, assuming that we ran BUSCO across a number of genomes, we're going
 to select us a bunch of BUSCO genes to be included in our phylogenomic
-analyses. Let's get and overview.
+analyses. Let's get an overview.
 
 We have a script to produce a matrix of presence/absence of BUSCO genes
-across multiple species. Let's try it out. In this tutorial we'll be
-using Docker containers through Singularity.
+across multiple species. Let's try it out. 
+
+.. admonition:: Important Information
+
+  In this tutorial we'll be using Docker containers through Singularity.
+  When calling `singularity exec docker://<containername:version>` as below the corresponding container will be downloaded from Dockerhub automatically if it is not yet present locally. This is very convenient, but might in some instances take a bit of time. If you are doing this exercise as part of a course you might be provided with local copies of the images to save some time. 
+
+  **Please wait here to get instructions**
+
+  The following command would download the image and safe it to a local `*.sif` file.
+  .. code:: bash
+     
+     (user@host)-$ singularity pull docker://reslp/biopython_plus:1.77
+     (user@host)-$ ls -hrlt
+
 
 .. code:: bash
 

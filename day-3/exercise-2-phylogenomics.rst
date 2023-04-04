@@ -105,13 +105,6 @@ Take a few minutes to explore the reports.
 
 **3.) Prefiltering of BUSCO groups**
 
-Now, assuming that we ran BUSCO across a number of genomes, we're going
-to select us a bunch of BUSCO genes to be included in our phylogenomic
-analyses. Let's get an overview.
-
-We have a script to produce a matrix of presence/absence of BUSCO genes
-across multiple species. Let's try it out. 
-
 .. admonition:: Important Information
 
   In this tutorial we'll be using Docker containers through Singularity.
@@ -119,20 +112,23 @@ across multiple species. Let's try it out.
 
   **Please wait here to get instructions**
 
-  If you are doing this exercise as part of a course you might be provided with local copies of the images to save some time. Please doublecheck with your instructor(s) if this is the case.
+  If you are doing this exercise as part of a course you might be provided with local copies of the images to save some time. 
 
-  In some courses for example you'll find local `*sif` files in `~/Share/singularity/`.
-  If this is the case you can use these instead of the images from the cloud, so you can replace a singularity call:
+  In some courses for example you'll find local ``*sif`` files in ``~/Share/singularity/`` - Please doublecheck with your instructor(s) if this is the case.
+
+  If it is the case you can use the local files instead of the images from the cloud, so you can replace a singularity call:
 
   .. code-block:: bash
 
-     (user@host)-$ singularity exec docker://reslp/biopython_plus:1.77 <rest of the command>
+     (user@host)-$ singularity exec docker://reslp/biopython_plus:1.77 \
+                   <rest of the command>
 
   with:
   
   .. code-block:: bash
 
-     (user@host)-$ singularity exec ~/Share/singularity/biopython_plus_1.77.sif  <rest of the command>
+     (user@host)-$ singularity exec ~/Share/singularity/biopython_plus_1.77.sif \
+                   <rest of the command>
 
 
   FYI, the following command would download the image and safe it to a local `*.sif` file.
@@ -141,6 +137,14 @@ across multiple species. Let's try it out.
      
         (user@host)-$ singularity pull docker://reslp/biopython_plus:1.77
         (user@host)-$ ls -hrlt
+
+
+Now, assuming that we ran BUSCO across a number of genomes, we're going
+to select us a bunch of BUSCO genes to be included in our phylogenomic
+analyses. Let's get an overview.
+
+We have a script to produce a matrix of presence/absence of BUSCO genes
+across multiple species. Let's try it out. 
 
 
 .. code:: bash

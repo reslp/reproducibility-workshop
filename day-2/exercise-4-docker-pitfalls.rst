@@ -51,7 +51,7 @@ Now, check what metadata this file has attached to it.
 
    (user@host)-$ ls -hl file.from.user.txt
 
-The third column in the answer you get shows the user that is the owner of this file, i.e. who created it: e.g. ``user22`` and in the fourth column you see through which usergroup the user was acting when he/she created it: e.g. ``user22``. Normally, each user has it's own usergroup per default.
+The third column in the answer you get shows the user that is the owner of this file, i.e. who created it: e.g. ``user22`` and in the fourth column you see through which usergroup the user was acting when s*he created it: e.g. ``user22``. Normally, each user has it's own usergroup per default.
 
 Now, let's create a file through a container.
 

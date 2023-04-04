@@ -140,18 +140,15 @@ Many people have struggled with the above mentioned aspects of easily taking not
 Additional resources
 ====================
 
-Once you start using Markdown more extensively, you will realize that it is used in many different settings that could complement your work. Here are some examples where Markdown is used. Sometimes these could use Markdown dialects which have additional features:
-
+Once you start using Markdown more extensively, you will realize that it is used in many different settings that could complement your work. Here are some examples where Markdown is used. In fact, what we have shown today is the backbone technology of several software solutions such as RMarkdown in RStudio or Quarto. Although these solutions have additional features, the underlying concept of having pandoc based conversion of different Markup languages is the samein all of them.
 
 - `R Markdown <https://rmarkdown.rstudio.com/>`_
+- `Quarto <https://quarto.org/docs/guide/>`_
 - `Markdown in Jupyter Notebooks <https://www.datacamp.com/tutorial/markdown-in-jupyter-notebook>`_ 
 - `Markdown guide <https://www.markdownguide.org/>`_
 - `Markdown cheatsheet <https://github.com/adam-p/markdown-here/wiki/Markdown-Cheatsheet>`_
 - `John Gruber inventor of Markdown <https://daringfireball.net/projects/markdown/>`_
  
-
-
-
 
 
 

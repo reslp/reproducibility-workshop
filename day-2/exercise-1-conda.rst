@@ -360,7 +360,7 @@ This is strange! Shouldn't conda help us solve these issues? Apparently it does 
 
 .. admonition:: Exercise
 
-   Your task is now to try to install ete3 and ete_toolchain into the same environment. The underlying issue is discussed `here <https://github.com/etetoolkit/ete/issues/500>`_ .
+   Your task is to try to install ete3 and ete_toolchain into the same environment. The underlying issue is discussed `here <https://github.com/etetoolkit/ete/issues/500>`_ .
 
 Once you have solved this, we can look at all packages installed through the etetoolkit channel:
 
@@ -386,7 +386,7 @@ Once you have solved this, we can look at all packages installed through the ete
    t_coffee                  11.00                h99d273f_0    etetoolkit
    trimal                    1.4                  h87cb4c3_0    etetoolkit
 
-You may recognize several of these programs. Most of them are standard phylogenetic software which ete3 interacts with, however the used version here are pretty outdated. The ``ete`` channel does not provide more recent versions. However we may need a more recent version for some other task we would like to perform. For example we can try to update ``iqtree`` (a Maximum-Likelihood phylogenetic tree building software) to it's latest version available on bioconda:
+You may recognize several of these programs. Most of them are standard phylogenetic software packages which ete3 uses, however the versions here are pretty outdated. The ``ete`` channel does not provide more recent versions. However we may need a more recent version for some other task we would like to perform. For example we can try to update ``iqtree`` (a Maximum-Likelihood phylogenetic tree building software) to it's latest version available on bioconda:
 
 .. code-block:: bash
 
@@ -581,7 +581,7 @@ While this particular example may not be very problematic in a real life scenari
 
 .. admonition:: Exercise
 
-   Your task now is to solve the issue so that the ggplot version shown in conda and R match again.
+   Your task is to solve the issue so that the ggplot version shown in conda and R match again.
 
 
 Summary: Tips to increase reproducibility with conda
@@ -600,10 +600,10 @@ From what we have seen in the exercises above, several hurdles can come in the w
 When working with R in conda
 ----------------------------
 
-- Alawys install R first before installing packages.
+- Always install R first before installing packages.
 - Avoid installing R packages from different channels
 - Don't mix R packages installed through conda and directly in R (eg. with ``install.packages()``).
-- If possible avoid the r channel and make sure to use a more up to date channel.
+- If possible avoid the r channel and make sure to use a more up-to-date channel.
 - Keep your environments small
 - Be prepared to run into problems.
 

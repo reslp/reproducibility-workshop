@@ -387,40 +387,42 @@ Now, you could extend the analyses to further genes.
 
 .. code:: bash
 
-    (user@host)-$ snakemake -n -rp auto/trimmed/193525at7742.clustalo.trimal.fasta auto/trimmed/406935at7742.clustalo.trimal.fasta
+    (user@host)-$ snakemake -n -rp \
+                  auto/trimmed/193525at7742.clustalo.trimal.fasta \
+                  auto/trimmed/406935at7742.clustalo.trimal.fasta
 
 Actually running would happen if you remove the ``-n`` flag. Note that I've added another flag (``--use-singularity``) which tells snakemake to use containers for certain rules if so indicated in the ``Snakefile``. 
 
 .. code:: bash
 
-    (user@host)-$ snakemake -rp --use-singularity --jobs 4 auto/trimmed/193525at7742.clustalo.trimal.fasta auto/trimmed/406935at7742.clustalo.trimal.fasta
+    (user@host)-$ snakemake -rp --use-singularity --jobs 4 \
+                  auto/trimmed/193525at7742.clustalo.trimal.fasta \
+                  auto/trimmed/406935at7742.clustalo.trimal.fasta
 
 **Well Done!**
 
 
-.. admonition:: Exercise 1
+.. admonition:: Exercise
 
    Add two rules to the ``Snakefile``:
 
    - ``rule gene_tree`` - infer a gene tree for each alignment
-   - ``rule supermatrix`` - infer the final tree for the supermatrix created from the individual gene alignments
+   - ``rule supermatrix`` - infer the final tree (target filename: ``super.treefile``) based the supermatrix created from the individual gene alignments
+
+   Further, make sure your workflow includes the following genes:
+   - 409625at7742
+   - 409719at7742
+   - 413149at7742
+   - 42971at7742
+   - 97645at7742
 
    A possible solution can be found `here <https://github.com/chrishah/phylogenomics_intro_vertebrata/blob/main/backup/Snakefile_with_ml>`_. It also ships with the repository ``backup/Snakefile_with_ml``. 
 
+   The snakemake call could look something like this:
 
-.. admonition:: Exercise 2
+   .. code:: bash
 
-  Run your pipeline including the following genes:
-
-  - 409625at7742
-  - 409719at7742
-  - 413149at7742
-  - 42971at7742
-  - 97645at7742
-
-.. code:: bash
-
-    (snakemake) (user@host)-$ snakemake -nrp --use-singularity --jobs 4 super.treefile
+       (snakemake) (user@host)-$ snakemake -nrp --use-singularity --jobs 4 super.treefile
 
 
 **Well Done!!!**
@@ -430,7 +432,7 @@ All that you need now is to practice .. ;-)
 
 **6.) Full automation**
 
-We are working on a pipeline for automating the entire process of
+We have developed a pipeline for automating the entire process of
 phylogenomic analyses from BUSCO genes (for now). You can find it
 `here <https://github.com/reslp/phylociraptor>`__.
 

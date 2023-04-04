@@ -180,9 +180,12 @@ A bunch of files have been created in your current directory
 
 **4.) For each BUSCO group**
 
-For each of the BUSCOs that passed we want to: - do multiple sequence
-alignment - filter the alignment, i.e. remove ambiguous/problematic
-positions - build a phylogenetic tree
+For each of the BUSCOs that passed we want to:
+
+  - do multiple sequence alignment
+  - filter the alignment, i.e. remove ambiguous/problematic
+positions
+  - build a phylogenetic tree
 
 Let's go over a possible solution step by step for gene:
 ``409625at7742``.

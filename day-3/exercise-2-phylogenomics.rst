@@ -183,8 +183,7 @@ A bunch of files have been created in your current directory
 For each of the BUSCOs that passed we want to:
 
   - do multiple sequence alignment
-  - filter the alignment, i.e. remove ambiguous/problematic
-positions
+  - filter the alignment, i.e. remove ambiguous/problematic positions
   - build a phylogenetic tree
 
 Let's go over a possible solution step by step for gene:

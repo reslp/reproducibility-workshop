@@ -115,15 +115,32 @@ across multiple species. Let's try it out.
 .. admonition:: Important Information
 
   In this tutorial we'll be using Docker containers through Singularity.
-  When calling `singularity exec docker://<containername:version>` as below the corresponding container will be downloaded from Dockerhub automatically if it is not yet present locally. This is very convenient, but might in some instances take a bit of time. If you are doing this exercise as part of a course you might be provided with local copies of the images to save some time. 
+  When calling `singularity exec docker://<containername:version>` as below the corresponding container will be downloaded from Dockerhub automatically if it is not yet present locally. This is very convenient, but might in some instances take a bit of time. 
 
   **Please wait here to get instructions**
 
-  The following command would download the image and safe it to a local `*.sif` file.
-  .. code:: bash
+  If you are doing this exercise as part of a course you might be provided with local copies of the images to save some time. Please doublecheck with your instructor(s) if this is the case.
+
+  In some courses for example you'll find local `*sif` files in `~/Share/singularity/`.
+  If this is the case you can use these instead of the images from the cloud, so you can replace a singularity call:
+
+  .. code-block:: bash
+
+     (user@host)-$ singularity exec docker://reslp/biopython_plus:1.77 <rest of the command>
+
+  with:
+  
+  .. code-block:: bash
+
+     (user@host)-$ singularity exec ~/Share/singularity/biopython_plus_1.77.sif  <rest of the command>
+
+
+  FYI, the following command would download the image and safe it to a local `*.sif` file.
+
+     .. code-block:: bash
      
-     (user@host)-$ singularity pull docker://reslp/biopython_plus:1.77
-     (user@host)-$ ls -hrlt
+        (user@host)-$ singularity pull docker://reslp/biopython_plus:1.77
+        (user@host)-$ ls -hrlt
 
 
 .. code:: bash

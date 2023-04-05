@@ -65,12 +65,21 @@ Another problem is that if you run a script again (on purpose or by accident) th
 GNU Make
 --------
 
-`GNU Make <https://www.gnu.org/software/make/>`_, make or sometimes ``gmake`` was first introduced in 1976 to build the source code of Unix and it has a long and successful track record in computer science. Typically make is used to compile software from source code. Before ``make`` existed Unix was compiled using custom shell scripts. If you have installed software on Linux or Unix you may be familiar with commands like ``make``, ``make install`` or ``make clean``. As already mentioned ``make`` is usually used to compile software, however it can be used to automate almost any task and even large bioinformatics projects. For example `LongStitch <https://github.com/bcgsc/longstitch>`_) uses make as a workflow manager. We will now create our own small workflow using GNU Make.
+`GNU Make <https://www.gnu.org/software/make/>`_, make or sometimes ``gmake`` was first introduced in 1976 to build the source code of Unix and it has a long and successful track record in computer science. Typically make is used to compile software from source code. Before ``make`` existed Unix was compiled using custom shell scripts. If you have installed software on Linux or Unix you may be familiar with commands like ``make``, ``make install`` or ``make clean``. As already mentioned ``make`` is usually used to compile software, however it can be used to automate almost any task and even large bioinformatics projects. For example `LongStitch <https://github.com/bcgsc/longstitch>`_ uses make as a workflow manager. We will now create our own small workflow using GNU Make.
 
 How does make work?
 ~~~~~~~~~~~~~~~~~~~
 
 Make uses the concept of rules. You can think of rules as individual tasks that are executed in a given order. The order is determined by the output of other rules. If we take our example from above, we have already identified the steps (and their order) for the whole workflow to complete successfully. Each rule has a target (the output) and one (or more) dependencies (the input). The rule then contains all instructions (the recipe) to build the output from the input. This is a common concept also in other workflow managers.
+
+
+.. hint::
+
+   Let us summarize some important terms used in workflow managers again:
+   - **rule**: A task that will be performed. Rules are usually ordered and have input and outputs.
+   - **target**: The output of a rule. This can be one or many files or data.
+   - **prerequisites**: The input of a rule. This can be one or many files or data as well.
+   - **recipe**: The instructions of the rule that create the output from the input. This can be singel bash commands or long scripts external software.
 
 Let's have a look at the general structure of a rule in make:
 
@@ -80,19 +89,21 @@ Let's have a look at the general structure of a rule in make:
         recipe
         …
  
-Here is how this could look for our task of converting a file to lower case:
+Now, here is how our task of converting a file to lower case could look like:
 
 .. code-block:: bash
 
    lower1.txt: combined1.txt
         cat combined1.txt | tr [:upper:] [:lower:] > lower1.txt
 
-The *target* (output) of this rule is the file ``lower1.txt`` and the *dependency* (input) is ``combined1.txt``. The *recipe* for this rule is the second line. Typically all rules are combined into one or more so-called **Makefiles** which typically are named ``Makefile`` or ``makefile``.
+The *target* (output) of this rule is the file ``lower1.txt`` and the *dependency* (input) is ``combined1.txt``. The *recipe* for this rule is the second line.
+
+ Typically all rules are combined into one or more so-called **Makefiles** which typically are named ``Makefile`` or ``makefile``.
 
 Our simple test workflow in make
 ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 
-How would our simple test workflow look written in make? Let us have a look at the complete ``Makefile`` and then discuss it.
+How would our simple test workflow look when written in make? For this we have again separated the different steps into individual tasks. Let us have a look at the complete ``Makefile`` and then discuss it.
 
 .. code-block:: bash
    
@@ -125,7 +136,7 @@ In the first line, the target and input is specified, seperated by a colon (:). 
 
 .. tip::
 
-   If you are familiar with ``bash`` scripting, the escaping rules and formatting of multiline commands may look weird. Keep in mind that although it looks similar ``make`` is not ``bash`` and the syntax is different. Here are a few links where escaping rules are explained in more detail:
+   If you are familiar with ``bash`` scripting, makes way of formatting multiline commands and character escaping may look weird. Keep in mind that although it looks similar ``make`` is not ``bash`` and the syntax is different. Here are a few links where escaping is explained in more detail:
 
    - `Escaping $ in Makefiles <https://til.hashrocket.com/posts/k3kjqxtppx-escape-dollar-sign-on-makefiles>`_
    - `GNU Make Escaping: A Walk on the Wild Side <https://www.cmcrossroads.com/article/gnu-make-escaping-walk-wild-side>`_
@@ -163,13 +174,17 @@ Here are some other examples:
    rm -rf combined1.txt lower1.txt
    $ make all # equivalent to make (in this case)
 
+.. tip::
+
+   You can also pass Makefile to make which have a different name with the ``-f``flag. For example you can write: ``make -f mymakefile``.
+
 This is it. Given that the makefile is correct and it finds all the files, this is all you have to do to execute the workflow and you should find the final output file ``lower.txt`` in the same directory.
 
 Behind the scenes, ``make`` searches for a Makefile in the present directory and executes the first rule it finds in the file. Since the first rule is the *all* rule, which requires the ``lower.txt`` file, make will continue to search for a rule called ``lower.txt``. It sees that the lower.txt rule requires the ``combined.txt`` file which is created in the according rule. The order of rule executon thus is: combined.txt -> lower.txt -> all.
 
 .. admonition:: Exercise
 
-   Play around with this workflow. Run make again and see what happens. Try to break the workflow by changing the Makefile. Which error messages do you get? Can you change the workflow so that it only usestwo files instead of four? Can you add another rule (eg. to create another file in upper case)?
+   Play around with this workflow. Run make again and see what happens. Try to break the workflow by changing the Makefile. Which error messages do you get? Can you change the workflow so that it only usestwo files instead of four? Can you add another rule (eg. to create another file in upper case)? `Here <https://github.com/reslp/reproducibility-workshop/blob/main/day-3/exercise-solutions/exercise-1-wm-solutions.md>`_ you can find solutions to this exercise.
 
 
 Parallelization with make
@@ -214,7 +229,7 @@ We can now execute the workflow in parallel:
 
 .. admonition:: Exercise
 
-   Your task now is to apply this logic and extend your workflow to use parallelization. Make sure that you have at least three input directories and then run the workflow in parallel.
+   Your task now is to apply this logic and extend your workflow to use parallelization. Make sure that you have at least three input directories and then run the workflow in parallel. As an extra, can you add another rule to combine all the lower case files into a single output file?
 
 Many more possibilities
 ~~~~~~~~~~~~~~~~~~~~~~~
@@ -235,7 +250,7 @@ We will soon look at workflow management systems tailored more specifically for 
 Snakemake
 ---------
 
-`Snakemake <https://snakemake.readthedocs.io/en/stable/>`_ is another commonly used workflow management system with lots of features. Many bioinformatics pipelines use snakemake such as our own `phylociraptor <https://github.com/reslp/phylociraptor>`_. Snakemake also heavily uses the concept of rules and wildcards and has many features allowing it to operate on HPC clusters, or other cloud computing infrastructures such as AWS, Google cloud and a lot more. Snakemake is developed rapidly and it can happen that snakemake pipelines written in older versions of snakemake stop working in newer versions. It is therefore important to be version specific when using it.
+`Snakemake <https://snakemake.readthedocs.io/en/stable/>`_ is another commonly used workflow management system with lots of features. Many bioinformatics pipelines use snakemake such as our own `phylociraptor <https://github.com/reslp/phylociraptor>`_. Snakemake also heavily uses the concept of **rules** and **wildcards** and has many features allowing it to operate on HPC clusters, or other cloud computing infrastructures such as AWS, Google cloud and a lot more. Snakemake is developed rapidly and it can happen that snakemake pipelines written in older versions of snakemake have to be adjusted in newer versions. It is therefore important to be version specific when using it.
 
 
 We have installed snakemake in a conda environment for you already. You can activate it like so:
@@ -291,12 +306,12 @@ In snakemake rules are specified by the keyword ``rule`` followed by the rule na
 
 Similar to GNU make we can have an ``all`` rule. As you can see, the ``all`` rules does not have an output. It only requires the ``lower1.txt`` file as ``input``.
 
-There are many additional directives in snakemake to modify how rules work. For example you can specify a conda yml file with ``conda:``. Snakemake will then create and activate a conda environment for you and run the code in the shell part inside this environment. Similarly with ``container:`` cou can specify a singularity container which is then used as runtime environment for you code. With ``params:`` you can specify additional parameters eg. values read from a YAML file. 
+There are many additional directives in snakemake to modify how rules work. For example you can specify a conda yml file with ``conda:``. Snakemake will then create and activate a conda environment for you and run the code in the shell part inside this environment. Similarly with ``container:`` you can specify a singularity container which is then used as runtime environment for you code. With ``params:`` you can specify additional parameters eg. values read from a YAML file. 
 
 Executing snakemake workflows
 ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 
-Similar to GNU make, snakemake expects a file containing all the rules to be present where you run your workflow. This file is called ``Snakefile``. If the ``Snakefile`` exists, you can run the workflow like so:
+Similar to GNU make, snakemake expects a file with all the rules to be present where you run your workflow. This file is called ``Snakefile``. If the ``Snakefile`` exists, you can run the workflow like so:
 
 .. code-block:: bash
 
@@ -346,7 +361,7 @@ Similar to GNU make, snakemake expects a file containing all the rules to be pre
    $
 
 
-Snakemake has many additional parameters which you can use to change its behavior. It can become overwhelming quickly If you look at ``snakemake --help`` and specif snakemake commands can quickly become very long! Here are some additional parameters we think are important to get started with snakemake: 
+Snakemake has many additional parameters which you can use to change its behavior. It can become overwhelming quickly If you look at ``snakemake --help`` and specific snakemake commands can quickly become very long! Here are some additional parameters we think are important to get started with snakemake: 
 
 - ``-p`` prints also the code inside the shell directives on screen.
 - ``-n, --dry-run`` performs a *dry run*. This lists all the rules to be executed without actually running them
@@ -367,7 +382,7 @@ From this graph we assume that our workflow works as we indended. In more comple
 
 .. admonition:: Exercise
 
-   Create a snakefile and run the workflow. Figure out how to create a rule-graph of the workflow.
+   Create a snakefile and run the workflow. Figure out how to create a rule-graph of the workflow. A solution can be found `here <https://github.com/reslp/reproducibility-workshop/blob/main/day-3/exercise-solutions/exercise-1-wm-solutions.md>`_.
 
 
 Generalizing the workflow
@@ -501,7 +516,7 @@ This does not automatically mean that the rule runs faster. It just means that s
 Nextflow
 --------
 
-Another, slightly different Workflow manager is `Nextflow <https://nextflow.io/>`_. It follows a slightly different paradigm than make and Snakemake and it uses a different terminology. Rules are called *processes* and different processes communicate through so-called *channels*. A *channel* is similar to a pipe in the Linuxshell, but there is a bit more to it. If you are interested, you can look `here <https://www.nextflow.io/docs/latest/channel.html>`_ to learn more. One big difference to make and snakemake is that in Nextflow input and output of different *processes* do not necessarily have to be files. Rather, values can be passed between processes without writing intermediate results to files. This can be very nice to reduce the number of files but it can also make it more complicated if you are not familiar with piping. To make this nextflow example easier to compare with the same implementation in make and snakemake, we will create outputfiles for all intermediate steps. Nextflow is based on Java mainly using the `Apache Groovy <https://en.wikipedia.org/wiki/Apache_Groovy>`_ super-set. We are no experts with Nextflow, however we wanted to show you how it looks in case it is a system that you would like to pursue further. Here is how our workflow looks like:
+Another, slightly different Workflow manager is `Nextflow <https://nextflow.io/>`_. It follows a slightly different paradigm than make and Snakemake and it uses a different terminology. Rules are called *processes* and different processes communicate through so-called *channels*. A *channel* is similar to a pipe in the Linux shell, but there is a bit more to it. If you are interested, you can look `here <https://www.nextflow.io/docs/latest/channel.html>`_ to learn more. One big difference to make and snakemake is that in Nextflow input and output of different *processes* do not necessarily have to be files. Rather, values can be passed between processes without writing intermediate results to files. This can be very nice to reduce the number of files but it can also make it more complicated if you are not familiar with piping. To make this nextflow example easier to compare with the same implementation in make and snakemake, we will create outputfiles for all intermediate steps. Nextflow is based on Java mainly using the `Apache Groovy <https://en.wikipedia.org/wiki/Apache_Groovy>`_ super-set. We are no experts with Nextflow, however we wanted to show you how it looks in case it is a system that you would like to pursue further. Here is how our workflow looks like:
 
 
 .. code-block:: bash

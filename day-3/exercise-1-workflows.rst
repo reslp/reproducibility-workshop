@@ -76,6 +76,7 @@ Make uses the concept of rules. You can think of rules as individual tasks that 
 .. hint::
 
    Let us summarize some important terms used in workflow managers again:
+
    - **rule**: A task that will be performed. Rules are usually ordered and have input and outputs.
    - **target**: The output of a rule. This can be one or many files or data.
    - **prerequisites**: The input of a rule. This can be one or many files or data as well.

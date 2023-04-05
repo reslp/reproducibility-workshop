@@ -31,8 +31,9 @@ The workflow we will demonstrate is as follows:
    - build alignment
    - trim alignment
    - identify model of protein evolution
-   - infer phylogenetic tree (ML) - construct supermatrix from individual gene alignments
+   - infer phylogenetic tree (ML)
 
+ - construct supermatrix from individual gene alignments
  - infer phylogenomic tree with paritions corresponding to the original gene alignments using ML
 
 Let's begin

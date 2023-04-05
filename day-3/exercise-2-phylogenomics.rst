@@ -425,6 +425,14 @@ Actually running would happen if you remove the ``-n`` flag. Note that I've adde
 
        (snakemake) (user@host)-$ snakemake -nrp --use-singularity --jobs 4 super.treefile
 
+   Also check out snakemakes functionality to generate dags (directed acyclic graphs)
+   notice that I am using a backup Snakefile ``backup/Snakefile_with_ml_from_dir``:
+
+   .. code:: bash
+
+      (snakemake) (user@host)-$ snakemake -n --dag \
+                  -s backup/Snakefile_with_ml_from_dir | dot -Tpdf > dag.from.dir.pdf
+
 
 **Well Done!!!**
 

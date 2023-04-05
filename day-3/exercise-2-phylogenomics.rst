@@ -442,15 +442,16 @@ The current repository is actually a snapshot of
 directory of this repository you could resume an analysis as shown
 below. If there is time we'll talk about the setup a little bit.
 
-The main things you need are: - config file
-``data/config.vertebrata_minimal.yaml`` - sample file
-``data/vertebrata_minimal.csv``
+The main things you need are:
+
+  - config file ``data/config.vertebrata_minimal.yaml``
+  - sample file ``data/vertebrata_minimal.csv``
 
 A few steps were already run for you - see the file
-``data/preparation.md``
+``data/preparation.md``, and you could resume and finish the analyses with the following
+commands.
 
 .. code:: bash
-
 
     #get table
     ./phylociraptor orthology -t serial=2 --config-file data/config.vertebrata_minimal.yaml

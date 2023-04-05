@@ -27,10 +27,12 @@ The workflow we will demonstrate is as follows:
  - Identifying complete BUSCO genes in each of the genomes
  - pre-filtering of orthology/BUSCO groups
  - For each BUSCO group:
+
    - build alignment
    - trim alignment
    - identify model of protein evolution
    - infer phylogenetic tree (ML) - construct supermatrix from individual gene alignments
+
  - infer phylogenomic tree with paritions corresponding to the original gene alignments using ML
 
 Let's begin

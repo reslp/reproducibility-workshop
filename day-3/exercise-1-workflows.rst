@@ -23,7 +23,7 @@ First, let us prepare the working environment for today. Run these commands in y
 Using commandline scripting
 ----------------------------
 
-As you probably figured out, what we want to do can be achieved by using bash oneliner. Three possible solution can be found `here <https://github.com/reslp/reproducibility-workshop/additional-data/simple-workflow-example/bash_solutions.md`_.
+As you probably figured out, what we want to do can be achieved by using bash oneliner. Three possible solution can be found `here <https://github.com/reslp/reproducibility-workshop/additional-data/simple-workflow-example/bash_solutions.md>`_.
 
 However we will now try to divide this command into individual steps for the sake of this exercise and then make an automated workflow out of it. 
 

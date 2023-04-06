@@ -578,7 +578,7 @@ Looks like it still shows the version we installed through conda. There is somet
 
 While this particular example may not be very problematic in a real life scenario, you can see how easy it is to mess up your environment and R set up and loose reproducibility. Especially when you only share your conda environment file without the information of how you installed R packages. 
 
-.. hint::
+.. warning::
 
    You may also encounter a different problem when trying to install ggplot2 inside the R environment directly. In this case the installation with devtools works ok, but when you try to load the package you will see something like this:
 
@@ -590,7 +590,7 @@ While this particular example may not be very problematic in a real life scenari
        In addition: Warning message:
        In get(Info[i, 1], envir = env) : internal error -3 in R_decompress1
 
-   As you can see, your ggplot package now is unuseable. The conda and R installed versions do collide somehow.
+   As you can see, your ggplot package now is unusable. The conda and R installed versions do collide somehow.
 
 .. admonition:: Exercise
 

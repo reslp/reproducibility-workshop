@@ -531,7 +531,6 @@ That said, it *is* possible to install a specific version of a package, given yo
   
    If you are working in ``R`` inside a ``conda`` environment, installing devtools (and also many other packages) can fail. This is because several requirements that R needs to compile packages are missing. This is strange since we would expect that ``conda`` managed to install everything that R needs. This does not seem to be the case.
 
-
 After this has finished, we can load the package and look at the output of ``sessionInfo()`` again:
 
 .. code-block:: bash
@@ -578,6 +577,20 @@ It looks like we now have a newer version of ggplot2 installed directly through 
 Looks like it still shows the version we installed through conda. There is something wrong here! If we would share our conda environment, it would be different from what we are actually using (inside the R console).
 
 While this particular example may not be very problematic in a real life scenario, you can see how easy it is to mess up your environment and R set up and loose reproducibility. Especially when you only share your conda environment file without the information of how you installed R packages. 
+
+.. hint::
+
+   You may also encounter a different problem when trying to install ggplot2 inside the R environment directly. In this case the installation with devtools works ok, but when you try to load the package you will see something like this:
+
+   .. code-block:: bash
+
+       >library(ggplot2)
+       Error: package or namespace load failed for ‘ggplot2’ in get(Info[i, 1], envir = env):
+        lazy-load database '/opt/conda/envs/r-test/lib/R/library/ggplot2/R/ggplot2.rdb' is corrupt
+       In addition: Warning message:
+       In get(Info[i, 1], envir = env) : internal error -3 in R_decompress1
+
+   As you can see, your ggplot package now is unuseable. The conda and R installed versions do collide somehow.
 
 .. admonition:: Exercise
 

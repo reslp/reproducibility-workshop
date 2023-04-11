@@ -78,7 +78,7 @@ after that, so only, e.g. ``mkdir assemblies``:
     (user@host)-$ wget https://ftp.ncbi.nlm.nih.gov/genomes/all/GCF/000/225/785/GCF_000225785.1_LatCha1/GCF_000225785.1_LatCha1_genomic.fna.gz
 
     #decompress for future use
-    (user@host)-$ gunzip GCF_000237925.1_ASM23792v2_genomic.fna.gz
+    (user@host)-$ gunzip GCF_000225785.1_LatCha1_genomic.fna.gz
 
     #leave the directory for now
     (user@host)-$ cd ../..

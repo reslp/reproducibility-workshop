@@ -5,7 +5,7 @@ For a rendered version of the information in this repository go [here](https://r
 
 ## DOIs of workshops:
 
-Iteration 1: July 11-13th 2022 [![DOI](https://zenodo.org/badge/499112215.svg)](https://zenodo.org/badge/latestdoi/499112215)  
+Iteration 1: July 11-13th 2022 [![DOI](https://zenodo.org/badge/DOI/10.5281/zenodo.6923985.svg)](https://doi.org/10.5281/zenodo.6923985)
 Iteration 2: Apr 03-05th 2023 [![DOI](https://zenodo.org/badge/DOI/10.5281/zenodo.7816800.svg)](https://doi.org/10.5281/zenodo.7816800)
 
 

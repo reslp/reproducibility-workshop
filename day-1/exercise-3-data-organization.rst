@@ -23,7 +23,7 @@ The suggested directory structure is intuitive (it follows basic naming conventi
 
     A quick recapitulation of the proposed structure:
 	
-    bin			contains scripts and execuables for performing different analyses
+    bin			contains scripts and executables for performing different analyses
     data		contains all raw-data
     results		contains analyses results. Ideally within subdirectories.
     tmp			Location of temporary files. The "playground" of your project
@@ -43,7 +43,7 @@ Keeping track of your work
 The digital lab book
 ~~~~~~~~~~~~~~~~~~~~
 
-Apart from a clear and transparent directory structure, it is very important to keep track of what you are doing. If you have experience of working in a wet-lab, you are probably familiar with the concept of having a lab book. In a lab book you keep track of what exactly you did in the lab eg. which protocols you followed and how you altered them, how samples were treated etc. Usually lab-books have to stay in the lab even after you leave. We like you to think of computer environments as labs as well. This means that we need to make sure our "samples" are properly labeled (stored in well-organized project folders) and we keep a lab book containing instructions of what exactly we did. Similar to the wet-lab such notes will help to repeat analyses and they are an important step to increase reproducibility.
+Apart from a clear and transparent directory structure, it is very important to keep track of what you are doing. If you have experience of working in a wet-lab, you are probably familiar with the concept of having a lab book. In a lab book you keep track of what exactly you did in the lab eg. which protocols you followed and how you altered them, how samples were treated etc. Usually lab-books have to stay in the lab even after you leave for a different job. We like you to think of computer environments as labs as well. This means that we need to make sure our "samples" are properly labeled (stored in well-organized project folders) and we keep a lab book containing instructions of what exactly we did. Similar to the wet-lab such notes will help to repeat analyses and they are an important step to increase reproducibility.
 
 Requirements
 ~~~~~~~~~~~~
@@ -54,7 +54,7 @@ Ideally a digital lab book should be:
 
 - Accessible (this implies a standard file format)
 - Platform independent (not specific to Linux/Windows/MacOS)
-- Structured (in the sense that we can use headers, code etc and make them distinguishable)
+- Structured (in the sense that we can make different sections such as code, plain text, headers etc distinguishable)
 - Internet ready
 - Easy to read and edit
 
@@ -136,6 +136,7 @@ A powerful command-line open-source note taking application
 ===========================================================
 
 Many people have struggled with the above mentioned aspects of easily taking notes in a command line setting. A tool which combines many of the tools mentioned above to make note taking less painful is the application `nb <https://xwmx.github.io/nb/>`_. It also has several advanced features like encryption or syncing with git repositories. It is easy to use and scriptable. An introduction to nb would be beyond the scope of this course, but I suggest you give it a try. I think if you start using it you will quickly come accross the concepts mentioned in this exercise.
+
 
 Additional resources
 ====================

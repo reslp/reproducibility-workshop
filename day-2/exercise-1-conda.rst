@@ -75,12 +75,12 @@ As you can see conda offeres different commands to create and remove environment
 
 .. hint::
 
-   There are different distribution of conda which all use the ``conda`` executable. We have installed `miniconda <https://docs.conda.io/en/latest/miniconda.html>`_ which is the minimal version of conda. You may also come across anaconda. Anaconda comes with a larger number of preinstalled packages. We recommend using miniconda instead of anaconda. Especially if you want to install additional packages, dependency errors between packages could cause troubles in anaconda.
+   There are different distribution of conda which all use the ``conda`` executable. We have installed `miniconda <https://docs.conda.io/en/latest/miniconda.html>`_ which is the minimal version of conda. You may also come across anaconda. Anaconda comes with a larger number of preinstalled packages. Here we use miniconda instead of anaconda. ``conda``can sometimes be slow. Therefore faster implementations of conda have been developed in recent years. One prominent example is `mamba <https://github.com/mamba-org/mamba>`_ which is a reimplementation of conda in C++. It works as a drop-in replacement of the conda executable and we will be using it later. An even more recent alternative is `pixi <https://github.com/prefix-dev/pixi>`_ which aims to provide better support for software written in other programming languages such as R packages.
 
 .. code-block:: bash
 
    $ conda -V
-   conda 4.8.3
+   conda 4.8.2
 
 
 Additionally you can get a more detailed account of your conda installation by running :bash:`conda info`.
@@ -88,30 +88,32 @@ Additionally you can get a more detailed account of your conda installation by r
 .. code-block:: bash
 
     $ conda info
-         active environment : None
-                shell level : 0
-           user config file : /home/user/.condarc
-     populated config files : /home/user/.condarc
-              conda version : 4.8.3
-        conda-build version : not installed
-             python version : 3.7.7.final.0
-           virtual packages : __glibc=2.27
-           base environment : /home/user/.miniconda3  (writable)
-               channel URLs : https://conda.anaconda.org/bioconda/linux-64
-                              https://conda.anaconda.org/bioconda/noarch
-                              https://repo.anaconda.com/pkgs/main/linux-64
-                              https://repo.anaconda.com/pkgs/main/noarch
-                              https://repo.anaconda.com/pkgs/r/linux-64
-                              https://repo.anaconda.com/pkgs/r/noarch
-              package cache : /home/user/.miniconda3/pkgs
-                              /home/user/.conda/pkgs
-           envs directories : /home/user/.miniconda3/envs
-                              /home/user/.conda/envs
-                   platform : linux-64
-                 user-agent : conda/4.8.3 requests/2.23.0 CPython/3.7.7 Linux/5.4.0-73-generic ubuntu/18.04.5 glibc/2.27
-                    UID:GID : 1000:1000
-                 netrc file : None
-               offline mode : False
+             active environment : None
+                    shell level : 0
+               user config file : /home/ubuntu/.condarc
+         populated config files : /home/ubuntu/.condarc
+                  conda version : 4.8.2
+            conda-build version : not installed
+                 python version : 3.7.6.final.0
+               virtual packages : __glibc=2.27
+               base environment : /home/ubuntu/src/conda  (writable)
+                   channel URLs : https://conda.anaconda.org/conda-forge/linux-64
+                                  https://conda.anaconda.org/conda-forge/noarch
+                                  https://conda.anaconda.org/bioconda/linux-64
+                                  https://conda.anaconda.org/bioconda/noarch
+                                  https://repo.anaconda.com/pkgs/main/linux-64
+                                  https://repo.anaconda.com/pkgs/main/noarch
+                                  https://repo.anaconda.com/pkgs/r/linux-64
+                                  https://repo.anaconda.com/pkgs/r/noarch
+                  package cache : /home/ubuntu/src/conda/pkgs
+                                  /home/ubuntu/.conda/pkgs
+               envs directories : /home/ubuntu/src/conda/envs
+                                  /home/ubuntu/.conda/envs
+                       platform : linux-64
+                     user-agent : conda/4.8.2 requests/2.22.0 CPython/3.7.6 Linux/5.4.0-1103-aws ubuntu/16.04.5 glibc/2.27
+                        UID:GID : 1000:1000
+                     netrc file : None
+                   offline mode : False
 
 .. tip::
 
@@ -130,8 +132,8 @@ Let us create a first conda environment:
    
    
    ==> WARNING: A newer version of conda exists. <==
-     current version: 4.8.3
-     latest version: 4.13.0
+     current version: 4.8.2
+     latest version: 24.3.0
    
    Please update conda by running
    
@@ -173,12 +175,13 @@ When you run the :bash:`conda activate` command, you will see that your command 
 
 .. code-block:: bash
 
-   (myenvironment) $ conda install -c conda-forge mamba=0.23.3
+   (myenvironment) $ conda install -c bioconda bwa=0.7.4
    # output of command omitted due to length
 
-This is the basic syntax of how to install conda packages. Notice the ``=0.23.3`` after the package name. This is the exact version number of the package. It is very important to specify version numbers with conda, otherwise you will end up with the latest version available on conda and your work may not be reproducible when you recreate the environment at a later time.
+This is the basic syntax of how to install conda packages. Notice the ``=0.7.4`` after the package name. This is the exact version number of the package. It is very important to specify version numbers with conda, otherwise you will end up with the latest version available on conda and your work may not be reproducible when you recreate the environment at a later time.
 
-The package we installed is called ``mamba`` and we installed it through the `conda forge <https://conda-forge.org/>`_ channel (``-c conda-forge``) which contains over 18.000 utility packages. `mamba <https://github.com/mamba-org/mamba>`_ is a replacement for the ``conda`` command executable. While it does not have every feature ``conda`` has we still highly recommend using ``mamba`` when installing packages because it is a lot faster than regular ``conda`` when resolving dependencies.
+The package we installed is called ``bwa`` and we installed it through the `bioconda <https://bioconda.github.io/>`_ channel (``-c biconda``) which contains a large number of packages relevant for the analyses of biological data.
+
 
 Removing packages
 -----------------
@@ -187,7 +190,7 @@ Conda packages are removed like so:
 
 .. code-block:: bash
 
-   (myenvironment) $ conda uninstall mamba
+   (myenvironment) $ conda uninstall bwa
 
 
 Additional commands for managing packages
@@ -199,7 +202,8 @@ Several additional commands exist to help you manage conda packages such as ``co
 .. admonition:: Exercise
 
    Now you have a bit of time to play around with conda and its different commands. If you already have some experience with conda, we encourage you to try commands you did not use before.
-   Some examples of what you could do is: Install additional packages, upgrade or downgrade packages, search for packages, list all installed packages, etc.
+   Some examples of what you could do is: Install additional packages, upgrade or downgrade packages, search for packages, list all installed packages, etc. 
+   Using these commands which information can you find about the bwa package we just installed? Can you upgrade it to a more recent version?
  
 Saving environments
 -------------------
@@ -235,24 +239,30 @@ Now we will save the environment with mamba installed to a YAML file:
 .. code-block:: bash
    
    $ conda env export -n myenvironment > myenvironment.yml
-   $ head myenvironment.yml
+   $ cat myenvironment.yml
    name: myenvironment
    channels:
-     - conda-forge
-     - bioconda
-     - defaults
+      - conda-forge
+      - bioconda
+      - defaults
    dependencies:
-     - _libgcc_mutex=0.1=conda_forge
-     - _openmp_mutex=4.5=2_gnu
-     - bzip2=1.0.8=h7f98852_4
-     - c-ares=1.18.1=h7f98852_0 
+      - _libgcc_mutex=0.1=conda_forge
+      - _openmp_mutex=4.5=2_gnu
+      - bwa=0.7.17=he4a0461_11
+      - libgcc-ng=13.2.0=h807b86a_5
+      - libgomp=13.2.0=h807b86a_5
+      - libxcrypt=4.4.36=hd590300_1
+      - libzlib=1.2.13=hd590300_5
+      - perl=5.32.1=7_hd590300_perl5
+      - zlib=1.2.13=hd590300_5
+    prefix: /home/user24/.conda/envs/myenvironment
 
 As you can see ``conda env export`` creates a YAML file. The first few lines already indicate how it is structured, we have different indented blocks which belong together (such as name, channels and dependencies). You can also see that each installed packages is specified with a version number and a build number using the format ``packagename=version=build``. This means conda is very specific when exporting environments. In terms of reproducibility this should be a good thing right? Well in fact this can cause many problems. In the rest of this exercise we will look at some issues you may encounter with conda.
 
 Problems with conda
 ===================
 
-Conda is a very useful too to create and manage virtual environments and software packages. However there are a few not immediately obvious challenges when working with conda that can impact reproducibility negatively. Let us continue with the example of creating an environment from a saved yaml file.
+Conda is a very useful to create and manage virtual environments and software packages. However there are a few not immediately obvious challenges when working with conda that can impact reproducibility negatively. Let us continue with the example of creating an environment from a saved yaml file.
 
 Challenges when exporting environments
 --------------------------------------
@@ -261,7 +271,7 @@ The standard way of creating an environment from a compatible YAML file with con
 
 .. code-block:: bash
 
-   $ conda env create -f myenvironment.yml 
+   $ conda env create -f myenvironment.yml -n mynewenvironment
 
 Conda will parse the YAML file, create a new environment by the name given in the first line of the file and install all packages listed under dependencies. It will install the exact same version and build and this is where the problem starts. Not every version and build exists for every operating system and computer architecture. It will depend if you are working on Linux or Mac and there are differences between 32bit and 64bit CPUs as well as ARM and x86 CPU architectures. Since there are many dependencies that need to be considered (look at the complete environment files with ``less``), there is a lot of room for problems. 
 
@@ -275,14 +285,14 @@ A first possibility is to export environments like this:
    $ head myenvironment.yml
    name: myenvironment
    channels:
-     - conda-forge
-     - bioconda
-     - defaults
+      - conda-forge
+      - bioconda
+      - defaults
    dependencies:
-     - _libgcc_mutex=0.1
-     - _openmp_mutex=4.5
-     - bzip2=1.0.8
-     - c-ares=1.18.1
+      - _libgcc_mutex=0.1
+      - _openmp_mutex=4.5
+      - bwa=0.7.17
+      - libgcc-ng=13.2.0
 
 As you can see this will create an environment file that still has the version number of the packages but is missing the build. You can be even more restrictive with what is exported by doing this:
 
@@ -294,25 +304,14 @@ As you can see this will create an environment file that still has the version n
      - bioconda
      - defaults
    dependencies:
-     - mamba
+     - bwa
    prefix: /home/user/.miniconda3/envs/myenvironment 
 
-In this case only the packages that have been installed explicitly (with ``conda install``) will be listed here. Unfortunately without version numbers and also a package channel (``conda-forge``) is missing.
-
-Create environments from yaml files
------------------------------------
-
-If you have a saved environment this is how you can create a conda environment from it:
-
-
-.. code-block:: bash
-
-   $ conda env create -f myenvironment.yml
-
+In this case only the packages that have been installed explicitly (with ``conda install``) will be listed here. Unfortunately (sometimes) without version numbers and also a package channel (``conda-forge``) can be missing. We recommend to always doublecheck your exported environment files.
 
 .. admonition:: Exercise
   
-   Your task is to try to get the exported environment to install properly and mamba working inside the environment as if you where on a different computer. If you have conda installed locally on your computer you can try it there. If not, we provide an alternative way for you to perform this exercise. Run: ``debian-alternative-miniconda`` in the same directory where your YAML environment file is. This will bring you into a stripped down version of Debian Linux with Miniconda 4.7.12 installed. You may use ``vim`` or ``nano`` to edit the file there. Use ``exit`` to close this environment when you are done. 
+   Your task is create a new environment and install ``mamba=0.23.3``. Export this environment into a file. Now try to get the exported environment to install properly and mamba working inside the environment as if you where on a different computer. If you have conda installed locally on your computer you can try it there. If not, we provide an alternative way for you to perform this exercise. Run: ``debian-alternative-miniconda`` in the same directory where your YAML environment file is. This will bring you into a stripped down version of Debian Linux with Miniconda 4.7.12 installed. You may use ``vim`` or ``nano`` to edit the file there. Use ``exit`` to close this environment when you are done. 
 
 
 Incompatible packages from small channels
@@ -445,9 +444,7 @@ If you plan to do so, there are several things to keep in mind and problems can 
 
    $ conda create -n r-test
    $ conda activate r-test
-   (r-test) $ conda install -c conda-forge r-base=4.0.5
-   (r-test) $ conda install -c conda-forge r-devtools=2.4.3
-   (r-test) $ conda install -c conda-forge r-ggplot2=3.3.0
+   (r-test) $ mamba install -c conda-forge r-base=4.0.5 r-devtools r-ggplot2=3.3.0
    (r-test) $ conda list | grep ggplot2
    r-ggplot2                 3.3.0             r40h6115d3f_1    conda-forge
 
@@ -463,7 +460,7 @@ If you plan to do so, there are several things to keep in mind and problems can 
    - `an old version of ggplot <https://anaconda.org/conda-forge/ggplot>`_ (also on conda-forge)
    - `ggplot2 on bioconda <https://anaconda.org/bioconda/r-ggplot2>`_ 
    
-   and probably others on small channels. This is not ideal and does not help with making analyses reproducible. One additional complication is that conda channels are ordered and it will search them based on the order you specified. We have already seen this with the example of mamba above.
+   and probably others on small channels. This is not ideal and does not help with making analyses reproducible. One additional complication is that conda channels are ordered and it will search them based on the order you specified. We have already seen this with the example above.
    
    You can list channels like so:
    

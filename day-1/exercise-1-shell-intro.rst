@@ -81,7 +81,8 @@ Let’s create a bit of directory structure and navigate through it.
 .. admonition:: Task 1
 
    Copy a file called ``README.md`` from a directory called ``data`` in ``${HOME}/Share/linux-intro`` to your directory ``linux-intro/data``. 
-   **Make sure to retain the timestamp of the original file**.
+
+   - Make sure to retain the timestamp of the original file.
 
 
 .. admonition:: Task 2
@@ -119,7 +120,10 @@ Note if you save the output of ``md5sum`` in a text file you can always check la
 ``diff`` is very useful, but the output can be a bit tricky to interpret. A slightly more complex example can be found `here <https://www.geeksforgeeks.org/diff-command-linux-examples/>`_. 
 
 
-Random number seeds are common in bioinformatics software employing different kinds of heuristics. Let's play with that.
+Random numbers and reproducibility
+==================================
+
+Random numbers are common in bioinformatics software employing different kinds of heuristics. If you want to work reproducibly it's worth knowing a few things in this context. Let's play with that.
 
 Print a random number between 1 and 1000 to screen.
 

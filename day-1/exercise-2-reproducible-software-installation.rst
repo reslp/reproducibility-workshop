@@ -92,7 +92,7 @@ now.
 
 Now, let’s say you have been happily predicting away for a couple of
 years, then at some point you decide to set up your computer with the
-current LTS version of Ubuntu. We are at LTS 22.04 at the moment.
+current LTS version of Ubuntu. Let's say are at LTS 22.04 at the moment.
 
 Let’s switch it on ..
 

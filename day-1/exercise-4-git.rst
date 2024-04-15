@@ -188,7 +188,7 @@ More information `here <https://git-scm.com/docs/git-log>`_.
 
 .. hint::
 
-   Hashing by itself is very powerful. It is used in many different fields of compuetr science. Calculating hashes can already help to increase reproducibility because hashes (of files) can be used to check if files are identical. 
+   Hashing by itself is very powerful. It is used in many different fields of computer science. Calculating hashes can already help to increase reproducibility because hashes (of files) can be used to check if files are identical. 
 
 
 Reverting to an older version of your repository

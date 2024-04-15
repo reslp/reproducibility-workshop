@@ -6,7 +6,7 @@ Reproducibility in Bioinformatics
 
 Here you will find the materials for the `Physalia course <https://www.physalia-courses.org/courses-workshops/bioinformatics-reproducibility/>`_ **Reproducibility in Bioinformatics**. 
 
-The course will be held online on **Apr 03-05 2023**.
+The course will be held online on **Apr 15-17 2023**.
 
 ---------------
 Course overview

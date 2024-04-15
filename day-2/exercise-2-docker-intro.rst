@@ -426,10 +426,12 @@ We can now run a completely different container, have it include the same volume
     cbdbe7a5bc2a: Pull complete
     Digest: sha256:9a839e63dad54c3a6d1834e29692c8492d93f90c59c978c1ed79109ea4fb9a54
     Status: Downloaded newer image for alpine:3.11
+
+    # now inside the container
     / # cd /data
     /data # ls
     file_inside_the_container  testdata
-    /data #
+    /data # exit
 
 Very nice. The volume is now part of both containers. We could now make additional changes to the files and then restart the Ubuntu container to look at the changed files.
 

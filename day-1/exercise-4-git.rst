@@ -226,14 +226,19 @@ More information `here <https://git-scm.com/docs/git-checkout>`_.
 Back to the HEAD commit
 =======================
 
-After this exercise we should still be at the second commit we made earlier. How do we get back to the latest commit? This can be done with ``git reset``. Let us see how it works:
+After this exercise we should still be at the second commit we made earlier. How do we get back to the latest commit? Let us see how it works:
 
 .. code-block:: bash
 
-   $ git reset --hard HEAD
-   HEAD is now at c3f028d Merge branch 'testbranch'
+   $ git checkout master
+   Previous HEAD position was da60069 Added info
+   Switched to branch 'master'
 
 Your repository should now be back at the original (latest) commit we made.
+
+.. hint::
+
+   You can also use ``git checkout -`` which will go back to the last commit you where at. Similar to ``cd -``.
 
 
 Ignoring files
@@ -267,12 +272,13 @@ The above ``.gitignore`` file covers several practical examples of how you can e
 Branches
 ========
 
-Sometimes you may want to make larger changes to your repository with the risk that they are incompatible with your main workflow. Of course you don't want to overwrite anything that already works. It may also be that you collaborate with somebody on a project and you don't want to mess up their work in the shared repository. In souch cases git offers a concept called branches. A branch is exactly what the name implies. It creates a named branch of your repository starting from a specific commit (usualy HEAD). A branch may contain many commits and you may have many branches. At a later stage, branches can also be merged to combine all commits. The standard branch is called master or main. :bash:`git status` will show you the current branch you are in. These examples should make it more clear:
+Sometimes you may want to make larger changes to your repository with the risk that they are incompatible with your main workflow. Of course you don't want to overwrite anything that already works. It may also be that you collaborate with somebody on a project and you don't want to mess up their work in the shared repository. In such cases :bash:`git` offers a concept called branches. A branch is exactly what the name implies. It creates a named branch of your repository starting from a specific commit (usualy HEAD). A branch may contain many commits and you may have many branches. At a later stage, branches can also be merged to combine all commits. The standard branch is called master or main. :bash:`git status` will show you the current branch you are in. These examples should make it more clear:
 
 .. code-block:: bash
 
    $ git branch testbranch
    $ git checkout testbranch
+   Switched to branch 'testbranch'
    $ git status
      On branch testbranch
      nothing to commit, working tree clean
@@ -289,12 +295,13 @@ At some point you may want to combine work made in different branches. This is p
 
 .. code-block:: bash
 
+   $ git checkout master # first we need to move back to the branch we want to merge testbranch with.
    $ git merge testbranch
      Merge made by the 'recursive' strategy.
       bla | 1 +
       1 file changed, 1 insertion(+)
 
-More information `here <https://git-scm.com/docs/git-merge>`.
+More information `here <https://git-scm.com/docs/git-merge>`_.
 
 .. warning::
 
@@ -326,7 +333,7 @@ Here are a few examples of how tagging is used in git:
    New version 1.5
 
 
-The first command lists all tags. The second command creates a new tag called ``v.15``. It also uses a tagging message ``-m``, to describe what the tag refers to. With ``git show`` you can get additional information on a tag.
+The first command lists all tags. The second command creates a new tag called ``v1.5``. It also uses a tagging message ``-m``, to describe what the tag refers to. With ``git show`` you can get additional information on a tag.
 
 
 Working with online Git repositories
@@ -338,6 +345,7 @@ Each of the three platforms have their own special features complementing the co
 
 .. code-block:: bash
 
+   $ cd # move back to your home directory before this
    $ git clone https://github.com/reslp/reproducibility-workshop.git
      Cloning into 'reproducibility-workshop'...
      remote: Enumerating objects: 54, done.
@@ -385,7 +393,7 @@ This command will compare the remote and local repositories and will download al
 More information `here <https://git-scm.com/docs/git-pull>`_.
 
 
-.. admonition:: bash
+.. admonition:: Exercise
 
    Find a git repository on Github, maybe some software you have been using. Clone the code and investigate the repository using what you have learned in this exercise. When was the last commit? Do you find the commit messages helpful? How many tags to you find? Are there any branches?
 
@@ -402,7 +410,7 @@ You probably already came accross DOIs. These digital object identifiers are a g
 Common mistakes with Git
 ========================
 
-Git can be difficult and it is easy to make mistakes. You will surely come accross the same problems several times and if you are like us you may be scratching your head trying to remember the git commands to solve the problem. Luckily your are not alone. Many people struggle with git and there are plenty of answers on StackOverflow and other website for many problems associated with git. Here two examples of common mistakes we have made many times with git and how to fix them. Hopefully these examples will also help you:
+Git can be difficult and it is easy to make mistakes. You will surely come accross the same problems several times and if you are like us you may be scratching your head trying to remember the git commands to solve the problem. Luckily your are not alone. Many people struggle with git and there are plenty of answers on StackOverflow and other websites for all kinds of problems associated with git. Here are two examples of common mistakes we have made many times with git and how to fix them. Hopefully these examples will also help you:
 
 Changing commit messages of a commit
 ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~

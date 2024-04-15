@@ -472,21 +472,33 @@ However, you can also bind-mount directories directly to your containers again u
 
 .. code-block:: bash
 
-    (host) $ docker run -v $(pwd):/data ubuntu
+    (host) $ docker run -it -v $(pwd):/data -w /data ubuntu
 
-This command will mount the current working directory on your host to the :bash:`/data` folder inside the ubuntu container. You can now make changes to that folder inside your container and the changes will translate to the folder on the host computer.
-
-We will now create a :bash:`testfile` in the current directory. Then we will start a container mounting this directory. Inside the container we will create another :bash:`testfile`. All changes persist also when we exit the container:
+**Make sure you exit the container before moving on**
 
 .. code-block:: bash
 
+    root@8b5386d5345d:/data# exit
+
+This command will mount the current working directory on your host to the :bash:`/data` folder inside the ubuntu container. You can now make changes to that folder inside your container and the changes will translate to the folder on the host computer.
+
+We will now create a :bash:`testfile` in the current directory. Then we will start a container mounting this directory. Inside the container we will create another testfile :bash:`another_testfile`. All changes persist also when we exit the container:
+
+.. code-block:: bash
+
+    # on your local computer make directory
+    (host) $ mkdir test-mount
+    (host) $ cd test-mount
+    # check what's in the directory
     (host) $ ls
-    docker-intro.md
+    
     (host) $ pwd
-    /Users/sinnafoch/Dropbox/Philipp/docker-intro
+    /home/user21/test-mount
     (host) $ touch testfile
     (host) $ ls
     testfile
+
+    # let's enter the container and mount your current directory to /data in the container
     (host) $ docker run -it --rm -v $(pwd):/data ubuntu:18.04
     root@a0f138701fc5:/# cd /data
     root@a0f138701fc5:/data# ls
@@ -494,9 +506,10 @@ We will now create a :bash:`testfile` in the current directory. Then we will sta
     root@a0f138701fc5:/data# touch another_testfile
     root@a0f138701fc5:/data# exit
     exit
+
+    # back at your local system check it out
     (host) $ ls
     testfile another_testfile
-    (host) $
 
 Summary
 =======

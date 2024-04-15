@@ -270,7 +270,7 @@ Inside our container we can do all kinds of things: Create files, install softwa
 
     Changes you make in interactive mode inside a container are restricted to the currently running container. Each docker run command will spawn a new container instance which only contains what is in the underlying Docker image.
 
-__Make sure you exit the container before moving on with the practical.__
+**Make sure you exit the container before moving on with the practical.**
 
 .. code-block:: bash
 

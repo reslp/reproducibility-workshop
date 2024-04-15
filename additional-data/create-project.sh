@@ -22,10 +22,10 @@ else
 fi
 
 read -p "Would you like to permanently add the project's bin directory to the PATH (this assumes bash and ~/.bashrc is used)? (y/n)" askpath
-if [[ $initgit == "y" || $initgit == "Y" ]]; then
+if [[ $askpath == "y" || $askpath == "Y" ]]; then
 	echo "export PATH=\"\$PATH:$(pwd)/bin\"" >> $HOME/.bashrc
 	echo "PATH has been changed you need to run: source ~/.bashrc to activate the changes"
-elif [[ $initgit == "n" || $initgit == "N" ]]; then
+elif [[ $askpath == "n" || $askpath == "N" ]]; then
 	echo "OK, will not alter PATH."
 else
 	echo "Wrong input. Please specify y or n."

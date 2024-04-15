@@ -282,27 +282,33 @@ Managing containers and images
 
 Once you have accumulated many images and run different containers it becomes important to manage the available images and running (or stopped) containers. The :bash:`docker` command also comes to the rescue here:
 
-To list all running containers you can execute :bash:`docker container ls`. If you have no currently running containers the output from this command will be an empty list. Here is an example showing how the output changes:
+To list all running containers you can execute :bash:`docker container ls`. Let's try it out. If you have no currently running containers the output from this command will be an empty list. 
 
 .. code-block:: bash
 
     (host) $ docker container ls
     CONTAINER ID        IMAGE               COMMAND             CREATED             STATUS              PORTS               NAMES
+
+Now, let's start a container. Note the option :bash:`-d` (detach) that will send the process to the background. It will run for 30 seconds. If you run :bash:`docker container ls` during this time you should see it.
+
+.. code-block:: bash
+
     $ docker run -d ubuntu:18.04 sleep 30
     36f65c44b177bb23c5e4ffb9f891b85353436b824c5bcfba1b38080e29a47fe8
+
     (host) $ docker container ls
     CONTAINER ID        IMAGE               COMMAND             CREATED             STATUS              PORTS               NAMES
     36f65c44b177        ubuntu:18.04        "sleep 30"          4 seconds ago       Up 2 seconds                            intelligent_lewin
     (host) $
 
-As you can see the first call of :bash:`docker container ls` shows that there is currently no running containers. When we run the sleep command inside an ubuntu container and then look at the output of :bash:`docker container ls` again we get information about it.
+When we run the sleep command inside an ubuntu container and then look at the output of :bash:`docker container ls` again we get information about it.
 
 .. hint::
 
     Background execution of containers:
     The `-d` flag in the docker run command sends a container to the background so that it continues runnning and we can continue to work in our terminal. `-d` is short for detach. The output of the container is detached from the current terminal.
 
-We can also list all containers regardless if there are currently running or not.
+We can also list all containers regardless if they are currently running or not, i.e. we show also containers that were run previoulsy.
 
 .. code-block:: bash
 

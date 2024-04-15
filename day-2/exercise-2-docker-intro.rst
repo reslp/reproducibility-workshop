@@ -157,7 +157,7 @@ Probably the first container every new Docker user runs is the `hello-world <htt
 	For more examples and ideas, visit:
 	 https://docs.docker.com/get-started/
 
-When you execute this command for the first time, a lot is happaning apart from printing the traditional "Hello World" message. As you can see from the output above the command :bash:`docker run hello-world:latest` communicates with the docker deamon and requests a container of the hello-world image. The docker daemon realized that this image is not yet available on our computer, so it downloads it from the `Docker Hub <https://hub.docker>`_ (this is usually referred to as *pulling*). The Docker daemon stores the hello-world image on the host and creates a virtualized runtime environment (the *container*). When this container is executed it can produce some output (in case of hello-world this is the message above), which is displayed on the terminal screen.
+When you execute this command for the first time, a lot is happaning apart from printing the traditional "Hello World" message. As you can see from the output above the command :bash:`docker run hello-world:latest` communicates with the docker deamon and requests a container of the hello-world image. The docker daemon realized that this image is not yet available on our computer, so it downloads it from the `Docker Hub <https://hub.docker.com/>`_ (this is usually referred to as *pulling*). The Docker daemon stores the hello-world image on the host and creates a virtualized runtime environment (the *container*). When this container is executed it can produce some output (in case of hello-world this is the message above), which is displayed on the terminal screen.
 
 .. tip::  
 

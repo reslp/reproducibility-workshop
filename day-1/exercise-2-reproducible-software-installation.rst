@@ -134,18 +134,19 @@ So, now you are faced with the reality that Ubuntu has moved on and
 ships with a newer version of augustus now. Is that a problem? It
 depends.. Let’s say you think it is. How to solve that now?
 
-When we do our ``apt update`` apt reads in a special file that contains
+When we do our ``apt update`` apt reads in a special files that contain
 the URLs for the source data of the repository. We can add the info of
-the 20.04 LTS, which was called ``focal``, to this file.
+the 20.04 LTS, which was called ``focal``, to such a file.
 
 .. code:: bash
 
-   root@ubuntu-22-04:/home# release=focal
-   root@ubuntu-22-04:/home# cat > "/etc/apt/sources.list.d/$release.list"<<EOF
-   deb http://archive.ubuntu.com/ubuntu $release universe
-   deb http://archive.ubuntu.com/ubuntu $release multiverse
-   deb http://security.ubuntu.com/ubuntu $release-security main
-   EOF
+   root@ubuntu-22-04:/home# release=focal #specify release name
+
+   # Write the relevant URLs to the source file for the focal distribution
+   # make sure you copy all three lines of code to get the full command
+   root@ubuntu-22-04:/home# echo "deb http://archive.ubuntu.com/ubuntu $release universe
+       deb http://archive.ubuntu.com/ubuntu $release multiverse
+       deb http://security.ubuntu.com/ubuntu $release-security main" > /etc/apt/sources.list.d/$release.list
 
 Then, update, and try to install again.
 

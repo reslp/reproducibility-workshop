@@ -255,7 +255,7 @@ Use apt-get to display ASCII cows:
 Working inside a container
 --------------------------
 
-You may ask yourself now how it would work if you wanted to run multiple commands inside your container or how you could prevent your container from exiting immediately after execution of a command. This can be done by providing the :bash:`-i -t`flags (usually used as `-it`). 
+You may ask yourself now how it would work if you wanted to run multiple commands inside your container or how you could prevent your container from exiting immediately after execution of a command. This can be done by providing the :bash:`-i -t` flags (usually used as :bash:`-it`). 
 
 Lets get inside an ubuntu container:
 

@@ -3,21 +3,33 @@
 
 .. code:: bash
 
-   user40@ip-172-31-4-141:~$ cp -p ${HOME}/Share/Day1/README.md linux-intro/data/
+   user40@ip-172-31-4-141:~$ cp -p ${HOME}/Share/linux-intro/data/README.md linux-intro/data/
 
 
 **Task 2 - Complex copy of relative directory structure**
 
 .. code:: bash
 
-   user40@ip-172-31-4-141:~$ rsync -avpuzP --relative ${HOME}/Share/./Day1/subfolder1 linux-intro/data/
+   user40@ip-172-31-4-141:~$ rsync -avpuzP --relative ~/Share/linux-intro/data/./Day1/subfolder1 linux-intro/data/
 
-
-**Task 3 - find differences between text files**
+**Task 3a - check if files changed - use md5sums**
 
 .. code:: bash
 
-   user40@ip-172-31-4-141:~$ diff ${HOME}/Share/Day1/README.md linux-intro/data/README.md 
+   #compare md5sums
+   user40@ip-172-31-4-141:~$ md5sum ~/Share/linux-intro/data/README.md
+   user40@ip-172-31-4-141:~$ md5sum linux-intro/data/README.md
+
+   # check using md5sum text file provided with the original file
+   user40@ip-172-31-4-141:~$ cd linux-intro/data/
+   user40@ip-172-31-4-141:~$ cp ~/Share/linux-intro/data/md5sums.txt .
+   user40@ip-172-31-4-141:~$ md5sum -c md5sums.txt
+
+**Task 3b - find differences between text files**
+
+.. code:: bash
+
+   user40@ip-172-31-4-141:~$ diff ${HOME}/Share/linux-intro/data/README.md linux-intro/data/README.md 
 
 **Task 4 - generate random numbers in for loop**
 

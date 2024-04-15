@@ -19,9 +19,22 @@ Let’s do a few small things to get you warmed up.
 First, let’s connect to the server.
 
 You’ve been provided with ``*.pem`` file that contains your users
-credentials for connecting to the server. If you have ``ssh`` set up on
-your computer connecting should be as easy as, where I set a few
-variables first:
+credentials for connecting to the server. Further, you'll need to know
+the IP address of the server. This will be change every day. As an example
+I use ``18.237.42.108``. Thirdly, you'll need to know your username, e.g. ``user1``.
+To sum up, you'll need:
+ - ``c1.pem`` - make sure you know where it's located on your computer
+ - IP address, e.g.: ``18.237.42.108``
+ - username, e.g.: ``user1``
+
+With that, if you have ``ssh`` set up on
+your computer connecting should be as easy as:
+
+.. code:: bash
+
+   (user@host)-$ ssh -i path/to/your/c1.pem user1@18.237.42.108
+
+You could store the relevant info also in variables, and connect like so:
 
 .. code:: bash
 
@@ -29,6 +42,8 @@ variables first:
    (user@host)-$ IP="18.237.42.108" #this will change every day
    (user@host)-$ user="ubuntu" #change to reflect your username, user1, user2, user3, etc.
    (user@host)-$ ssh -i $pem $user@$IP #connect - confirm with yes if you connect for the first time
+
+On Windows, you may need a third party software to connect. We recommend `MobaXterm <https://mobaxterm.mobatek.net/>`. 
 
 If successful you’ll find yourself connected and your prompt will look
 something like that:
@@ -65,16 +80,16 @@ Let’s create a bit of directory structure and navigate through it.
 
 .. admonition:: Task 1
 
-   Copy a file called ``README.md`` from a directory called ``Day1`` in ``${HOME}/Share`` to ``linux-intro/data``. 
+   Copy a file called ``README.md`` from a directory called ``data`` in ``${HOME}/Share/linux-intro`` to your directory ``linux-intro/data``. 
    **Make sure to retain the timestamp of the original file**.
 
 
 .. admonition:: Task 2
 
-   Copy the directory ``${HOME}/Share/Day1/subfolder1/`` and all it's content to ``linux-intro/data``.
+   Copy the directory ``subfolder1`` and all its content from ``${HOME}/Share/linux-intro/data/Day1/`` to your directory ``linux-intro/data``.
 
-   - make sure to also bring about the entire directory structure from ``Day1`` onwards
-   - do not copy subfolders ``subfolder2`` and ``subfolder3`` of ``Day1``.
+   - make sure to also bring about the entire directory structure from ``Day1`` onwards, so that you get ``linux-intro/data/Day1/subfolder1``
+   - do not copy subfolders ``subfolder2`` and ``subfolder3`` in ``Day1``.
    - keep original timestamps
 
 
@@ -85,11 +100,20 @@ Now, let's add a line of text to the file ``linux-intro/data/README.md``
    user40@ip-172-31-4-141:~$ echo "Add some text" >> linux-intro/data/README.md
 
 
-.. admonition:: Task 3
+.. admonition:: Task 3a
+
+   Fast forward 3 months into the future. You've been otherwise occupied and return to the current project. You vaguely remember that you made some change to the ``README.md`` file, or did you?
+
+   Check the md5sums of the original file ``~/Share/linux-intro/data/README.md`` and your copy ``linux-intro/data/README.md``.
+
+Note if you save the output of ``md5sum`` in a text file you can always check later on.
+
+
+.. admonition:: Task 3b
 
    Fast forward 3 months into the future. You've been otherwise occupied and return to the current project. You vaguely remember that you made some change to the ``README.md`` file, but what did you change?
    
-   use the ``diff`` command to compare the two files ``${HOME}/Share/Day1/README.md`` and ``linux-intro/data/README.md``.
+   use the ``diff`` command to compare the two files ``${HOME}/Share/linux-intro/data/README.md`` and ``linux-intro/data/README.md``.
 
 
 ``diff`` is very useful, but the output can be a bit tricky to interpret. A slightly more complex example can be found `here <https://www.geeksforgeeks.org/diff-command-linux-examples/>`_. 

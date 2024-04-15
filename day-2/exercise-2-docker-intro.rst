@@ -379,7 +379,7 @@ Apart from these automatically created volumes, we can also create volumes manua
 
 .. code-block:: bash
     
-    (host) $ docker volume create my_data
+    (host) $ docker volume create my_data_${USER}
     my_data
 
 
@@ -389,7 +389,7 @@ With :bash:`docker volume ls` we can list our current volumes:
 
    (host) $ docker volume ls
     DRIVER              VOLUME NAME
-    local               my_data
+    local               my_data_user21
 
 
 .. hint::
@@ -400,7 +400,7 @@ After we created the volume we can tell Docker to make it available when a conta
 
 .. code-block:: bash
 
-   (host) $ docker run -it -v my_data:/data ubuntu:18.04
+   (host) $ docker run -it -v my_data_${USER}:/data ubuntu:18.04
 
 
 As you can see we introduced a new command line flag :bash:`-v`. One could say the flag works like this: Take the volume with the name on the left side of the colon and include it as new directory on the right side of the colon inside the container. Here the right side can be a longer path as well, it is however important that the path is absolute (starts with / ). This is referred to as binding, mounting or bind-mounting. You will come across all three terms online.
@@ -420,7 +420,7 @@ We can now run a completely different container, have it include the same volume
 
 .. code-block:: bash
 
-    (host) $ docker run --rm -it -v my_data:/data alpine:3.11
+    (host) $ docker run --rm -it -v my_data_${USER}:/data alpine:3.11
     Unable to find image 'alpine:3.11' locally
     3.11: Pulling from library/alpine
     cbdbe7a5bc2a: Pull complete
@@ -439,7 +439,7 @@ To remove a volume you can run:
 
 .. code-block:: bash
 
-    (host) $ docker volume rm my_data
+    (host) $ docker volume rm my_data_${USER}
     my_data
 
 

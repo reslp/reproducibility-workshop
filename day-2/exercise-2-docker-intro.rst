@@ -328,7 +328,9 @@ For example if you would like to get inside the an existing ubuntu container we 
 
 .. code-block:: bash
 
-    (host) $ docker start -ia 36f65c44b177 #make sure you adjust the container ID to something in your list
+    #make sure you adjust the container ID to point to 
+    # a ubuntu:18.04 container that ran "/bin/bash"
+    (host) $ docker start -ia 22c3563c46a5
 
 
 Docker conveniently names each container with a random but more humanly readable name which can be used instead of the complicated container ID. The above command is thus equivalent with:
@@ -340,7 +342,7 @@ Docker conveniently names each container with a random but more humanly readable
 
 .. hint::
 
-    Note that -ia is the equivalent to -it in docker start.
+    Note that :bash:`docker start -ia` will call the container however it was called initially
 	
 Similar to starting stopped containers you can also stop running containers with :bash:`docker stop`.
 

@@ -123,7 +123,7 @@ Let's see how it works:
 
 .. code-block:: bash
 
-   $ pandoc test.md --from markdown --to rst -o test.rst
+   $ pandoc test.md --from markdown --to rst > test.rst
 
 The above command converts a file from Markdown to reStructuredText.
 

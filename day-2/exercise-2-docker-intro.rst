@@ -328,7 +328,7 @@ For example if you would like to get inside the an existing ubuntu container we 
 
 .. code-block:: bash
 
-    (host) $ docker start -ia 36f65c44b177
+    (host) $ docker start -ia 36f65c44b177 #make sure you adjust the container ID to something in your list
 
 
 Docker conveniently names each container with a random but more humanly readable name which can be used instead of the complicated container ID. The above command is thus equivalent with:

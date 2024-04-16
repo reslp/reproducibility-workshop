@@ -1,0 +1,7 @@
+name: myenvironment
+channels:
+  - defaults
+  - conda-forge
+dependencies:
+  - mamba
+prefix: /opt/conda/envs/myenvironment

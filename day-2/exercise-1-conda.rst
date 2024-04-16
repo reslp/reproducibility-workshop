@@ -337,6 +337,10 @@ Beside the large conda channels (such as ``bioconda``, ``conda-forge``, ``r``) i
     https://github.com/etetoolkit/ete_toolchain
 
 
+.. hint:: 
+
+   You can also use the ete3 environment provided `here <https://github.com/reslp/reproducibility-workshop/tree/main/day-2/exercise-solutions>`_ to speed up installation of ete3.
+
 It seems the installation of ete3 went well, however we are missing external applications. Let's install them according to the suggested command:
 
 .. code-block:: bash

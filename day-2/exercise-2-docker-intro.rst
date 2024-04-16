@@ -400,7 +400,7 @@ After we created the volume we can tell Docker to make it available when a conta
 
 .. code-block:: bash
 
-   (host) $ docker run -it -v my_data_${USER}:/data ubuntu:18.04
+   (host) $ docker run -it --rm -v my_data_${USER}:/data ubuntu:18.04
 
 
 As you can see we introduced a new command line flag :bash:`-v`. One could say the flag works like this: Take the volume with the name on the left side of the colon and include it as new directory on the right side of the colon inside the container. Here the right side can be a longer path as well, it is however important that the path is absolute (starts with / ). This is referred to as binding, mounting or bind-mounting. You will come across all three terms online.
@@ -474,13 +474,14 @@ However, you can also bind-mount directories directly to your containers again u
 
     (host) $ docker run -it -v $(pwd):/data -w /data ubuntu
 
+This command will mount the current working directory on your host to the :bash:`/data` folder inside the ubuntu container. You can now make changes to that folder inside your container and the changes will translate to the folder on the host computer.
+
 **Make sure you exit the container before moving on**
 
 .. code-block:: bash
 
     root@8b5386d5345d:/data# exit
 
-This command will mount the current working directory on your host to the :bash:`/data` folder inside the ubuntu container. You can now make changes to that folder inside your container and the changes will translate to the folder on the host computer.
 
 We will now create a :bash:`testfile` in the current directory. Then we will start a container mounting this directory. Inside the container we will create another testfile :bash:`another_testfile`. All changes persist also when we exit the container:
 

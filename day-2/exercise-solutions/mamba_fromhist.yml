@@ -1,0 +1,8 @@
+name: mamba
+channels:
+  - conda-forge
+  - bioconda
+  - defaults
+dependencies:
+  - mamba=0.23.3
+prefix: /home/user22/.conda/envs/mamba

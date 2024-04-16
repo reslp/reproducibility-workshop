@@ -311,7 +311,10 @@ In this case only the packages that have been installed explicitly (with ``conda
 
 .. admonition:: Exercise
   
-   Your task is create a new environment and install ``mamba=0.23.3``. Export this environment into a file. Now try to get the exported environment to install properly and mamba working inside the environment as if you where on a different computer. If you have conda installed locally on your computer you can try it there. If not, we provide an alternative way for you to perform this exercise. Run: ``debian-alternative-miniconda`` in the same directory where your YAML environment file is. This will bring you into a stripped down version of Debian Linux with Miniconda 4.7.12 installed. You may use ``vim`` or ``nano`` to edit the file there. Use ``exit`` to close this environment when you are done. 
+   Your task is create a new environment and install ``mamba=0.23.3``. Export this environment into a file using the different options presented above. Now try to get the exported environment to install properly and mamba working inside the environment as if you where on a different computer. If you have conda installed locally on your computer you can try it there. If not, we provide an alternative way for you to perform this exercise. Run: ``debian-alternative-miniconda`` in the same directory where your YAML environment file is. This will bring you into a stripped down version of Debian Linux with Miniconda 4.7.12 installed. You may use ``vim`` or ``nano`` to edit the file there. Use ``exit`` to close this environment when you are done.
+
+
+   If conda is very slow and solving the environments takes too long (> 5 mins) you can skip the first part of the execise and use the environment files we provide `here <https://github.com/reslp/reproducibility-workshop/tree/main/day-2/exercise-solutions>`_. Try using these files inside the ``debian-alternative-miniconda`` to create the mamba environment. 
 
 
 Incompatible packages from small channels
@@ -444,7 +447,7 @@ If you plan to do so, there are several things to keep in mind and problems can 
 
    $ conda create -n r-test
    $ conda activate r-test
-   (r-test) $ mamba install -c conda-forge r-base=4.0.5 r-devtools r-ggplot2=3.3.0
+   (r-test) $ conda install -c conda-forge r-base=4.0.5 r-devtools r-ggplot2=3.3.0
    (r-test) $ conda list | grep ggplot2
    r-ggplot2                 3.3.0             r40h6115d3f_1    conda-forge
 

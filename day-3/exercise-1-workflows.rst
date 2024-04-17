@@ -5,7 +5,9 @@ Workflow management systems help to structure complex workflows. When a workflow
 
 In this exercise we will introduce different ways how to automate workflows to increase productivity and reproducibility.
 
-We will be using a very small test dataset to illustrate the principle of what we want to do. The task is this: We want to combine the content of several files into a single file and convert all text in the combined file to lower case. The resulting file should be called ``lower1.txt``. The data for this exercise is in ``additional-data/simple-workflow-example/input1`` in the workshops repository.
+We will be using a very small test dataset to illustrate the principle of what we want to do.
+
+**The task is this:** We want to combine the content of several files into a single file and convert all text in the combined file to lower case. The resulting file should be called ``lower1.txt``. The data for this exercise is in ``additional-data/simple-workflow-example/input1`` in the workshops repository.
 
 First, let us prepare the working environment for today. Run these commands in your home directory:
 
@@ -23,18 +25,18 @@ First, let us prepare the working environment for today. Run these commands in y
 Using commandline scripting
 ----------------------------
 
-As you probably figured out, what we want to do can be achieved by using bash oneliner. Three possible solution can be found `here <https://github.com/reslp/reproducibility-workshop/blob/main/additional-data/simple-workflow-example/bash_solutions.md>`_.
+As you probably figured out, what we want to do can be achieved by using a simple bash oneliner. Three possible solutions can be found `here <https://github.com/reslp/reproducibility-workshop/blob/main/additional-data/simple-workflow-example/bash_solutions.md>`_.
 
 However we will now try to divide this command into individual steps for the sake of this exercise and then make an automated workflow out of it. 
 
-The command above does several things:
+The command does several things (according the the first solution from the link above):
 
 1. First, it gets a list of all ``.txt`` files in the ``input1`` directory by using the ``*`` expansion.
-2. It shows the content of all the files gather by 1 using ``cat``.
-3. It pipes the output of 2 into ``tr`` which converts the streamed content to lower case.
+2. It shows the content of all the files gathered by step 1 using ``cat``.
+3. It pipes the output of step 2 into ``tr`` which converts the streamed content to lower case.
 4. Finally the result is piped into a file called ``lower1.txt``
 
-As we have mentioned earlier it is generally a good idea to keep more complex bash operations in shell script files, so they can be reused. How does this command look if we write a shell script.
+One solution to increase reproducibility is to keep more complex bash operations in shell script files, so they can be reused. How does this command look if we write a shell script.
 
 .. code-block:: bash
 
@@ -58,7 +60,7 @@ As we have mentioned earlier it is generally a good idea to keep more complex ba
 
 Using a script already increases reproducibility quite a bit. We can take this script, transfer it to a different folder or computer and run it again to generate the final output ``lower1.txt``. If we were to run it on the same input files again we would get the same output.
 
-However, there are several potential pitfalls to keep in mind. One problem with an approach like this is that for complex analyses such a script can quickly become hard to understand. A solution would be to create different scripts (eg. for our test case ``step-1-get-input-files.sh step-2-combine-files.sh step-3-convert-to-lower.sh``). This would help to detect errors and make the code easier to understand because each script only contains code for a single part of the analysis.
+However, there are several potential pitfalls to keep in mind: One problem with an approach like this is that for complex analyses such a script can quickly become hard to understand. A solution would be to create different scripts (eg. for our test case ``step-1-get-input-files.sh step-2-combine-files.sh step-3-convert-to-lower.sh``). This would help to detect errors and make the code easier to understand because each script only contains code for a single part of the analysis.
 
 Another problem is that if you run a script again (on purpose or by accident) the script will recreate all results regardless of it is necessary or not. Why is this relevant? For one, complex bioinformatic analyses can take a significant amount of time and computational resources. Another aspect is that in many cases it is simply not necessary to recreate results. Only when input files or parameters change you will want to rerun an analysis. However, in large-scale projects with thousands of input and output files it is impossible to keep track which files could have changed. To address these issues (and more which we will see below) workflow management systems have been developed. We will now implement our simple test workflow using different workflow managers.
 
@@ -99,7 +101,7 @@ Now, here is how our task of converting a file to lower case could look like:
 
 The *target* (output) of this rule is the file ``lower1.txt`` and the *dependency* (input) is ``combined1.txt``. The *recipe* for this rule is the second line.
 
- Typically all rules are combined into one or more so-called **Makefiles** which typically are named ``Makefile`` or ``makefile``.
+ Typically all rules are combined into one or more so-called **Makefiles** which are named ``Makefile`` or ``makefile``.
 
 Our simple test workflow in make
 ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~

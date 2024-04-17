@@ -392,7 +392,7 @@ Now, let's try to do a Snakemake 'dry-run' (flag ``-n``), providing a specific t
 file and see what happens. Remember that ``snakemake`` expects a file called ``Snakefile``
 in the working directory per default, so you could copy the file ``Snakemake_intro/Snakefile_local`` (or if instructed to use images from Dockerhub instead, ``Snakemake_intro/Snakefile_cloud``) here, renamed ``Snakefile`` (this is what will be assumed) or find another way (you could add the flag ``-s <path/to/Snakefile>`` to the snakemake commands below).
 
-**Review the ``Snakefile`` you've just copied and make sure that the paths to the locally provided ``*sif`` files are correct. Change from ``~/Shared_folder`` to ``~/Share`` for example. Note that each rule uses a different one.**
+**Review the** ``Snakefile`` **you've just copied and make sure that the paths to the locally provided** ``*sif`` **files are correct. Change from** ``~/Shared_folder`` **to** ``~/Share`` **for example. Note that each rule uses a different one.**
 
 .. code:: bash
 

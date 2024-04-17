@@ -85,14 +85,16 @@ after that, so only, e.g. ``mkdir assemblies``:
 
 We have compiled a list of published genomes that we will be including
 in our analyses
-`here <https://github.com/chrishah/phylogenomics_intro_vertebrata/tree/main/data/samples.csv>`__.
-You don't have to download them all now, but do another few just as
+`here <https://github.com/chrishah/phylogenomics_intro_vertebrata/tree/main/data/samples.csv>`__ - it also ships with the repository and can be found here: ``data/samples.csv``.
+You don't have to download them all now, but if you want you can do another few just as
 practice. You can do one by one or use your scripting skills (for loop)
 to get them all in one go.
 
 To keep things clean I'd suggest to download each into a separate
 directory that should be named according to the binomial (connected with
 underscores, rather than spaces) - see example for *L. chalumnae* above.
+
+If you want to try out writing a for loop I have a reduced list of samples here: ``data/samples.exercise.csv``. A possible solution also ships with the repo here: ``data/download_loop.sh``.
 
 **2.) Run BUSCO on each assembly**
 
@@ -294,7 +296,9 @@ these:
             echo -e "$(date)\tDone"
     done
 
-  Possible solutions using docker images or local ``*sif`` files (make sure to change the path to the ``*sif`` files) can be found `here <https://github.com/chrishah/phylogenomics_intro_vertebrata/blob/main/backup/bygene.sh>`_ and `here <https://github.com/chrishah/phylogenomics_intro_vertebrata/blob/main/backup/bygene_local.sh>`_, respectively. See scripts ``backup/bygene.sh`` and ``backup/bygene_local.sh`` in this repository.
+  Possible solutions using docker images or local ``*sif`` files (make sure to change the path to the ``*sif`` files) can be found `here <https://github.com/chrishah/phylogenomics_intro_vertebrata/blob/main/backup/bygene.sh>`_ and `here <https://github.com/chrishah/phylogenomics_intro_vertebrata/blob/main/backup/bygene_local.sh>`_, respectively. See scripts ``backup/bygene.sh`` and ``backup/bygene_local.sh`` in this repository. 
+
+ **If you want to the script ``backup/bygene_local.sh`` please make sure that the paths to the Shared folder where the ``*sif`` files are is correct.**
 
   If you want to skip this step alltogehter you can fetch the files that would be produced by this step from the ``backup`` directory, like so:
 
@@ -302,6 +306,8 @@ these:
 
     (user@host)-$ rsync -avpuzP backup/by_gene .
 
+
+The results of the above processes (aligning, trimming and tree inference for 5 genes) can be found in the directory ``by_gene/``. Check it out and take note how we have neatly organised our results with meaningful directory names, etc.
 
 Now, let's infer a ML tree using a supermatrix of all 5 genes that we
 have processed so far.
@@ -355,10 +361,14 @@ A very neat way of handling this kind of thing is
 
 .. admonition:: Important Information
 
-  Snakemake should be installed on your system. An easy way to get it set up is through ``conda``. If you haven't set it up yet, we provide some instructions `here <https://github.com/chrishah/phylogenomics_intro_vertebrata/tree/main/Snakemake_intro/README.md>`_.
+  Snakemake needs to be installed on your system to continue with the exercise. An easy way to get it set up is through ``conda``. 
 
+  If you do this as part of a course it might be that the environment is already set up for you. Run the command: ``conda env list`` to list all conda envirnments. If you see something called ``snakemake`` or ``serpentesmake`` they are probably the right ones (check back with instructors in case of doubt). Please activate the right environment, e.g. like so: ``conda activate serpentesmake``.
 
-The very minimum you'll need to create Snakemake workflow is a so called Snakefile. The repository ships with a file called ``Snakemake_intro/Snakefile_cloud``. This file contains the instructions for running a basic workflow with Snakemake. Let's have a look. Note that we have prepared also a file ``Snakemake_intro_Snakefile_local`` in case you've been instructed to use local ``*sif`` files.
+  If the environment isn't yet set up for you, we provide some instructions `here <https://github.com/chrishah/phylogenomics_intro_vertebrata/tree/main/Snakemake_intro/README.md>`_.
+  
+
+The very minimum you'll need to create Snakemake workflow is a so called Snakefile. The repository ships with a file called ``Snakemake_intro/Snakefile_cloud``. This file contains the instructions for running a basic workflow with Snakemake. Let's have a look. Note that we have prepared also a file ``Snakemake_intro/Snakefile_local`` in case you've been instructed to use local ``*sif`` files.
 
 .. code:: bash
 
@@ -375,15 +385,23 @@ Assuming you've set up a ``conda`` environment called ``snakemake`` (either you 
 
 .. code:: bash
 
-    (user@host)-$ conda activate snakemake
+    (user@host)-$ conda activate snakemake # maybe conda activate serpentesmake - depends on the course
     (snakemake) (user@host)-$ snakemake -h
 
 Now, let's try to do a Snakemake 'dry-run' (flag ``-n``), providing a specific target
 file and see what happens. Remember that ``snakemake`` expects a file called ``Snakefile``
-in the working directory per default, so you could copy the file ``Snakemake_intro/Snakefile_local`` or ``Snakemake_intro/Snakefile_cloud`` here, renamed ``Snakefile`` (this is what will be assumed) or find another way (``-s <path/to/Snakefile>``).
+in the working directory per default, so you could copy the file ``Snakemake_intro/Snakefile_local`` (or if instructed to use images from Dockerhub instead, ``Snakemake_intro/Snakefile_cloud``) here, renamed ``Snakefile`` (this is what will be assumed) or find another way (you could add the flag ``-s <path/to/Snakefile>`` to the snakemake commands below).
+
+**Review the ``Snakefile`` you've just copied and make sure that the paths to the locally provided ``*sif`` files are correct. Change from ``~/Shared_folder`` to ``~/Share`` for example. Note that each rule uses a different one.**
 
 .. code:: bash
 
+    (user@host)-$ cp Snakemake_intro/Snakefile_local Snakefile
+
+    ## now let's do a 'dry-run' with snakemake
+    ## you provide a specific target file and given the rules 
+    ## in the Snakefile snakemake will figure out what it 
+    ## needs to do to get to this file
     (user@host)-$ snakemake -n -rp auto/trimmed/193525at7742.clustalo.trimal.fasta
 
 Now, you could extend the analyses to further genes.
@@ -401,6 +419,8 @@ Actually running would happen if you remove the ``-n`` flag. Note that I've adde
     (user@host)-$ snakemake -rp --use-singularity --jobs 4 \
                   auto/trimmed/193525at7742.clustalo.trimal.fasta \
                   auto/trimmed/406935at7742.clustalo.trimal.fasta
+
+Check out the results of these analyses in the directory ``auto/``.
 
 **Well Done!**
 
@@ -428,14 +448,19 @@ Actually running would happen if you remove the ``-n`` flag. Note that I've adde
 
        (snakemake) (user@host)-$ snakemake -nrp --use-singularity --jobs 4 super.treefile
 
-   Also check out snakemakes functionality to generate dags (directed acyclic graphs)
-   notice that I am using a backup Snakefile ``backup/Snakefile_with_ml_from_dir``:
+   Also check out snakemakes functionality to generate dags (directed acyclic graphs).
+
+   Notice that I am using a backup Snakefile ``backup/Snakefile_with_ml_from_dir_local`` below.
+   This file has built in a python function at the beginning that will cause the workflow to 
+   consider all fasta files in the directory ``by_gene/raw/`` as input rather than only specific
+   ones.
 
    .. code:: bash
 
       (snakemake) (user@host)-$ snakemake -n --dag \
-                  -s backup/Snakefile_with_ml_from_dir | dot -Tpdf > dag.from.dir.pdf
+                  -s backup/Snakefile_with_ml_from_dir_local | dot -Tpdf > dag.from.dir.pdf
 
+In case you actually ran the above commands the final tree can be found in ``super.treefile`` (also in ``backup/super.treefile``). The directected acyclid graph can be viewed in the pdf ``dag.from.dir.pdf`` (or alternatively ``backup/dag.with_ml_from_dir.pdf``).
 
 **Well Done!!!**
 

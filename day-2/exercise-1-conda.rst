@@ -366,7 +366,7 @@ Users can easily add channels to their conda configuration using the command lin
    $ conda config --add channels conda-forge
 
 
-Once added, conda will search this channel for packages together with the other specified channels. You can even prioritize channels by specifying their order in your configuration. This is useful if you want ``conda`` to prefer packages from a specific channel over others. In general, we recommend omitting the proprietary ``defaults``channel.
+Once added, conda will search this channel for packages together with the other specified channels. You can even prioritize channels by specifying their order in your configuration. This is useful if you want ``conda`` to prefer packages from a specific channel over others. In general, we recommend omitting the proprietary ``defaults`` channel.
 
 Creating custom channels
 ~~~~~~~~~~~~~~~~~~~~~~~~
@@ -383,6 +383,8 @@ Managing channels effectively can significantly enhance your experience with con
 
 **Use Environment Files:** When sharing environments with others, consider using an environment file that specifies the channels and packages. This ensures that others can recreate the same environment with ease. However, also keep in mind potential problems of this approach which we discussed above.
 
+Example of a concrete problem
+~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 
 Beside the large conda channels (such as ``bioconda``, ``conda-forge``, ``r``) it is also possible to use and install from alternative channels. However this can come with several challenges and unexpected behaviour. It can for example result in incompatible dependecies and you can quickly damage up your environment beyond repair. This can sometimes happen unexpectedly and also rarely with large channels, but far less often. Here is an example where we try to install `ete3 <http://etetoolkit.org/>`_ and its associated command line tools. Ete3 is an API for working with phylogenetic data in python. It is powerful and provides many interesting functions to work with alignments and phylogenetic trees and a full featured command line interface. Let us see how this goes by following installation instructions which you can find if you search for `ete3 conda install <https://www.google.com/search?channel=fs&client=ubuntu&q=install+ete3+conda>`_ . 
 

@@ -402,6 +402,10 @@ Beside the large conda channels (such as ``bioconda``, ``conda-forge``, ``r``) i
    or manually compile from:
     https://github.com/etetoolkit/ete_toolchain
 
+.. warning:: 
+
+   Depending on the version of python, which in turn depends on your version of conda, it could happen that the installation finishes without error but ete3 still does not work. It complains that it is missing the python module ``cgi``. This is because the ``cgi``library was removed from the python stdandard library in python 3.13 (see `here <https://docs.python.org/3/library/cgi.html>`_). In this case you have to install the another package with conda: ``conda install -c conda-forge legacy-cgi`` before you continue.
+
 
 .. hint:: 
 

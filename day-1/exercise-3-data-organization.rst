@@ -85,16 +85,13 @@ Here is a first example showing many features of Markdown:
    produce a line break.
 
    ## You can also create tables:
-
    | Left columns  | Right columns |
    | ------------- |:-------------:|
    | left foo      | right foo     |
    | left bar      | right bar     |
    | left baz      | right baz     |
 
-
    ## Code or bash commands can be written like this:
-   
    ``` 
    ls | wc -l
    ```

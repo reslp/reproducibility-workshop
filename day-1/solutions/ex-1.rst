@@ -3,7 +3,7 @@
 
 .. code:: bash
 
-   user40@ip-172-31-4-141:~$ cp -p ${HOME}/Share/linux-intro/data/README.md linux-intro/data/
+   user40@ip-172-31-4-141:~$ cp -p ~/Share/linux-intro/data/README.md linux-intro/data/
 
 
 **Task 2 - Complex copy of relative directory structure**
@@ -29,7 +29,7 @@
 
 .. code:: bash
 
-   user40@ip-172-31-4-141:~$ diff ${HOME}/Share/linux-intro/data/README.md linux-intro/data/README.md 
+   user40@ip-172-31-4-141:~$ diff ~/Share/linux-intro/data/README.md linux-intro/data/README.md 
 
 **Task 4 - generate random numbers in for loop**
 

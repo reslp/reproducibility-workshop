@@ -80,14 +80,14 @@ Let’s create a bit of directory structure and navigate through it.
 
 .. admonition:: Task 1
 
-   Copy a file called ``README.md`` from a directory called ``data`` in ``${HOME}/Share/linux-intro`` to your directory ``linux-intro/data``. 
+   Copy a file called ``README.md`` from a directory called ``data`` in ``~/Share/linux-intro`` to your directory ``linux-intro/data``. 
 
    - Make sure to retain the timestamp of the original file.
 
 
 .. admonition:: Task 2
 
-   Copy the directory ``subfolder1`` and all its content from ``${HOME}/Share/linux-intro/data/Day1/`` to your directory ``linux-intro/data``.
+   Copy the directory ``subfolder1`` and all its content from ``~/Share/linux-intro/data/Day1/`` to your directory ``linux-intro/data``.
 
    - make sure to also bring about the entire directory structure from ``Day1`` onwards, so that you get ``linux-intro/data/Day1/subfolder1``
    - do not copy subfolders ``subfolder2`` and ``subfolder3`` in ``Day1``.
@@ -114,7 +114,7 @@ Note if you save the output of ``md5sum`` in a text file you can always check la
 
    Fast forward 3 months into the future. You've been otherwise occupied and return to the current project. You vaguely remember that you made some change to the ``README.md`` file, but what did you change?
    
-   use the ``diff`` command to compare the two files ``${HOME}/Share/linux-intro/data/README.md`` and ``linux-intro/data/README.md``.
+   use the ``diff`` command to compare the two files ``~/Share/linux-intro/data/README.md`` and ``linux-intro/data/README.md``.
 
 
 ``diff`` is very useful, but the output can be a bit tricky to interpret. A slightly more complex example can be found `here <https://www.geeksforgeeks.org/diff-command-linux-examples/>`_. 

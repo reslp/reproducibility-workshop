@@ -71,7 +71,7 @@ if [ -x /usr/lib/command-not-found -o -x /usr/share/command-not-found/command-no
 fi
 
 # a few aliases of docker run commmands
-alias pandoc='docker run --rm -it -v `$(pwd)`:/data -w /data reslp/pandoc:3.7.0.2 pandoc'
+alias pandoc='docker run --rm -it -v `pwd`:/data -w /data reslp/pandoc:3.7.0.2 pandoc'
 alias debian-alternative-miniconda="docker run --rm -it -v $(pwd):/data reslp/debian-alternative-miniconda:4.7.12"
 alias nextflow="docker run --rm -it -v $(pwd):/data -w /data nextflow/nextflow:22.04.4 nextflow "
 alias nf-core="docker run -it -v $(pwd):$(pwd) -w $(pwd) -u $(id -u):$(id -g) nfcore/tools:2.4.1"

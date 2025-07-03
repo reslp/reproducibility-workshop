@@ -34,9 +34,9 @@ We use several bash aliases to mask complex docker commands which we added globa
 
    # a few aliases of docker run commmands
    alias pandoc='docker run --rm -it -v `pwd`:/data -w /data reslp/pandoc:3.7.0.2 pandoc'
-   alias debian-alternative-miniconda="docker run --rm -it -v $(pwd):/data reslp/debian-alternative-miniconda:4.7.12"
-   alias nextflow="docker run --rm -it -v $(pwd):/data -w /data nextflow/nextflow:22.04.4 nextflow "
-   alias nf-core="docker run -it -v $(pwd):$(pwd) -w $(pwd) -u $(id -u):$(id -g) nfcore/tools:2.4.1"
+   alias debian-alternative-miniconda='docker run --rm -it -v `pwd`:/data reslp/debian-alternative-miniconda:4.7.12'
+   alias nextflow='docker run --rm -it -v `pwd`:/data -w /data nextflow/nextflow:22.04.4 nextflow '
+   alias nf-core='docker run -it -v `pwd`:`pwd` -w `pwd` -u $(id -u):$(id -g) nfcore/tools:2.4.1'
    alias switch-on_ubuntu_20-04="docker run -it --rm --hostname ubuntu-20-04 -w /home ubuntu:20.04"
    alias switch-on_ubuntu_22-04="docker run -it --rm --hostname ubuntu-22-04 -w /home ubuntu:22.04" 
 

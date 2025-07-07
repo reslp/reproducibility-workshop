@@ -89,10 +89,9 @@ Let’s create a bit of directory structure and navigate through it.
 
 .. admonition:: Task 2
 
-   Copy the directory ``subfolder1`` and all its content from ``~/Share/linux-intro/data/Day1/`` to your directory ``linux-intro/data``.
-   
    Get an overview of what the original directory structure looks like with the tree command ``tree ~/Share/linux-intro`` (`example <https://github.com/reslp/reproducibility-workshop/blob/main/day-1/solutions/tree-linux-intro.png>`_)
 
+   Copy the directory ``subfolder1`` and all its content from ``~/Share/linux-intro/data/Day1/`` to your directory ``linux-intro/data``, considering the following:
    - make sure to also bring about the entire directory structure from ``Day1`` onwards, so that you get ``linux-intro/data/Day1/subfolder1``
    - do not copy subfolders ``subfolder2`` and ``subfolder3`` in ``Day1``.
    - keep original timestamps

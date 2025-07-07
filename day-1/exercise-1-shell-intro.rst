@@ -93,6 +93,9 @@ Let’s create a bit of directory structure and navigate through it.
    - do not copy subfolders ``subfolder2`` and ``subfolder3`` in ``Day1``.
    - keep original timestamps
 
+   Here's a visual representation of what the directory structure looks like:
+   ![](solutions/tree-linux-intro.png)
+
 
 Now, let's add a line of text to the file ``linux-intro/data/README.md``
 

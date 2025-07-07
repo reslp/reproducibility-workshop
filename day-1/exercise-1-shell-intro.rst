@@ -94,7 +94,7 @@ Let’s create a bit of directory structure and navigate through it.
    - keep original timestamps
 
    Here's a visual representation of what the directory structure looks like:
-   ![](solutions/tree-linux-intro.png)
+   ![](day-1/solutions/tree-linux-intro.png)
 
 
 Now, let's add a line of text to the file ``linux-intro/data/README.md``

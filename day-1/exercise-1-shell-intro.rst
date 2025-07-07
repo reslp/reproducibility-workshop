@@ -2,6 +2,8 @@
 Exercise 1 - Refresh command line skills
 =======================================
 
+Github page URL: [https://github.com/reslp/reproducibility-workshop/blob/main/day-1/exercise-1-shell-intro.rst](https://github.com/reslp/reproducibility-workshop/blob/main/day-1/exercise-1-shell-intro.rst)
+
 For the following three days we assume that you can navigate in a
 UNIX-like file system using the command line, list, copy, rename and
 remove files, and alsodisplay the contents of files. Further, we assume
@@ -93,8 +95,8 @@ Let’s create a bit of directory structure and navigate through it.
    - do not copy subfolders ``subfolder2`` and ``subfolder3`` in ``Day1``.
    - keep original timestamps
 
-   Here's a visual representation of what the directory structure looks like:
-   ![](day-1/solutions/tree-linux-intro.png)
+Here's a visual representation of what the original directory structure looks like:
+![](day-1/solutions/tree-linux-intro.png)
 
 
 Now, let's add a line of text to the file ``linux-intro/data/README.md``

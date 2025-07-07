@@ -2,7 +2,7 @@
 Exercise 1 - Refresh command line skills
 =======================================
 
-Github page URL: [https://github.com/reslp/reproducibility-workshop/blob/main/day-1/exercise-1-shell-intro.rst](https://github.com/reslp/reproducibility-workshop/blob/main/day-1/exercise-1-shell-intro.rst)
+Github page URL: [https://github.com/reslp/reproducibility-workshop](https://github.com/reslp/reproducibility-workshop)
 
 For the following three days we assume that you can navigate in a
 UNIX-like file system using the command line, list, copy, rename and
@@ -96,7 +96,7 @@ Let’s create a bit of directory structure and navigate through it.
    - keep original timestamps
 
 Here's a visual representation of what the original directory structure looks like:
-![](day-1/solutions/tree-linux-intro.png)
+![title](solutions/tree-linux-intro.png)
 
 
 Now, let's add a line of text to the file ``linux-intro/data/README.md``

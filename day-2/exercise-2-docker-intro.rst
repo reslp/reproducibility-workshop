@@ -382,7 +382,7 @@ To achieve this you can bind-mount directories directly to your containers using
 
     (host) $ docker run -it -v $(pwd):/data -w /data ubuntu
 
-This command will mount the current working directory on your host to the :bash:`/data` folder inside the ubuntu container. You can now make changes to that folder inside your container and the changes will translate to the folder on the host computer.
+This command will mount the current working directory on your host to the :bash:`/data` folder inside the ubuntu container. If you are connected to the container and have navigated to :bash:`/data`, a simple :bash:`ls` should display all files you have in your local directory. You can now also make changes to that folder inside your container and the changes will translate to the folder on the host computer.
 
 **Make sure you exit the container before moving on**
 
@@ -391,6 +391,7 @@ This command will mount the current working directory on your host to the :bash:
     root@8b5386d5345d:/data# exit
 
 
+Make sure you have left the container (type :bash:`exit`) before moving on (see above).
 We will now create a :bash:`testfile` in the current directory. Then we will start a container mounting this directory. Inside the container we will create another testfile :bash:`another_testfile`. All changes persist also when we exit the container:
 
 .. code-block:: bash
@@ -401,15 +402,16 @@ We will now create a :bash:`testfile` in the current directory. Then we will sta
     # check what's in the directory
     (host) $ ls
     
+    # where are you on your local computer
     (host) $ pwd
     /home/user21/test-mount
+    # create an empty file
     (host) $ touch testfile
     (host) $ ls
     testfile
 
     # let's enter the container and mount your current directory to /data in the container
-    (host) $ docker run -it --rm -v $(pwd):/data ubuntu:18.04
-    root@a0f138701fc5:/# cd /data
+    (host) $ docker run -it --rm -v $(pwd):/data -w /data ubuntu:18.04
     root@a0f138701fc5:/data# ls
     testfile
     root@a0f138701fc5:/data# touch another_testfile

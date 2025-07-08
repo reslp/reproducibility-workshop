@@ -421,18 +421,18 @@ Exercises
 
 .. admonition:: Exercise 3
 
-   Another interesting tool in the context of long read genome assembly is `LongStitch <https://github.com/bcgsc/longstitch>`_. This is a pipeline for scaffolding of draft assemblies with long reads incorporating multiple tools and controlled through ``make``. I found it relatively difficult to set up because of the many dependencies it requires, but if you like a challenge .. ;-)
+   Choose your favourite piece of bioinformatics software (command line tools) and try to run it via a Docker container.
 
-   Write a ``Dockerfile`` and build an image for LongStitch.
-
-   A possible solution can be found `here <https://github.com/reslp/reproducibility-workshop/blob/main/additional-data/dockerfiles/longstitch.Dockerfile>`_.
+   Two options:
+   - find a suitable existing Docker image
+   - Create your own Dockerfile and build an image yourself.
 
 
 Phew, for a minute there ... **Well Done !!!**
 
 
-Demos
-=====
+Demos (require local Docker setup)
+==================================
 
 .. warning::
 

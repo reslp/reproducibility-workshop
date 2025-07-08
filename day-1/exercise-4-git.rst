@@ -363,7 +363,7 @@ It is even possible to host a git repository on your own server.
 
 .. admonition:: Exercise
 
-   Find the secret message hidden in the repository. You can use what you have learned so far to discover it. Additionally, the command ``git branch -a`` or ``git branch -r`` could help. Branches are often listed as origin/<branchname> to change to a branch using git you just need the name after the forward slash ``/`` character.
+   Find the secret message hidden in the repository. You can use what you have learned so far to discover it. Additionally, the command ``git branch -a`` or ``git branch -r`` could help. In cloned repositories, branches are often listed as origin/<branchname>. Depending on how you have already interacted with your local copy of your repository you need to use the full branchname origin/<branchname> or you just need the name after the forward slash ``/`` character.
 
 
 Transfering local changes to an online repository

@@ -371,6 +371,56 @@ Sharing data with the host system
 
 Often, you will want share data from the host computer with the container. For example you may want to analyse files you created inside your container or you may want to copy files from inside your container to your computer after an analysis has finished. Docker provides two ways to do this: Docker volumes and bind-mounting whole directories. We will introduce both approaches here:
 
+Mounting directories
+--------------------
+
+Unless you specify otherwise what happens in the container stays in the container. However, it is often also necessary to copy files between the host and the container, or access files on your local computer through the container. 
+To achieve this you can bind-mount directories directly to your containers using the :bash:`-v` flag in :bash:`docker run`:
+
+
+.. code-block:: bash
+
+    (host) $ docker run -it -v $(pwd):/data -w /data ubuntu
+
+This command will mount the current working directory on your host to the :bash:`/data` folder inside the ubuntu container. You can now make changes to that folder inside your container and the changes will translate to the folder on the host computer.
+
+**Make sure you exit the container before moving on**
+
+.. code-block:: bash
+
+    root@8b5386d5345d:/data# exit
+
+
+We will now create a :bash:`testfile` in the current directory. Then we will start a container mounting this directory. Inside the container we will create another testfile :bash:`another_testfile`. All changes persist also when we exit the container:
+
+.. code-block:: bash
+
+    # on your local computer make directory
+    (host) $ mkdir test-mount
+    (host) $ cd test-mount
+    # check what's in the directory
+    (host) $ ls
+    
+    (host) $ pwd
+    /home/user21/test-mount
+    (host) $ touch testfile
+    (host) $ ls
+    testfile
+
+    # let's enter the container and mount your current directory to /data in the container
+    (host) $ docker run -it --rm -v $(pwd):/data ubuntu:18.04
+    root@a0f138701fc5:/# cd /data
+    root@a0f138701fc5:/data# ls
+    testfile
+    root@a0f138701fc5:/data# touch another_testfile
+    root@a0f138701fc5:/data# exit
+    exit
+
+    # back at your local system check it out
+    (host) $ ls
+    testfile another_testfile
+
+
 Docker volumes
 --------------
 
@@ -463,54 +513,7 @@ Now, try with the key volume mounted to the :bash:`/data` directory mounted in t
 
     (host) $ docker run -v key:/data chrishah/welldone:1.0
 
-
-Mounting directories
---------------------
-
-While volumes are very helpful when sharing data between containers, it is often also necessary to copy files between the host and the container. It is possible to find your created volumes (they are just folders on your host computer), but they are usally stored in place we don't normally access (e.g. on Linux Docker stores them in :bash:`/usr/lib/docker/volumes`). We could navigate to this directory and copy data frame there.
-However, you can also bind-mount directories directly to your containers again using the :bash:`-v` flag in :bash:`docker run`:
-
-.. code-block:: bash
-
-    (host) $ docker run -it -v $(pwd):/data -w /data ubuntu
-
-This command will mount the current working directory on your host to the :bash:`/data` folder inside the ubuntu container. You can now make changes to that folder inside your container and the changes will translate to the folder on the host computer.
-
-**Make sure you exit the container before moving on**
-
-.. code-block:: bash
-
-    root@8b5386d5345d:/data# exit
-
-
-We will now create a :bash:`testfile` in the current directory. Then we will start a container mounting this directory. Inside the container we will create another testfile :bash:`another_testfile`. All changes persist also when we exit the container:
-
-.. code-block:: bash
-
-    # on your local computer make directory
-    (host) $ mkdir test-mount
-    (host) $ cd test-mount
-    # check what's in the directory
-    (host) $ ls
-    
-    (host) $ pwd
-    /home/user21/test-mount
-    (host) $ touch testfile
-    (host) $ ls
-    testfile
-
-    # let's enter the container and mount your current directory to /data in the container
-    (host) $ docker run -it --rm -v $(pwd):/data ubuntu:18.04
-    root@a0f138701fc5:/# cd /data
-    root@a0f138701fc5:/data# ls
-    testfile
-    root@a0f138701fc5:/data# touch another_testfile
-    root@a0f138701fc5:/data# exit
-    exit
-
-    # back at your local system check it out
-    (host) $ ls
-    testfile another_testfile
+It is possible to find your created volumes (they are just folders on your host computer), but they are usally stored in place we don't normally access (e.g. on Linux Docker stores them in :bash:`/usr/lib/docker/volumes`).
 
 Summary
 =======

@@ -3,6 +3,8 @@ Exercise 2 - Creating a self sustained bioinformatic pipeline
 
 Phylogenomics tutorial based on BUSCO genes
 
+Github URL (latest version): `https://github.com/chrishah/phylogenomics_intro_vertebrata <https://github.com/chrishah/phylogenomics_intro_vertebrata>`_
+
 .. admonition:: Disclaimer
 
   To follow the demo and make the most of it, it helps if

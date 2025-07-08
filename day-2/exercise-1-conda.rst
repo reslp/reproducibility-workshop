@@ -320,6 +320,72 @@ In this case only the packages that have been installed explicitly (with ``conda
 Incompatible packages from small channels
 -----------------------------------------
 
+What are conda channels?
+~~~~~~~~~~~~~~~~~~~~~~~~
+
+Conda channels serve as the primary source of conda packages. Each channel can contain a variety of different packages, and they can be organized by different criteria, such as the type of software and the target audience (bioinformatics, mathematics, machine learning, etc). When you issue a command to install a package, conda searches the specified channels in order to find the requested software and its dependencies.
+
+Default channels
+~~~~~~~~~~~~~~~~
+
+By default, Conda is configured to use the ``defaults`` channel, which is maintained by Anaconda, Inc. This channel includes a wide range of popular packages that are commonly used in data science, machine learning, and scientific computing. The packages in the defaults channel are generally well-tested and stable, making it a reliable choice for many users. However, in 2024 Anaconda, the company behind the conda tool, has updated their terms of use for software obtained from the defaults channel. A good summary can be found `here <https://www.datacamp.com/blog/navigating-anaconda-licensing>`_. Essentially, the free of charge usage of packages from the defaults channel has been strongly restricted and now requires a paid license. This something very important to keep in mind when using conda!
+
+To remove the default channel:
+
+.. code-block:: bash
+
+   # check what channels you currently have
+   $ conda config --show channels
+
+   # remove channel 
+   $ conda config --remove channels defaults
+
+
+.. hint:: 
+
+   The ``defaults`` channel can also have sub-channels. Make sure to also remove them if you want to remove ``defaults``. More info on this you can find `here <https://stackoverflow.com/questions/67695893/how-do-i-completely-purge-and-disable-the-default-channel-in-anaconda-and-switch>`_
+
+
+.. hint::
+
+   If you install `miniforge <https://github.com/conda-forge/miniforge#miniforge>`_ instead of conda or miniconda the default channel will be ``conda-forge``.
+
+
+Community channels
+~~~~~~~~~~~~~~~~~~
+
+In addition to the defaults channel, there are numerous community-driven channels that provide access to a broader selection of packages. Two very popular community channels are ``conda-forge`` and ``bioconda``. These channel are maintained by a community of contributors who work to provide up-to-date versions of packages and ensure that they are compatible with one another. 
+
+Adding and managing channels
+~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+
+Users can easily add channels to their conda configuration using the command line. For example, to add the ``conda-forge`` channel, you would use the following command:
+
+.. code-block:: bash
+
+   $ conda config --add channels conda-forge
+
+
+Once added, conda will search this channel for packages together with the other specified channels. You can even prioritize channels by specifying their order in your configuration. This is useful if you want ``conda`` to prefer packages from a specific channel over others. In general, we recommend omitting the proprietary ``defaults`` channel.
+
+Creating custom channels
+~~~~~~~~~~~~~~~~~~~~~~~~
+
+For organizations or individuals who develop their own software, ``conda`` allows the creation of custom channels. By hosting a custom channel, developers can ensure that their packages are easily accessible to team members or collaborators, while also managing versioning and dependencies effectively.
+However, as we will see below, using packages from small channels also has several downsides.
+
+Channel configuration and best practices
+~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+
+Managing channels effectively can significantly enhance your experience with conda. Here are some things that can help mitigate problems:
+
+**Prioritize Channels:** If you rely on multiple channels, prioritize them based on your needs. For example, if you prefer the latest versions of packages, place ``conda-forge`` higher in your channel list.
+
+**Use Environment Files:** When sharing environments with others, consider using an environment file that specifies the channels and packages. This ensures that others can recreate the same environment with ease. However, also keep in mind potential problems of this approach which we discussed above.
+
+Example of a concrete problem
+~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+
 Beside the large conda channels (such as ``bioconda``, ``conda-forge``, ``r``) it is also possible to use and install from alternative channels. However this can come with several challenges and unexpected behaviour. It can for example result in incompatible dependecies and you can quickly damage up your environment beyond repair. This can sometimes happen unexpectedly and also rarely with large channels, but far less often. Here is an example where we try to install `ete3 <http://etetoolkit.org/>`_ and its associated command line tools. Ete3 is an API for working with phylogenetic data in python. It is powerful and provides many interesting functions to work with alignments and phylogenetic trees and a full featured command line interface. Let us see how this goes by following installation instructions which you can find if you search for `ete3 conda install <https://www.google.com/search?channel=fs&client=ubuntu&q=install+ete3+conda>`_ . 
 
 .. code-block:: bash
@@ -335,6 +401,10 @@ Beside the large conda channels (such as ``bioconda``, ``conda-forge``, ``r``) i
     conda install -c etetoolkit ete_toolchain
    or manually compile from:
     https://github.com/etetoolkit/ete_toolchain
+
+.. warning:: 
+
+   Depending on the version of python, which in turn depends on your version of conda, it could happen that the installation finishes without error but ete3 still does not work. It complains that it is missing the python module ``cgi``. This is because the ``cgi``library was removed from the python stdandard library in python 3.13 (see `here <https://docs.python.org/3/library/cgi.html>`_). In this case you have to install the another package with conda: ``conda install -c conda-forge legacy-cgi`` before you continue.
 
 
 .. hint:: 

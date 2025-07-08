@@ -26,8 +26,44 @@ You'll see that in addition to the specific versions of Ubuntu images we used be
    Using ``latest`` tag is fine for testing, but if you attempt to work reproducibly, **USE SPECIFIC TAGS**.
 
 
-The root 'problem'
-==================
+What's actually in the container?
+=================================
+
+If you surf to `DockerHub <https://hub.docker.com/>`_, or other repositories, like `Quay.io <https://quay.io/>`_, you will find containers for many of your favourite tools. These are fantastic resources. 
+
+However, it needs to be made clear that very often it's not entirely (or not at all) transparent what actually is in the container, other than that it claims to contain a certain piece of software. This is particularly true if the Docker Image is the result of a manual push, as demonstrated in a previous exercise.
+
+Of course the same argument could be made for a lot of other 'black boxes' of software. I just want to stress that Docker, per se, isn't solving this problem.
+
+See for example this container on `DockerHub <https://hub.docker.com/r/biocontainers/spades>`_. If you browse through this repository you can find some info about how it was built and so on but overall it's not really easily accessible or satisfying.
+
+Automated builds should solve this to a certain extent, right. I mean we hook up our Docker repo to a Github repo that contains the Dockerfile. If you go, for example to `this <https://hub.docker.com/r/staphb/spades>`_ repository, you will see that on the main page this is linked to a Github repository. However, also here the very version of the Dockerfile that was used to create the image may be hard to find.
+
+We've mentioned tags above as a prerequisite to work reproducibly with containers. However, there is no guarantuee that if you pull ``user/image:tag-xyz`` today and then again in half a year, that the same tag actually gives you the same image.
+
+
+Dockerfiles alone aren't reproducible
+=====================================
+
+Until recently I thought: 
+
+*Everything I need is my Dockerfile to be reproducible.* 
+
+I can share it with the community and if I or anyone else wants to build the same container they can just reuse the recipe.
+
+**This is not neccessarily true.**
+
+Why? Because we tend to build on other people's Docker images and, as stressed above, images may change even if their tags stay the same. Users may just remove their images from DockerHub or other repos.
+
+The only real long term solution I see currently, is saving your images locally. 
+
+Unfortunately, as far as we are aware, there is currently no dedicated system that guarantuees permanent long term storage of containers, including e.g. assignment of a `DOI <https://www.doi.org/>`_. So far the community doesn't seem to have picked up on that on a larger scale.
+
+You can upload images to and receive DOI from, e.g. `Dryad <https://datadryad.org/stash>`_, this is not a dedicated Image repository, however, but it can be a solution in the meantime.
+
+
+The root 'problem' (Docker specific - does not apply in Singularity/Apptainer)
+=============================================================================
 
 Within Docker containers we normally appear as root users. This is necessary - after all we want to have all rights to install packages, etc. in the container. The way Docker works this root privileges also need to extend to the local system on which the Docker daemon is running. Actually you always have to run Docker as root user, so ``sudo docker run ..``, and you will sometimes see that in Docker discussions. On the system wer are running we have created a Docker usergroup and added each user to it. Members of the docker group were given root privileges per default, so you don't have to use ``sudo`` each time. This is just for convenience and so you know.
 
@@ -113,41 +149,5 @@ Check it out.
    I want to draw your attention to the fact that of course through tricks like the above we could actually modify parts of the system that as a regular user we don't have the right to - and probably for good reasons. 
 
    This is why system admins don't 'like' Docker and we resort to Singularity on such systems because it is more restrictive with respect to user privileges.
-
-
-What's actually in the container?
-=================================
-
-If you surf to `DockerHub <https://hub.docker.com/>`_, or other repositories, like `Quay.io <https://quay.io/>`_, you will find containers for many of your favourite tools. These are fantastic resources. 
-
-However, it needs to be made clear that very often it's not entirely (or not at all) transparent what actually is in the container, other than that it claims to contain a certain piece of software. This is particularly true if the Docker Image is the result of a manual push, as demonstrated in a previous exercise.
-
-Of course the same argument could be made for a lot of other 'black boxes' of software. I just want to stress that Docker, per se, isn't solving this problem.
-
-See for example this container on `DockerHub <https://hub.docker.com/r/biocontainers/spades>`_. If you browse through this repository you can find some info about how it was built and so on but overall it's not really easily accessible or satisfying.
-
-Automated builds should solve this to a certain extent, right. I mean we hook up our Docker repo to a Github repo that contains the Dockerfile. If you go, for example to `this <https://hub.docker.com/r/staphb/spades>`_ repository, you will see that on the main page this is linked to a Github repository. However, also here the very version of the Dockerfile that was used to create the image may be hard to find.
-
-We've mentioned tags above as a prerequisite to work reproducibly with containers. However, there is no guarantuee that if you pull ``user/image:tag-xyz`` today and then again in half a year, that the same tag actually gives you the same image.
-
-
-Dockerfiles alone aren't reproducible
-=====================================
-
-Until recently I thought: 
-
-*Everything I need is my Dockerfile to be reproducible.* 
-
-I can share it with the community and if I or anyone else wants to build the same container they can just reuse the recipe.
-
-**This is not neccessarily true.**
-
-Why? Because we tend to build on other people's Docker images and, as stressed above, images may change even if their tags stay the same. Users may just remove their images from DockerHub or other repos.
-
-The only real long term solution I see currently, is saving your images locally. 
-
-Unfortunately, as far as we are aware, there is currently no dedicated system that guarantuees permanent long term storage of containers, including e.g. assignment of a `DOI <https://www.doi.org/>`_. So far the community doesn't seem to have picked up on that on a larger scale.
-
-You can upload images to and receive DOI from, e.g. `Dryad <https://datadryad.org/stash>`_, this is not a dedicated Image repository, however, but it can be a solution in the meantime.
 
 

@@ -1,4 +1,4 @@
-FROM reslp/mamba:0.5.3
+FROM reslp/mamba:2.0.5
 
 RUN mamba install -y -c conda-forge pigz zsh boost openmpi compilers 
 RUN mamba install -y -c bioconda arcs tigmint samtools google-sparsehash abyss

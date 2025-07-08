@@ -421,7 +421,7 @@ Exercises
 
 .. admonition:: Exercise 3
 
-   Choose your favourite piece of bioinformatics software (command line tools) and try to run it via a Docker container.
+   Choose your favourite piece of bioinformatics software (command line tools) and try to run it through a container via Docker or Singularity.
 
    Two options:
 

@@ -493,66 +493,6 @@ Here's another one that has ``snakemake`` setup within it.
 
     (host)-$ docker run -it --rm -v /$HOME:/app --workdir /app -p 8888:8888 -e REDIRECT_URL=http://localhost:8888 chrishah/snakemake-vice:v05062020 
 
-Mkdocs server
--------------
-
-MkDocs (`mkdocs.org <https://www.mkdocs.org/>`_) is a neat tool for creating project documentation sites. Instead of installing and running it locally, why not build it into an image and run it from within a Docker container?
-
-To keep things organized, let's first make a new directory.
-
-.. code:: bash
-
-    (host)-$ mkdir mkdocs && cd mkdocs
-
-Open your favorite text editor, copy, paste and save the following text
-into a file called ``Dockerfile`` in the ``mkdocs`` directory you've
-just created.
-
-::
-
-    FROM jfloff/alpine-python:2.7-slim
-
-    WORKDIR /usr/src/app
-
-    RUN pip install --no-cache-dir mkdocs==0.17.1 Pygments==2.2 pymdown-extensions==3.4
-
-    WORKDIR /docs
-
-    EXPOSE 8000
-
-    ENTRYPOINT ["mkdocs"]
-    CMD ["serve", "--dev-addr=0.0.0.0:8000"]
-
-Now, build your image:
-
-::
-
-    (host)-$ docker build -t mkdocs-serve .
-
-I've deposited the context for a little test site on Github - let's
-clone it - guess what, using Docker..
-
-.. code:: bash
-
-    (host)-$ docker run -ti --rm -v ${HOME}:/root -v $(pwd):/git alpine/git:v2.24.2 clone https://github.com/chrishah/mkdocs-readthedocs-docker-demo.git
-
-Then, move into it - ``cd mkdocs-readthedocs-docker-demo/``.
-
-Now we're ready to launch our server.
-
-.. code:: bash
-
-    (host)-$ docker run -it --rm -p 8000:8000 -v ${PWD}:/docs --name mkdocs-serve mkdocs-serve
-
-In your webbrowser, scoot to ``http://localhost:8000`` and see what you
-have done.
-
-Shut down the running server by pressing ``CTRL+C``.
-
-*Note:* If you cloned the context of the test site using the method
-above, you might need to change permissions on the directory in case you
-want to modify it, like so
-``sudo chown -R $USER:$USER mkdocs-readthedocs-docker-demo/``.
 
 Links
 =====

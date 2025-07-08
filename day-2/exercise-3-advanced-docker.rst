@@ -424,8 +424,11 @@ Exercises
    Choose your favourite piece of bioinformatics software (command line tools) and try to run it via a Docker container.
 
    Two options:
-   - find a suitable existing Docker image
+
+   - find a suitable existing Docker image (e.g. try to Google for it or explore `Dockerhub <https://hub.docker.com/>`_)
    - Create your own Dockerfile and build an image yourself.
+
+   We'll briefly discuss your experiences in the group.
 
 
 Phew, for a minute there ... **Well Done !!!**

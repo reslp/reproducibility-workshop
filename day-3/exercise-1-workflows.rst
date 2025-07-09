@@ -19,7 +19,7 @@ First, let us prepare the working environment for today. Run these commands in y
 
 .. admonition:: Exercise
 
-   Navigate to the directory ``additional-data/simple-workflow-example/input1`` and familiarize yourself with the input data file. If possible try to come up with a solution to the proposed task in ``bash``  before reading on.
+   Navigate to the directory ``reproducibility-workshop/additional-data/simple-workflow-example/input1`` and familiarize yourself with the input data file. If possible try to come up with a solution to the proposed task in ``bash``  before reading on.
 
 
 Using commandline scripting

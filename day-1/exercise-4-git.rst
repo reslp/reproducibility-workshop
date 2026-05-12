@@ -6,7 +6,7 @@
 Exercise 4 - Version control with Git
 =====================================
 
-Git is a version control system originally introduced to support the development of the Linux operating system. Originally released in 2005 git is now used in countless projects to facilitate version control and collaboration. Git can be used in many different scenarios and it is also a handy tool to keep track of changes in research projects. With git it is straightforward to monitor changes in files and thus ensure reproducibility of bioinformatic experiments. In this exercise we will introduce ``git`` and show how a basic git workflow looks like. 
+Git is a version control system originally introduced to support the development of the Linux operating system. Originally released in 2005 git is now used in countless projects to facilitate version control and collaboration. Git can be used in many different scenarios and it is also a handy tool to keep track of changes in research projects. With git it is straightforward to monitor changes in files and thus ensure reproducibility of bioinformatic experiments. In this exercise we will introduce ``git`` and show how a basic git workflow looks like.
 
 Objectives
 ==========
@@ -26,6 +26,10 @@ repository
 	Your directory that you would like to track with git. Also often called repo.
 commit
 	A snapshot of your repository with all the changes since your last commit. They are essential to your repository to keep track of all changes. You can also jump between commits to recover different versions of file.
+staging area
+	The place where you collect changes before you create a commit. This allows you to decide exactly what should be part of the next snapshot.
+remote
+	A copy of your repository on another computer or online platform such as GitHub or GitLab.
 
 
 Initialize a new repository
@@ -35,11 +39,13 @@ With `git <https://git-scm.com>`_ you can easily track your work and see how it 
 
 .. code-block:: bash
 
-    $ cd my_project 
+    $ cd my_project
     $ git init
     Initialized empty Git repository ...
 
-It is generally also a good idea to set up git with your name and email address so that contributions to a repository can be attributed transparently. This can be done with the following commands which will set the global settings of git. It is only necessary to do this once regardless of how many reporitories you initialize.
+Depending on your git version and configuration, the default branch may be called :bash:`master` or :bash:`main`. In this exercise many examples use :bash:`master`, but the same ideas apply if your branch is called :bash:`main`.
+
+It is generally also a good idea to set up git with your name and email address so that contributions to a repository can be attributed transparently. This can be done with the following commands which will set the global settings of git. It is only necessary to do this once regardless of how many repositories you initialize.
 
 More information `here <https://git-scm.com/docs/git-init>`_.
 
@@ -56,7 +62,7 @@ Check the status of your repository
 -----------------------------------
 
 
-You should see a message that ``git init`` successfully created a git repository. Congratulations, now your project is monitored by git. One of the things you will be doing regularely is to check the status of your repository with :bash:`git status`. This command is very handy and it allows you to see what git sees. Let's try it out:
+You should see a message that ``git init`` successfully created a git repository. Congratulations, now your project is monitored by git. One of the things you will be doing regularly is to check the status of your repository with :bash:`git status`. This command is very handy and it allows you to see what git sees. Let's try it out:
 
 .. code-block:: bash
 
@@ -68,7 +74,7 @@ You should see a message that ``git init`` successfully created a git repository
     nothing to commit (create/copy files and use "git add" to track)
 
 
-Remember this command. It is key to understand what git keeps track of and what not. Form the output you can see that currently the repository is empty, and also that there are no tracked files. Let us change that and create a new file. After this we run :bash:`git status` again.
+Remember this command. It is key to understand what git keeps track of and what not. From the output you can see that currently the repository is empty, and also that there are no tracked files. Let us change that and create a new file. After this we run :bash:`git status` again.
 
 More information `here <https://git-scm.com/docs/git-status>`_.
 
@@ -77,7 +83,7 @@ More information `here <https://git-scm.com/docs/git-status>`_.
     $ touch protocol.md
     $ git status
     On branch master
-	
+
     No commits yet
 
     Untracked files:
@@ -100,12 +106,12 @@ Now that git "sees" the file, we need to let it know that we would like to also 
     $ git add protocol.md
     $ git status
     On branch master
-    
+
     No commits yet
-    
+
     Changes to be committed:
       (use "git rm --cached <file>..." to unstage)
-    
+
     	new file:   protocol.md
 
 
@@ -114,15 +120,22 @@ Now that git "sees" the file, we need to let it know that we would like to also 
 More information `here <https://git-scm.com/docs/git-add>`_.
 
 
-.. admonition::
+Before committing changes it is often useful to inspect what exactly has changed. This can be done with :bash:`git diff`. Without additional arguments, :bash:`git diff` shows changes in files which have not yet been staged. If you would like to see the changes which are already staged for the next commit, you can use :bash:`git diff --staged`.
 
-   How can you see what exactly has changed in my file before I commit changes? Git has a special command for that. Your task is to find this command and try it.
+.. code-block:: bash
+
+   $ git diff
+   $ git diff --staged
+
+.. admonition:: Exercise
+
+   Make a small change to your :bash:`protocol.md` file and use :bash:`git diff` to inspect the change before you commit it.
 
 
 Commit changes
 --------------
 
-Committing changes (remember that all changes to be committed first need to be staged), is what makes git remember. A commit is a snapshot of the complete repository at a given time. Creating a commit requires the :bash:`git commit` command. Seee below:
+Committing changes (remember that all changes to be committed first need to be staged), is what makes git remember. A commit is a snapshot of the complete repository at a given time. Creating a commit requires the :bash:`git commit` command. See below:
 
 .. code-block:: bash
 
@@ -132,7 +145,7 @@ Committing changes (remember that all changes to be committed first need to be s
      create mode 100644 protocol.md
 
 
-As you can see we are using the flag :bash:`-m`, which is short for message. This flag takes a string as argument which will become the commit message. The commit message describes what is contained in the commit. Make sure this is an informative message, because it will stay in your git log. Meaningful commit messages enable you to quickly idenftify what you did whitout having to look at the actual files. Look at the `xkcd <https://xkcd.com/1296/>`_ comic below. It describes what can happen easily with projects in git.
+As you can see we are using the flag :bash:`-m`, which is short for message. This flag takes a string as argument which will become the commit message. The commit message describes what is contained in the commit. Make sure this is an informative message, because it will stay in your git log. Meaningful commit messages enable you to quickly identify what you did without having to look at the actual files. A good commit usually contains one logical change and has a short message that explains what changed, for example ``Add sample metadata`` or ``Document quality filtering command``. Look at the `xkcd <https://xkcd.com/1296/>`_ comic below. It describes what can happen easily with projects in git.
 
 More information `here <https://git-scm.com/docs/git-commit>`_.
 
@@ -145,13 +158,13 @@ More information `here <https://git-scm.com/docs/git-commit>`_.
 Stage and commit. Why two steps?
 --------------------------------
 
-Let us quickly recapitualte what we have learned so far about working with git. We have seen how a typical git workflow would look like:
+Let us quickly recapitulate what we have learned so far about working with git. We have seen how a typical git workflow would look like:
 
 	1. Make changes to your file.
 	2. Add the file to your staging area with :bash:`git add`.
 	3. Commit your staged file using :bash:`git commit` and use an informative commit message.
 
-It is sometimes considered confusing that git uses this two-part workflow with staging and commiting. Why is it necessary to stage files first and how does git know that a file should be part of a commit? The answer to this question is that you can also combine changes of multiple files into a single commit. This makes sense, since you may be working on different things simultaneously or changes for one aspect of your project requires modifying multiple files. In this case you would probably want to group all changes together and only create a single commit.
+It is sometimes considered confusing that git uses this two-part workflow with staging and committing. Why is it necessary to stage files first and how does git know that a file should be part of a commit? The answer to this question is that you can also combine changes of multiple files into a single commit. This makes sense, since you may be working on different things simultaneously or changes for one aspect of your project requires modifying multiple files. In this case you would probably want to group all changes together and only create a single commit.
 
 
 Keeping track of your commits
@@ -178,46 +191,46 @@ Git offers several commands which let you quickly check the history of your repo
 
          First commit
 
- 
+
 The difference between the two commands presented above is simply the amount of information you get controlled by the :bash:`--oneline` flag. The standard :bash:`git log` command show additional information such as who contributed to the repository and the exact date and time of the commits. The last commit is always on top of the list. It is also called HEAD. This is also indicated by :bash:`(HEAD -> master)` which also tells you the branch you are on. In this case: master. We did not talk about branches yet. This will come a little bit later.
 
-To make them identifiabl, commits get unique IDs that consists of combinations of numbers and letters. These are also called `hashes <https://en.wikipedia.org/wiki/Hash_function>`_. We can use commit hashes to switch between different versions of the repository. For example let us try to switch back to the First commit with the hash :bash:`50d2cf8` (long version: :bash:`50d2cf80c9461eef8f67c9273eec8fd3e687162b`). Mind you, that your hashes will be different. You need to use the ones from your :bash:`git log` output. 
+To make them identifiable, commits get unique IDs that consist of combinations of numbers and letters. These are also called `hashes <https://en.wikipedia.org/wiki/Hash_function>`_. We can use commit hashes to switch between different versions of the repository. For example let us try to switch back to the First commit with the hash :bash:`50d2cf8` (long version: :bash:`50d2cf80c9461eef8f67c9273eec8fd3e687162b`). Keep in mind that your hashes will be different. You need to use the ones from your :bash:`git log` output.
 
 More information `here <https://git-scm.com/docs/git-log>`_.
 
 
 .. hint::
 
-   Hashing by itself is very powerful. It is used in many different fields of computer science. Calculating hashes can already help to increase reproducibility because hashes (of files) can be used to check if files are identical. 
+   Hashing by itself is very powerful. It is used in many different fields of computer science. Calculating hashes can already help to increase reproducibility because hashes (of files) can be used to check if files are identical.
 
 
 Reverting to an older version of your repository
 ================================================
 
-Since git keeps track of all your commited changes by using unique hashes, it is also possible to revert the repository to a specific commit. This is done with :bash:`git checkout`. 
+Since git keeps track of all your committed changes by using unique hashes, it is also possible to revert the repository to a specific commit. This is done with :bash:`git checkout`.
 
 .. code-block:: bash
-   
+
    $ git checkout 50d2cf8
    You are in 'detached HEAD' state. You can look around, make experimental
    changes and commit them, and you can discard any commits you make in this
    state without impacting any branches by performing another checkout.
-   
+
    If you want to create a new branch to retain commits you create, you may
    do so (now or later) by using -b with the checkout command again. Example:
 
       git checkout -b <new-branch-name>
 
-   HEAD is now at 50d2cf8 First commit 
+   HEAD is now at 50d2cf8 First commit
 
 
 This will revert (checkout) your repository to how it was when you made your first commit.
 
 .. admonition:: Exercise
 
-    Revert your reporitory to the second commit we made earlier. Hint: you may use :bash:`git reflog` to get the hash.
+    Revert your repository to the second commit we made earlier. Hint: you may use :bash:`git reflog` to get the hash.
 
-.. hint:: 
+.. hint::
 
    Using ``git checkout`` is crucial if you would like to use the exact same version of a repository which is hosted on some online platform such as GitHub or Gitlab.
 
@@ -244,20 +257,26 @@ Your repository should now be back at the original (latest) commit we made.
 Ignoring files
 ==============
 
-In general git is aware of all files in your repository. However, it is common that there are files which you do not want to be tracked. For example this includes large input files or software executables which your are not allowed to distribute. 
+In general git is aware of all files in your repository. However, it is common that there are files which you do not want to be tracked. For example this includes large input files or software executables which you are not allowed to distribute.
 
 You can tell git to ignore files by using what is called a :bash:`.gitignore` file. In this file you can add all folders and files which git should ignore, each entry on its own line. You can also use regular expressions to specify multiple files. Here are some examples from a :bash:`.gitignore` file:
 
 .. code-block:: bash
 
    $ cat .gitignore
+   data/raw/
    data/raw_reads.fq.gz
    data/*.fq
+   data/*.fastq.gz
+   *.bam
+   tmp/
    software/
    log/
    !log/.gitkeep
 
-The above ``.gitignore`` file covers several practical examples of how you can exclude (and keep) files in excluded directories. It should be pretty self explanatory what they do. Lines starting with ``!`` have a special meaning though. It means that this file will **not** be excluded. Remember earlier when we said that it is not possible to commit empty directories to a git repository? This is a away around this problem.
+The above ``.gitignore`` file covers several practical examples of how you can exclude (and keep) files in excluded directories. It should be pretty self explanatory what they do. Lines starting with ``!`` have a special meaning though. It means that this file will **not** be excluded. Remember earlier when we said that it is not possible to commit empty directories to a git repository? This is a way around this problem.
+
+Especially in bioinformatics you should think carefully about which files belong into a git repository. Scripts, small metadata tables, configuration files and documentation are usually good candidates. Large raw sequencing files, BAM files or large temporary results should usually not be committed to a normal git repository. They are better stored in archives, public databases or data repositories and then referenced from your documentation.
 
 .. hint::
 
@@ -266,7 +285,7 @@ The above ``.gitignore`` file covers several practical examples of how you can e
 
 .. admonition:: Exercise
 
-   Create two files in your repository and add one of these files to your :bash:`.gitignore` file. Hint: You can use :bash:`git status` to keep track of the files and find you what git "sees". 
+   Create two files in your repository and add one of these files to your :bash:`.gitignore` file. Hint: You can use :bash:`git status` to keep track of the files and find out what git "sees". Also add one pattern that would ignore a common large bioinformatics file type, for example :bash:`*.fastq.gz` or :bash:`*.bam`.
 
 
 Branches
@@ -283,7 +302,7 @@ Sometimes you may want to make larger changes to your repository with the risk t
      On branch testbranch
      nothing to commit, working tree clean
 
-First we have to create a branch and give it a name: :bash:`git branch testbranch`. Next we need to switch to that branch: :bash:`git checkout testbranch`. With :bash:`git status` we can now see that we are working in this new branch. Everyting we commit will be committed to this new branch.
+First we have to create a branch and give it a name: :bash:`git branch testbranch`. Next we need to switch to that branch: :bash:`git checkout testbranch`. With :bash:`git status` we can now see that we are working in this new branch. Everything we commit will be committed to this new branch.
 
 More information `here <https://git-scm.com/docs/git-branch>`_.
 
@@ -291,7 +310,7 @@ More information `here <https://git-scm.com/docs/git-branch>`_.
 Merging branches
 ================
 
-At some point you may want to combine work made in different branches. This is possible with :bash:`git merge`. Typically you will want to merge your new branch with the main (or master) branch. Git will identify the last commit the two branches have in common and it will create a new merge commit. Before merging you need to make sure thate the current HEAD is in the branch that should be the merge target. This means you will need to check out the branch you want to merge with first. This is typically is the main (or master) branch. Given we are already in the main branch we can merge a branch with master like this:
+At some point you may want to combine work made in different branches. This is possible with :bash:`git merge`. Typically you will want to merge your new branch with the main (or master) branch. Git will identify the last commit the two branches have in common and it will create a new merge commit. Before merging you need to make sure that the current HEAD is in the branch that should be the merge target. This means you will need to check out the branch you want to merge with first. This is typically the main (or master) branch. Given we are already in the main branch we can merge a branch with master like this:
 
 .. code-block:: bash
 
@@ -339,7 +358,7 @@ The first command lists all tags. The second command creates a new tag called ``
 Working with online Git repositories
 ====================================
 
-There are several services that provide online hosting of git repositories. The three largest services are `Github <https://github.com/>`_, `Gitlab <https://about.gitlab.com/>`_ and `BitBucket <https://bitbucket.org/>`_. Many different bioinformatic software packages are hosted and developed using one of these platforms. It is one of the great strengths of git to be able to access repositories that are located on different computers. It greatly facilitates collabrative work, transparency and reproducibility.
+There are several services that provide online hosting of git repositories. The three largest services are `Github <https://github.com/>`_, `Gitlab <https://about.gitlab.com/>`_ and `BitBucket <https://bitbucket.org/>`_. Many different bioinformatic software packages are hosted and developed using one of these platforms. It is one of the great strengths of git to be able to access repositories that are located on different computers. It greatly facilitates collaborative work, transparency and reproducibility.
 
 Each of the three platforms have their own special features complementing the core functionality of git. There is a lot you can do on these platforms going far beyond what we can show here. We will therefore only provide a very general introduction to how to interact with online repositories. Here is a simple example:
 
@@ -366,7 +385,7 @@ It is even possible to host a git repository on your own server.
    Find the secret message hidden in the repository. You can use what you have learned so far to discover it. Additionally, the command ``git branch -a`` or ``git branch -r`` could help. In cloned repositories, branches are often listed as origin/<branchname>. Depending on how you have already interacted with your local copy of your repository you need to use the full branchname origin/<branchname> or you just need the name after the forward slash ``/`` character.
 
 
-Transfering local changes to an online repository
+Transferring local changes to an online repository
 =================================================
 
 If you have made local changes to a repository, at some point you will want to include these changes in the online version of it. This is called pushing and the corresponding command is :bash:`git push`.
@@ -387,8 +406,8 @@ It can happen that changes have been pushed to an online repository, but your lo
 .. code-block:: bash
 
    $ git pull
-   
-This command will compare the remote and local repositories and will download all changes from the remot version of the repository
+
+This command will compare the remote and local repositories and will download all changes from the remote version of the repository
 
 More information `here <https://git-scm.com/docs/git-pull>`_.
 
@@ -400,22 +419,27 @@ More information `here <https://git-scm.com/docs/git-pull>`_.
 Moving and removing files in a git repository
 =============================================
 
-Sometimes you will want to relocate files inside your repository or stop tracking them with git. You should not use ``mv`` and ``rm`` in these situations. Git can get confused if you simple delete a file or put it into a different place. It is not smart enough for that. Instead what you should do is use ``git mv`` to move files to a different place and ``git rm`` to remove files. By default ``git rm`` will not delete the fil though, it will simply tell git that the file should not be tracked anymore. It basically makes it invisible to git again.
+Sometimes you will want to relocate files inside your repository or stop tracking them with git. You should not use ``mv`` and ``rm`` in these situations. Git can get confused if you simply delete a file or put it into a different place. Instead what you should do is use ``git mv`` to move files to a different place and ``git rm`` to remove files. Be careful: by default ``git rm`` removes the file from git and also deletes it from your working directory. If you want to stop tracking a file but keep the local copy, use ``git rm --cached``. This is useful when you accidentally added a file that should have been ignored, for example a large data file.
+
+.. code-block:: bash
+
+   $ git mv old_name.txt new_name.txt
+   $ git rm --cached data/raw_reads.fq.gz
 
 Use Digital Object Identifiers for your code and data
 =====================================================
 
-You probably already came accross DOIs. These digital object identifiers are a great tool to increase reproducibility because the are snapshots of different data. Most researchers are familiar with them in the conext of scientific publications. Most journals will assign DOIs to their published articles to provide a long-term reference to a specific work. However, DOIs can be used for many other things such as datasets, code etc. In fact, ideally each dataset behind a scientific publication should be available online and connected to a DOI so that other researchers can easily find and reuse them. Luckily there are several websites which make it easy to create DOIs for code and other data such as `Zenodo <https://zenodo.org/>`_ or `Figshare <https://figshare.com/>`_. We highly encourage you to use these in your next publication and we would be happy if you request that data is deposited in public databases connected with a DOI when you review other researchers work. As an example you can look at the `GitHub <https://github.com/reslp/reproducibility-workshop>`_ page of this course, where each past iteration of this course has its own DOI number, which corresponds to the specific version of the course and how it was taught.
+You probably already came across DOIs. These digital object identifiers are a great tool to increase reproducibility because they are snapshots of different data. Most researchers are familiar with them in the context of scientific publications. Most journals will assign DOIs to their published articles to provide a long-term reference to a specific work. However, DOIt can be used for many other things such as datasets, code etc. In fact, ideally each dataset behind a scientific publication should be available online and connected to a DOI so that other researchers can easily find and reuse them. Luckily there are several websites which make it easy to create DOIs for code and other data such as `Zenodo <https://zenodo.org/>`_ or `Figshare <https://figshare.com/>`_. We highly encourage you to use these in your next publication and we would be happy if you request that data is deposited in public databases connected with a DOI when you review other researchers work. As an example you can look at the `GitHub <https://github.com/reslp/reproducibility-workshop>`_ page of this course, where each past iteration of this course has its own DOI number, which corresponds to the specific version of the course and how it was taught.
 
 Common mistakes with Git
 ========================
 
-Git can be difficult and it is easy to make mistakes. You will surely come accross the same problems several times and if you are like us you may be scratching your head trying to remember the git commands to solve the problem. Luckily your are not alone. Many people struggle with git and there are plenty of answers on StackOverflow and other websites for all kinds of problems associated with git. Here are two examples of common mistakes we have made many times with git and how to fix them. Hopefully these examples will also help you:
+Git can be difficult and it is easy to make mistakes. You will surely come across the same problems several times and if you are like us you may be scratching your head trying to remember the git commands to solve the problem. Luckily you are not alone. Many people struggle with git and there are plenty of answers on StackOverflow and other websites for all kinds of problems associated with git. Here are two examples of common mistakes we have made many times with git and how to fix them. Hopefully these examples will also help you:
 
 Changing commit messages of a commit
 ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 
-If you would like to change the commit message of the last commited commit you can use:
+If you would like to change the commit message of the last committed commit you can use:
 
 .. code-block:: bash
 
@@ -428,11 +452,15 @@ If you have already pushed this commit you have to push the changes again with t
 
   $ git push --force-with-lease origin YOURBRANCH
 
+.. warning::
 
-I commited to the wrong branch
+   Rewriting commits that were already pushed can confuse collaborators. Only do this if you know that nobody else is currently basing work on the commit you are changing.
+
+
+I committed to the wrong branch
 ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 
-If you accidently commited changes to the wrong branch, this is how you can fix it and move the last commit to the correct branch:
+If you accidentally committed changes to the wrong branch, this is how you can fix it and move the last commit to the correct branch:
 
 .. code-block:: bash
 
@@ -441,6 +469,10 @@ If you accidently commited changes to the wrong branch, this is how you can fix 
   $ git cherry-pick COMMIT_HASH
   $ git checkout main # back to main branch
   $ git reset --hard HEAD~1 #remove last commit in main
+
+.. warning::
+
+   :bash:`git reset --hard` can discard local changes. Before using it, always check :bash:`git status` and make sure that you do not need the changes anymore.
 
 
 
@@ -454,8 +486,8 @@ This practical can only be considered a basic introduction to git. Git can do a 
     - `Git Pro Book <https://git-scm.com/book/en/v2>`_
     - `Oh Shit, Git?! <https://ohshitgit.com/>`_
     - `W3 Schools Git Tutorial <https://www.w3schools.com/git/>`_
-    - `Learn Git interactively <https://learngitbranching.js.org/>`_ 
+    - `Learn Git interactively <https://learngitbranching.js.org/>`_
     - `Linus Torvalds talking about Git <https://www.youtube.com/watch?v=4XpnKHJAok8>`_
     - `A Quick Introduction to Version Control with Git and GitHub <https://journals.plos.org/ploscompbiol/article?id=10.1371/journal.pcbi.1004668>`_
     - `What comes after Git? <https://matt-rickard.com/what-comes-after-git/>`_
-    - `Gut (an alterantive CLI for Git) <https://gut-cli.dev/>`_ Also a great learning resource for git.
+    - `Gut (an alternative CLI for Git) <https://gut-cli.dev/>`_ Also a great learning resource for git.

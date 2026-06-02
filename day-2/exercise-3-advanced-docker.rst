@@ -382,7 +382,7 @@ A very neat feature in my opinion is that Dockerhub allows you
 to link its repos to Github repositories. By this, one can neatly and
 reprodcibly organize ones Docker containers.
 
-Check out this example `here <https://hub.docker.com/r/chrishah/ncbi-blast>`_.
+Check out this example on Dockerhub `here <https://hub.docker.com/r/chrishah/ncbi-blast>`_ - the basis for this image is hosted on Github `here <https://github.com/reslp/reproducibility-workshop.git>`
 
 
 Exercises
